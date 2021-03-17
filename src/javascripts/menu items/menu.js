@@ -6,7 +6,7 @@ const showMenuItems = (array) => {
 
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `<div class="media">
-    <img src="${item.image}" class="mr-3" alt="...">
+    <img src="${item.image}" class="mr-3" id="menuItemImage2"alt="...">
     <div class="media-body">
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
@@ -24,7 +24,7 @@ const showUserMenuItems = (array) => {
 
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `<div class="media">
-    <img src="${item.image}" class="mr-3" alt="...">
+    <img src="${item.image}" class="mr-3" id="menuItemImage"alt="...">
     <div class="media-body">
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
