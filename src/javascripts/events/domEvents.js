@@ -1,4 +1,3 @@
-// import showStaff from '../staff/showStaff';
 import showStaff from '../staff/showStaff';
 import { deleteStaff, getStaff } from '../staff/staffData';
 
