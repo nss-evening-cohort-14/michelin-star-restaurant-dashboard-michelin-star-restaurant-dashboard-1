@@ -1,14 +1,14 @@
-import axios from "axios";
-
-import firebase from 'firebase/app';
+import axios from 'axios';
+// import firebase from 'firebase/app';
 import 'firebase/auth';
+import firebaseConfig from '../helpers/apiKeys';
 
-const dbUrl = "https://michelin-star-restaurant-default-rtdb.firebaseio.com/";
+const dbUrl = firebaseConfig.databaseURL;
 
-const getMenuItems = () => new Promise((resolve,reject) => {
+const getMenuItems = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/menu.json`)
-  .then((response) => console.warn(response.data))
-  .catch((error) => reject(error));
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
 });
 
 export default getMenuItems;
