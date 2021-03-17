@@ -6,7 +6,7 @@ const navbar = () => {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="navbar-nav">
-        <a class="nav-link active" id="nav-menu" href="#">Menu<span class="sr-only">(current)</span></a>
+        <a class="nav-link active" id="nav-menu" href="#">Menu</a>
         <a class="nav-link" id="nav-ingredients" href="#">Ingredients</a>
         <a class="nav-link" id="nav-staff" href="#">Staff</a>
         <a class="nav-link" id="nav-seating" href="#">Seating</a>
