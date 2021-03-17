@@ -4,12 +4,12 @@ import navbar from '../components/navbar';
 import domEvents from '../events/domEvents';
 import navEvents from '../events/navEvents';
 
-const startApp = () => {
+const startApp = (user) => {
   domBuilder();
-  navbar();
+  navbar(user);
   logoutButton();
   domEvents();
-  navEvents();
+  navEvents(user);
 };
 
 export default startApp;
