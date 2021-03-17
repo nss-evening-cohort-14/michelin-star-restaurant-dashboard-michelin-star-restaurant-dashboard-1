@@ -2,6 +2,8 @@ import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 import getMenuItems from '../menu items/menuData';
 import showMenuItems from '../menu items/menu';
+import getSeating from '../seating/seatingData';
+import showSeating from '../seating/seating';
 import showStaff from '../components/showStaff';
 import getStaff from '../helpers/staffData';
 import getReservations from '../helpers/data/reservationData';
@@ -27,6 +29,11 @@ const navEvents = (user) => {
   document.querySelector('#nav-ingredients').addEventListener('click', (e) => {
     e.preventDefault();
     getIngredients().then((ingredients) => showIngredients(ingredients));
+  });
+  // Click event for Seating
+  document.querySelector('#nav-seating').addEventListener('click', (e) => {
+    e.preventDefault();
+    getSeating().then((seats) => showSeating(seats));
   });
 };
 
