@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import { showUserMenuItems } from '../menu items/menu';
 import { deleteMenuItems } from '../menu items/menuData';
-=======
 import { deleteReservation } from '../reservations/reservationData';
 import { showUserReservations } from '../reservations/reservations';
->>>>>>> development
 import showStaff from '../staff/showStaff';
 import { deleteStaff, getStaff } from '../staff/staffData';
 
