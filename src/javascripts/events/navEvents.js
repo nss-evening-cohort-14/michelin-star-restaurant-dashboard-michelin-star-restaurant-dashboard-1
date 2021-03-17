@@ -2,6 +2,8 @@ import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 import getMenuItems from '../menu items/menuData';
 import showMenuItems from '../menu items/menu';
+import getReservations from '../helpers/data/reservationData';
+import showReservations from '../components/reservations';
 
 const navEvents = () => {
   // Events for Navbar, READ only
@@ -9,6 +11,10 @@ const navEvents = () => {
   // menu view
   document.querySelector('#nav-menu').addEventListener('click', () => {
     getMenuItems().then((menuItemsArray) => showMenuItems(menuItemsArray));
+  });
+  // reservations view
+  document.querySelector('#nav-reservations').addEventListener('click', () => {
+    getReservations().then((reservations) => showReservations(reservations));
   });
 
   // Click event for Ingredients
