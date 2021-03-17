@@ -1,7 +1,7 @@
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 
-const navEvents = () => {
+const guestNavEvents = () => {
   document.querySelector('#navigation').addEventListener('click', (e) => {
     // Events for Navbar, READ only
 
@@ -13,4 +13,4 @@ const navEvents = () => {
   });
 };
 
-export default navEvents;
+export default guestNavEvents;
