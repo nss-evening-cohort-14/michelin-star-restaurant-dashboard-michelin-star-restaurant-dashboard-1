@@ -1,6 +1,6 @@
 import showReservations from '../components/reservations';
 import getReservations from '../helpers/data/reservationData';
-import getMenuItems from '../menu items/menuData';
+import { getMenuItems } from '../menu items/menuData';
 import { showMenuItems } from '../menu items/menu';
 import showStaff from '../components/showStaff';
 import getStaff from '../helpers/staffData';
