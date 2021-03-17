@@ -6,7 +6,7 @@ import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
 import showStaff from '../components/showStaff';
 import getStaff from '../helpers/staffData';
-import getReservations from '../reservations/reservationData';
+import { getReservations } from '../reservations/reservationData';
 import { showUserReservations } from '../reservations/reservations';
 
 // Events for Navbar, READ only

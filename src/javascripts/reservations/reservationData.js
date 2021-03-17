@@ -11,4 +11,10 @@ const getReservations = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getReservations;
+const deleteReservation = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/reservations/${firebaseKey}.json`)
+    .then(() => getReservations().then((booksArray) => resolve(booksArray)))
+    .catch((error) => reject(error));
+});
+
+export { getReservations, deleteReservation };
