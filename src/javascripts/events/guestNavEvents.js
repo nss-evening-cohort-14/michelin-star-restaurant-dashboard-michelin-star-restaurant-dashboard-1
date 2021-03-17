@@ -1,11 +1,22 @@
+import showReservations from '../components/reservations';
+import getReservations from '../helpers/data/reservationData';
 import getMenuItems from '../menu items/menuData';
 import { showMenuItems } from '../menu items/menu';
+import showStaff from '../components/showStaff';
+import getStaff from '../helpers/staffData';
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 
 const guestNavEvents = () => {
   // Events for Navbar, READ only
 
+  document.querySelector('#nav-staff').addEventListener('click', () => {
+    getStaff().then((staffArray) => showStaff(staffArray));
+  });
+  // reservations view
+  document.querySelector('#nav-reservations').addEventListener('click', () => {
+    getReservations().then((reservations) => showReservations(reservations));
+  });
   // menu view
   document.querySelector('#nav-menu').addEventListener('click', () => {
     getMenuItems().then((menuItemsArray) => showMenuItems(menuItemsArray));
