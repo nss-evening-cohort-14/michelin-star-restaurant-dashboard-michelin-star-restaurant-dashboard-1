@@ -1,5 +1,5 @@
 import getMenuItems from '../menu items/menuData';
-import showMenuItems from '../menu items/menu';
+import { showMenuItems } from '../menu items/menu';
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 

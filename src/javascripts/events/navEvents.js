@@ -1,14 +1,14 @@
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 import getMenuItems from '../menu items/menuData';
-import showMenuItems from '../menu items/menu';
+import { showUserMenuItems } from '../menu items/menu';
 
 const navEvents = () => {
   // Events for Navbar, READ only
 
   // menu view
   document.querySelector('#nav-menu').addEventListener('click', () => {
-    getMenuItems().then((menuItemsArray) => showMenuItems(menuItemsArray));
+    getMenuItems().then((menuItemsArray) => showUserMenuItems(menuItemsArray));
   });
 
   // Click event for Ingredients
