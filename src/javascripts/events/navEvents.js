@@ -1,7 +1,10 @@
+import showReservations from '../components/reservations';
+import getReservations from '../helpers/data/reservationData';
+
 const navEvents = () => {
-  document.querySelector('body').addEventListener('click', (e) => {
-    // Events for Navbar, READ only
-    console.warn(e);
+  // Events for Navbar, READ only
+  document.querySelector('#nav-reservations').addEventListener('click', () => {
+    getReservations().then((reservations) => showReservations(reservations));
   });
 };
 
