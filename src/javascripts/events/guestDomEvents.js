@@ -1,7 +1,6 @@
 const guestDomEvents = () => {
-  document.querySelector('body').addEventListener('click', (e) => {
+  document.querySelector('body').addEventListener('click', () => {
     // Events for READ on Guest App
-    console.warn(e);
   });
 };
 
