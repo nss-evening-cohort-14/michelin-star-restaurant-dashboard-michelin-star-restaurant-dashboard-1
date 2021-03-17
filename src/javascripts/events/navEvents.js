@@ -1,13 +1,13 @@
 import { getIngredients } from '../ingredients/ingredientsData';
 import { showUserIngredients } from '../ingredients/showIngredients';
-import getMenuItems from '../menu items/menuData';
-import showMenuItems from '../menu items/menu';
+import { getMenuItems } from '../menu items/menuData';
+import { showUserMenuItems } from '../menu items/menu';
 import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
-import showStaff from '../components/showStaff';
-import getStaff from '../helpers/staffData';
-import getReservations from '../helpers/data/reservationData';
-import showReservations from '../components/reservations';
+import showStaff from '../staff/showStaff';
+import { getStaff } from '../staff/staffData';
+import { getReservations } from '../reservations/reservationData';
+import { showUserReservations } from '../reservations/reservations';
 
 // Events for Navbar, READ only
 const navEvents = (user) => {
@@ -18,11 +18,11 @@ const navEvents = (user) => {
 
   // menu view
   document.querySelector('#nav-menu').addEventListener('click', () => {
-    getMenuItems().then((menuItemsArray) => showMenuItems(menuItemsArray));
+    getMenuItems().then((menuItemsArray) => showUserMenuItems(menuItemsArray));
   });
   // reservations view
   document.querySelector('#nav-reservations').addEventListener('click', () => {
-    getReservations().then((reservations) => showReservations(reservations));
+    getReservations().then((reservations) => showUserReservations(reservations));
   });
 
   // ingredient view
