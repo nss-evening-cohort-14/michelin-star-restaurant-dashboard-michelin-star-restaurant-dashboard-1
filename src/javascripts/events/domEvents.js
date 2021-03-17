@@ -1,5 +1,5 @@
 const domEvents = () => {
-  document.querySelector('body').addEventListener('click', (e) => {
+  document.querySelector('body').addEventListener('click', () => {
     // Events for CUD on components
   });
 };
