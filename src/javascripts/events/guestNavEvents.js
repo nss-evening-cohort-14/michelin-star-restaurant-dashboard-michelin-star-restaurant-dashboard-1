@@ -3,7 +3,7 @@ import getReservations from '../helpers/data/reservationData';
 import getMenuItems from '../menu items/menuData';
 import showMenuItems from '../menu items/menu';
 import showStaff from '../components/showStaff';
-import getStaff from '../helpers/staffData';
+import { getStaff } from '../helpers/staffData';
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
 import getSeating from '../seating/seatingData';

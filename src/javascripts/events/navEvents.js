@@ -5,7 +5,7 @@ import showMenuItems from '../menu items/menu';
 import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
 import showStaff from '../components/showStaff';
-import getStaff from '../helpers/staffData';
+import { getStaff } from '../helpers/staffData';
 import getReservations from '../helpers/data/reservationData';
 import showReservations from '../components/reservations';
 
