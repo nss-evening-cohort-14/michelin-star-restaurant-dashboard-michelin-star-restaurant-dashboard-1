@@ -4,8 +4,8 @@ import getMenuItems from '../menu items/menuData';
 import { showUserMenuItems } from '../menu items/menu';
 import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
-import showStaff from '../components/showStaff';
-import getStaff from '../helpers/staffData';
+import showStaff from '../staff/showStaff';
+import getStaff from '../staff/staffData';
 import getReservations from '../helpers/data/reservationData';
 import showReservations from '../components/reservations';
 
