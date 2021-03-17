@@ -4,7 +4,7 @@ import firebaseConfig from '../helpers/apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 
-// GET BOARDS
+// GET RESERVATIONS
 const getReservations = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/reservations.json`)
     .then((response) => resolve(Object.values(response.data)))

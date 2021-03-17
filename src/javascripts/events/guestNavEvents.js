@@ -1,7 +1,7 @@
+import { getMenuItems } from '../menu items/menuData';
+import { showMenuItems } from '../menu items/menu';
 import { showReservations } from '../reservations/reservations';
 import { getReservations } from '../reservations/reservationData';
-import getMenuItems from '../menu items/menuData';
-import showMenuItems from '../menu items/menu';
 import showStaff from '../staff/showStaff';
 import { getStaff } from '../staff/staffData';
 import getIngredients from '../ingredients/ingredientsData';

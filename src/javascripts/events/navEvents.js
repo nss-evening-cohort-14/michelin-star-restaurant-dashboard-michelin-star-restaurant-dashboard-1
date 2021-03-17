@@ -1,6 +1,6 @@
 import getIngredients from '../ingredients/ingredientsData';
 import showIngredients from '../ingredients/showIngredients';
-import getMenuItems from '../menu items/menuData';
+import { getMenuItems } from '../menu items/menuData';
 import { showUserMenuItems } from '../menu items/menu';
 import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
