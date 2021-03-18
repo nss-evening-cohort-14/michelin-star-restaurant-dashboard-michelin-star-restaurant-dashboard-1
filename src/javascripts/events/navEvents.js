@@ -1,5 +1,5 @@
-import getIngredients from '../ingredients/ingredientsData';
-import showIngredients from '../ingredients/showIngredients';
+import { getIngredients } from '../ingredients/ingredientsData';
+import { showUserIngredients } from '../ingredients/showIngredients';
 import { getMenuItems } from '../menu items/menuData';
 import { showUserMenuItems } from '../menu items/menu';
 import getSeating from '../seating/seatingData';
@@ -28,7 +28,7 @@ const navEvents = (user) => {
   // ingredient view
   document.querySelector('#nav-ingredients').addEventListener('click', (e) => {
     e.preventDefault();
-    getIngredients().then((ingredients) => showIngredients(ingredients));
+    getIngredients().then((ingredients) => showUserIngredients(ingredients));
   });
   // Click event for Seating
   document.querySelector('#nav-seating').addEventListener('click', (e) => {
