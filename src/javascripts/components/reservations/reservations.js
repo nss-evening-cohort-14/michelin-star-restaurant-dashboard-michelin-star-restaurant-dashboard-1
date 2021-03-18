@@ -13,7 +13,7 @@ const showReservations = (array) => {
   });
 };
 
-const showUserReservations = (array) => {
+const showLoginReservations = (array) => {
   document.querySelector('#view').innerHTML = '';
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
@@ -25,9 +25,8 @@ const showUserReservations = (array) => {
       <li class="list-group-item"><strong>Reservation Time:</strong> ${item.time}</li>
       <li class="list-group-item"><strong>Notes:</strong> ${item.notes}</li>
     </ul>
-    <button class="btn btn-info" data-toggle="modal" data-target="#formModal" id="edit-res-btn--${item.firebaseKey}">Edit Reservation</button>
     <button class="btn btn-danger" id="delete-res--${item.firebaseKey}">Delete Reservation</button>`;
   });
 };
 
-export { showReservations, showUserReservations };
+export { showReservations, showLoginReservations };

@@ -7,7 +7,7 @@ import showSeating from '../components/seating/seating';
 import showStaff from '../components/staff/showStaff';
 import { getStaff } from '../helpers/data/staffData';
 import { getReservations } from '../helpers/data/reservationData';
-import { showUserReservations } from '../components/reservations/reservations';
+import { showLoginReservations } from '../components/reservations/reservations';
 
 // Events for Navbar, READ only
 const navEvents = (user) => {
@@ -22,7 +22,7 @@ const navEvents = (user) => {
   });
   // reservations view
   document.querySelector('#nav-reservations').addEventListener('click', () => {
-    getReservations().then((reservations) => showUserReservations(reservations));
+    getReservations().then((reservations) => showLoginReservations(reservations));
   });
 
   // ingredient view
