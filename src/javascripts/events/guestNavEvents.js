@@ -4,8 +4,8 @@ import { showReservations } from '../reservations/reservations';
 import { getReservations } from '../reservations/reservationData';
 import showStaff from '../staff/showStaff';
 import { getStaff } from '../staff/staffData';
-import getIngredients from '../ingredients/ingredientsData';
-import showIngredients from '../ingredients/showIngredients';
+import { getIngredients } from '../ingredients/ingredientsData';
+import { showIngredients } from '../ingredients/showIngredients';
 import getSeating from '../seating/seatingData';
 import showSeating from '../seating/seating';
 
