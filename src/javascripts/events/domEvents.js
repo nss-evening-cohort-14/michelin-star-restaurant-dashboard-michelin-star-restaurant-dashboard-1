@@ -1,5 +1,5 @@
 import { deleteIngredients } from '../helpers/data/ingredientsData';
-import { showUserIngredients } from '../components/ingredients/showIngredients';
+import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import { deleteMenuItems } from '../helpers/data/menuData';
 import { deleteReservation } from '../helpers/data/reservationData';
@@ -17,7 +17,7 @@ const domEvents = (user) => {
       if (window.confirm('Want to delete this ingredient?')) {
         e.preventDefault();
         const firebaseKey = e.target.id.split('^^')[1];
-        deleteIngredients(firebaseKey).then((ingredients) => showUserIngredients(ingredients));
+        deleteIngredients(firebaseKey).then((ingredients) => showLoginIngredients(ingredients));
       }
     }
     // DELETE MENU ITEM

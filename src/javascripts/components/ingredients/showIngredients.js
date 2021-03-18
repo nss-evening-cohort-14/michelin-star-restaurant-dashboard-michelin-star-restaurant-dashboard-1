@@ -9,7 +9,7 @@ const showIngredients = (array) => {
   });
 };
 
-const showUserIngredients = (array) => {
+const showLoginIngredients = (array) => {
   document.querySelector('#view').innerHTML = `<div class="card mt-2 ingredients" style="width: 18rem;">
   <ul class="list-group list-group-flush" id="ingredients-list">
   </ul>
@@ -21,4 +21,4 @@ const showUserIngredients = (array) => {
   });
 };
 
-export { showIngredients, showUserIngredients };
+export { showIngredients, showLoginIngredients };
