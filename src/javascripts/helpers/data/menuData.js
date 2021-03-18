@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import firebase from 'firebase/app';
 import 'firebase/auth';
-import firebaseConfig from '../helpers/apiKeys';
+import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 
@@ -18,18 +18,5 @@ const deleteMenuItems = (firebasekey, uid) => new Promise((resolve, reject) => {
     .then(() => getMenuItems(uid).then((menuArray) => resolve(menuArray)))
     .catch((error) => reject(error));
 });
-
-// CREATE MENU ITEMS
-
-// const createMenuItems = (menuObject, uid) => new Promise((resolve, reject) => {
-//   axios.post(`${dbUrl}/menu.json`, menuObject)
-//     .then((response) => {
-//       const frame = { firebasekey: response.data.name };
-//       axios.patch(`${dbUrl}/menu/${response.data.name}.json`, frame)
-//         .then(() => {
-//           getMenuItems(uid).then((menuArray) => console.warn(menuArray));
-//         });
-//     }).catch((error) => reject(error));
-// });
 
 export { getMenuItems, deleteMenuItems };

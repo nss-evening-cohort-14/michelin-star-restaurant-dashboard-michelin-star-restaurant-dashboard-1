@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseConfig from '../helpers/apiKeys';
+import firebaseConfig from '../apiKeys';
 
 // API Calls for Ingredients
 const dbUrl = firebaseConfig.databaseURL;
