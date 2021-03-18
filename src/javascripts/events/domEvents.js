@@ -1,11 +1,11 @@
-import { deleteIngredients } from '../ingredients/ingredientsData';
-import { showUserIngredients } from '../ingredients/showIngredients';
-import { showUserMenuItems } from '../menu items/menu';
-import { deleteMenuItems } from '../menu items/menuData';
-import { deleteReservation } from '../reservations/reservationData';
-import { showUserReservations } from '../reservations/reservations';
-import showStaff from '../staff/showStaff';
-import { deleteStaff, getStaff } from '../staff/staffData';
+import { deleteIngredients } from '../helpers/data/ingredientsData';
+import { showUserIngredients } from '../components/ingredients/showIngredients';
+import { showLoginMenuItems } from '../components/menu/menu';
+import { deleteMenuItems } from '../helpers/data/menuData';
+import { deleteReservation } from '../helpers/data/reservationData';
+import { showUserReservations } from '../components/reservations/reservations';
+import showStaff from '../components/staff/showStaff';
+import { deleteStaff, getStaff } from '../helpers/data/staffData';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -23,7 +23,7 @@ const domEvents = (user) => {
     // DELETE MENU ITEM
     if (e.target.id.includes('delete-menu-item')) {
       const firebaseKey = e.target.id.split('--')[1];
-      deleteMenuItems(firebaseKey).then((menuArray) => showUserMenuItems(menuArray));
+      deleteMenuItems(firebaseKey).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
     // Delete Staff

@@ -16,7 +16,7 @@ const showMenuItems = (array) => {
   });
 };
 
-const showUserMenuItems = (array) => {
+const showLoginMenuItems = (array) => {
   document.querySelector('#form-container').innerHTML = '';
   document.querySelector('#view').innerHTML = '';
   document.querySelector('#stage').innerHTML = '';
@@ -29,11 +29,10 @@ const showUserMenuItems = (array) => {
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
       <p>${item.price}</p>
-      <button type="button" class="btn btn-secondary" id="edit-menu-item--${item.firebasekey}">Edit</button>
       <button type="button" class="btn btn-danger" id="delete-menu-item--${item.firebasekey}">Delete</button>
     </div>
     </div>`;
   });
 };
 
-export { showMenuItems, showUserMenuItems };
+export { showMenuItems, showLoginMenuItems };

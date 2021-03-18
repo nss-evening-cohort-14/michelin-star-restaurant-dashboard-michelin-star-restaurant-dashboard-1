@@ -1,13 +1,13 @@
-import { getMenuItems } from '../menu items/menuData';
-import { showMenuItems } from '../menu items/menu';
-import { showReservations } from '../reservations/reservations';
-import { getReservations } from '../reservations/reservationData';
-import showStaff from '../staff/showStaff';
-import { getStaff } from '../staff/staffData';
-import { getIngredients } from '../ingredients/ingredientsData';
-import { showIngredients } from '../ingredients/showIngredients';
-import getSeating from '../seating/seatingData';
-import showSeating from '../seating/seating';
+import { getMenuItems } from '../helpers/data/menuData';
+import { showMenuItems } from '../components/menu/menu';
+import { showReservations } from '../components/reservations/reservations';
+import { getReservations } from '../helpers/data/reservationData';
+import showStaff from '../components/staff/showStaff';
+import { getStaff } from '../helpers/data/staffData';
+import { getIngredients } from '../helpers/data/ingredientsData';
+import { showIngredients } from '../components/ingredients/showIngredients';
+import getSeating from '../helpers/data/seatingData';
+import showSeating from '../components/seating/seating';
 
 const guestNavEvents = () => {
   // Events for Navbar, READ only
