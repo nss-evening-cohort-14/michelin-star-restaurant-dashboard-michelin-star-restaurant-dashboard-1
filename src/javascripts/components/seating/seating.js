@@ -1,4 +1,6 @@
 const showSeating = (array) => {
+  document.querySelector('#stage').innerHTML = '';
+  document.querySelector('#form-container').innerHTML = '';
   document.querySelector('#view').innerHTML = `<div class="card mt-2" style="width: 18rem;">
   <ul class="list-group list-group-flush" id="ingredients-list">
   </ul>

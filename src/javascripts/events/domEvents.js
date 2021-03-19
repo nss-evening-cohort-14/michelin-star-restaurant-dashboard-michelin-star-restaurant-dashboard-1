@@ -1,14 +1,17 @@
 import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
-import { deleteMenuItems } from '../helpers/data/menuData';
 import { createReservation, deleteReservation } from '../helpers/data/reservationData';
+import { createMenuItems, deleteMenuItems } from '../helpers/data/menuData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
-import { deleteStaff, getStaff } from '../helpers/data/staffData';
+import createMenuItemForm from '../components/forms/createMenuItemForm';
+import ingredientModal from '../components/forms/ingredientModal';
+import { createStaff, deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
 import addReservationForm from '../components/forms/addReservationForm';
+import addStaffForm from '../components/forms/addStaffForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -66,6 +69,28 @@ const domEvents = (user) => {
       createReservation(resObject).then((reservations) => showLoginReservations(reservations));
       $('#formModal').modal('toggle');
     }
+    // SHOW FORM TO CREATE MENU ITEM
+    if (e.target.id.includes('add-menu-btn')) {
+      createMenuItemForm();
+    }
+
+    // SUBMIT CREATE MENU ITEM
+    if (e.target.id.includes('create-menu-item')) {
+      e.preventDefault();
+      const itemObject = {
+        image: document.querySelector('#itemImage').value,
+        title: document.querySelector('#itemTitle').value,
+        description: document.querySelector('#itemDescription').value,
+        price: document.querySelector('#itemPrice').value,
+        available: document.querySelector('#available').checked
+      };
+      createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    }
+
+    // Show Ingredients Modal
+    if (e.target.id.includes('#showIngredients')) {
+      ingredientModal();
+    }
 
     // Delete Staff
     if (e.target.id.includes('delete-staff')) {
@@ -74,12 +99,35 @@ const domEvents = (user) => {
         .then((staffArray) => getStaff(staffArray))
         .then((staffArray) => showStaff(staffArray, user));
     }
+
+    // Delete Reservations
     if (e.target.id.includes('delete-res')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const firebaseKey = e.target.id.split('--')[1];
         deleteReservation(firebaseKey).then((resArray) => showLoginReservations(resArray));
       }
+    }
+    // Add staff form
+    if (e.target.id.includes('add-staff-member')) {
+      e.preventDefault();
+      formModal('Add Staff Member');
+      addStaffForm();
+    }
+    if (e.target.id.includes('submit-staff')) {
+      e.preventDefault();
+      const staffObject = {
+        first_name: document.querySelector('#new-first-name').value,
+        last_name: document.querySelector('#new-last-name').value,
+        job_title: document.querySelector('#new-position').value,
+        image: document.querySelector('#new-image-url').value,
+        bio: document.querySelector('#new-staff-bio').value,
+      };
+
+      createStaff(staffObject).then(() => getStaff()
+        .then((staffArray) => showStaff(staffArray, user)));
+
+      $('#formModal').modal('toggle');
     }
   });
 };
