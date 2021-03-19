@@ -19,7 +19,6 @@ const getSingleIngredient = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // Delete Calls
-
 const deleteIngredients = (firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/ingredients/${firebaseKey}.json`)
     .then(() => getIngredients().then((ingredients) => resolve(ingredients)))

@@ -20,10 +20,24 @@ const getSingleMenuItemIngredients = (firebaseKey) => new Promise((resolve, reje
 });
 
 // DELETE MENU ITEMS
-const deleteMenuItems = (firebasekey, uid) => new Promise((resolve, reject) => {
+const deleteMenuItems = (firebasekey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/menu/${firebasekey}.json`)
-    .then(() => getMenuItems(uid).then((menuArray) => resolve(menuArray)))
+    .then(() => getMenuItems().then((menuArray) => resolve(menuArray)))
     .catch((error) => reject(error));
 });
 
-export { getMenuItems, deleteMenuItems, getSingleMenuItemIngredients };
+// CREATE MENU ITEM
+const createMenuItems = (menuObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/menu.json`, menuObject)
+    .then((response) => {
+      const frame = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/menu/${response.data.name}.json`, frame)
+        .then(() => {
+          getMenuItems().then((menuArray) => resolve(menuArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export {
+  getMenuItems, deleteMenuItems, createMenuItems, getSingleMenuItemIngredients
+};
