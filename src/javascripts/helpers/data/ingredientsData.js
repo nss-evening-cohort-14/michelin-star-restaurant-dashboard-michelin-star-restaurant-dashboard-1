@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseConfig from '../helpers/apiKeys';
+import firebaseConfig from '../apiKeys';
 
 // API Calls for Ingredients
 const dbUrl = firebaseConfig.databaseURL;
@@ -19,4 +19,16 @@ const deleteIngredients = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getIngredients, deleteIngredients };
+// Create calls
+const createIngredient = (ingredientObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/ingredients.json`, ingredientObject)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/ingredients/${response.data.name}.json`, body)
+        .then(() => {
+          getIngredients().then((ingredientsArray) => resolve(ingredientsArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export { getIngredients, deleteIngredients, createIngredient };

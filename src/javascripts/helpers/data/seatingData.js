@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseConfig from '../helpers/apiKeys';
+import firebaseConfig from '../apiKeys';
 
 // API CALLS FOR BOARDS
 const dbUrl = firebaseConfig.databaseURL;

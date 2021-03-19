@@ -1,4 +1,5 @@
 const showIngredients = (array) => {
+  document.querySelector('#form-container').innerHTML = '<button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#formModal" id="addIngredient">Add a new ingredient</button>';
   document.querySelector('#view').innerHTML = `<div class="card mt-2 ingredients" style="width: 18rem;">
   <ul class="list-group list-group-flush" id="ingredients-list">
   </ul>
@@ -9,7 +10,8 @@ const showIngredients = (array) => {
   });
 };
 
-const showUserIngredients = (array) => {
+const showLoginIngredients = (array) => {
+  document.querySelector('#form-container').innerHTML = '<button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#formModal" id="addIngredient">Add a new ingredient</button>';
   document.querySelector('#view').innerHTML = `<div class="card mt-2 ingredients" style="width: 18rem;">
   <ul class="list-group list-group-flush" id="ingredients-list">
   </ul>
@@ -21,4 +23,4 @@ const showUserIngredients = (array) => {
   });
 };
 
-export { showIngredients, showUserIngredients };
+export { showIngredients, showLoginIngredients };
