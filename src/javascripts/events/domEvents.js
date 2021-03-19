@@ -1,4 +1,4 @@
-import { deleteIngredients } from '../helpers/data/ingredientsData';
+import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import { deleteMenuItems } from '../helpers/data/menuData';
@@ -6,12 +6,15 @@ import { deleteReservation } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
+import formModal from '../components/menu/forms/formModal';
+import addIngredientForm from '../components/menu/forms/addIngredientForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
     // Events for CUD on components
 
     // Click Events for Ingredients
+    // Delete Ingredient
     if (e.target.id.includes('deleteIngredient')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete this ingredient?')) {
@@ -20,6 +23,22 @@ const domEvents = (user) => {
         deleteIngredients(firebaseKey).then((ingredients) => showLoginIngredients(ingredients));
       }
     }
+    // Create Ingredient
+    if (e.target.id.includes('addIngredient')) {
+      e.preventDefault();
+      formModal('Add Ingredient');
+      addIngredientForm();
+    }
+    // Submit Ingredient
+    if (e.target.id.includes('submit-ingredient')) {
+      e.preventDefault();
+      const ingredientObject = {
+        name: document.querySelector('#ingredientName').value
+      };
+      createIngredient(ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
+      $('#formModal').modal('toggle');
+    }
+
     // DELETE MENU ITEM
     if (e.target.id.includes('delete-menu-item')) {
       const firebaseKey = e.target.id.split('--')[1];
