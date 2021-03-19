@@ -12,7 +12,7 @@ const showMenuItems = (array) => {
       <p>${item.description}</p>
       <p>${item.price}</p>
       <div class="pb-2">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebasekey}">View Ingredients</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebaseKey}">View Ingredients</button>
       </div>
     </div>
     </div>`;
