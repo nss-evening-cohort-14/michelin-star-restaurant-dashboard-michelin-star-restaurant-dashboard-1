@@ -6,8 +6,8 @@ import { deleteReservation } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
-import formModal from '../components/menu/forms/formModal';
-import addIngredientForm from '../components/menu/forms/addIngredientForm';
+import formModal from '../components/forms/formModal';
+import addIngredientForm from '../components/forms/addIngredientForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
