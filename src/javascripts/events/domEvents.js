@@ -1,8 +1,8 @@
 import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
+import { createReservation, deleteReservation } from '../helpers/data/reservationData';
 import { createMenuItems, deleteMenuItems } from '../helpers/data/menuData';
-import { deleteReservation } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import createMenuItemForm from '../components/forms/createMenuItemForm';
@@ -10,6 +10,7 @@ import ingredientModal from '../components/forms/ingredientModal';
 import { createStaff, deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
+import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
 
 const domEvents = (user) => {
@@ -48,6 +49,26 @@ const domEvents = (user) => {
       deleteMenuItems(firebaseKey).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
+    // CREATE RESERVATION FORM POPUP
+    if (e.target.id.includes('addReservation')) {
+      e.preventDefault();
+      formModal('Add Reservation');
+      addReservationForm();
+    }
+
+    // CREATE RESERVATION
+    if (e.target.id.includes('submit-reservation')) {
+      e.preventDefault();
+      const resObject = {
+        name: document.querySelector('#last-name').value,
+        party_size: document.querySelector('#party-size').value,
+        date: document.querySelector('#res-date').value,
+        time: document.querySelector('#res-time').value,
+        notes: document.querySelector('#res-notes').value,
+      };
+      createReservation(resObject).then((reservations) => showLoginReservations(reservations));
+      $('#formModal').modal('toggle');
+    }
     // SHOW FORM TO CREATE MENU ITEM
     if (e.target.id.includes('add-menu-btn')) {
       createMenuItemForm();
