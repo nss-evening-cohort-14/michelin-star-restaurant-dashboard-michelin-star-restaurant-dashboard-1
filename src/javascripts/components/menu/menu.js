@@ -31,7 +31,7 @@ const showLoginMenuItems = (array) => {
       <p>${item.description}</p>
       <a href="#" id="showIngredients">Show Full Ingredient List</a>
       <p>${item.price}</p>
-      <button type="button" class="btn btn-danger" id="delete-menu-item--${item.firebasekey}">Delete</button>
+      <button type="button" class="btn btn-danger" id="delete-menu-item--${item.firebaseKey}">Delete</button>
     </div>
     </div>`;
   });
