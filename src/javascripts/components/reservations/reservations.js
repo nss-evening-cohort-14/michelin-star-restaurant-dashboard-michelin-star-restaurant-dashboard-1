@@ -1,5 +1,8 @@
 const showReservations = (array) => {
   document.querySelector('#view').innerHTML = '';
+  document.querySelector('#stage').innerHTML = '';
+  document.querySelector('#form-container').innerHTML = '';
+
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
     <ul class="list-group-res">
@@ -15,6 +18,8 @@ const showReservations = (array) => {
 
 const showLoginReservations = (array) => {
   document.querySelector('#view').innerHTML = '';
+  document.querySelector('#stage').innerHTML = '';
+  document.querySelector('#form-container').innerHTML = '';
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
     <ul class="list-group-res">
