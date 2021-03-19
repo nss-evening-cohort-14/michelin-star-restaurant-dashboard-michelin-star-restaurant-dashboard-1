@@ -8,6 +8,8 @@ import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
+import getMenuIngredients from '../helpers/data/menuIngredientsData';
+import menuIngredients from '../components/forms/ingredientModal';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -43,6 +45,14 @@ const domEvents = (user) => {
     if (e.target.id.includes('delete-menu-item')) {
       const firebaseKey = e.target.id.split('--')[1];
       deleteMenuItems(firebaseKey).then((menuArray) => showLoginMenuItems(menuArray));
+    }
+
+    // View Menu Ingredients
+    if (e.target.id.includes('view-menu-ingredients')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('--')[1];
+      getMenuIngredients(firebaseKey).then((menuItem) => menuIngredients(menuItem));
+      formModal('Ingredients');
     }
 
     // Delete Staff

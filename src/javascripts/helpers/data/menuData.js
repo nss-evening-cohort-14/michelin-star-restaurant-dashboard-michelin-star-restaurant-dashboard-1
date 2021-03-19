@@ -12,6 +12,13 @@ const getMenuItems = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Get a single Menu Item
+const getSingleMenuItemIngredients = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/menu/${firebaseKey}.json`)
+    .then((response) => resolve(response.data.ingredients))
+    .catch((error) => reject(error));
+});
+
 // DELETE MENU ITEMS
 const deleteMenuItems = (firebasekey, uid) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/menu/${firebasekey}.json`)
@@ -19,4 +26,4 @@ const deleteMenuItems = (firebasekey, uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getMenuItems, deleteMenuItems };
+export { getMenuItems, deleteMenuItems, getSingleMenuItemIngredients };

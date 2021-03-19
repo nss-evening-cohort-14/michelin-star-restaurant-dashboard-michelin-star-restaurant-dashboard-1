@@ -5,7 +5,8 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$9.99",
     "available": "True",
-    "firebasekey": "-MVvegv2k0wPieOVEFc7"
+    "firebasekey": "-MVvegv2k0wPieOVEFc7",
+    "ingredients": ["-MVxIo-pDIAbUH6jYtSv", "-MVxIvqqqbS2AzG25Ls2", "-MVxJUBooq8-N6V1P0DI", "-MVxJY4fFWYg5BZDzWbe", "-MVxJaCfcjF54RvJqZYH", "-MVxJc6QjwwolEZhQlzZ"]
   },
   "-MVvgW-ax_fs0TChp7i1": {
     "title": "VooDoo Chicken",
@@ -13,7 +14,8 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$12.99",
     "available": "False",
-    "firebasekey": "-MVvgW-ax_fs0TChp7i1"
+    "firebasekey": "-MVvgW-ax_fs0TChp7i1",
+    "ingredients": ["-MVxJgGJNCYH8tqhHoxp", "-MVxIvqqqbS2AzG25Ls2", "-MVxJoQdnYjceeDBA7O1", "-MVxJsN5OwfgAJQgr88V"]
   },
   "-MVvgkAUHzQS45pBEyXp": {
     "title": "Jambalaya",
@@ -21,7 +23,8 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$14.29",
     "available": "True",
-    "firebasekey": "-MVvgkAUHzQS45pBEyXp"
+    "firebasekey": "-MVvgkAUHzQS45pBEyXp",
+    "ingredients": ["-MVxJgGJNCYH8tqhHoxp", "-MVxJugoKnuS-CmIPI4-", "-MVxJsN5OwfgAJQgr88V", "-MVxIo-pDIAbUH6jYtSv", "-MVxJoQdnYjceeDBA7O1", "-MVxJptNSWhQfrCcG9lw", "-MVxJzJFH0RtS3ApJePJ"]
   },
   "-MVvhwqcPvH6_LgwfsEH": {
     "title": "Red Beans and Rice",
@@ -29,7 +32,8 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$8.99",
     "available": "False",
-    "firebasekey": "-MVvhwqcPvH6_LgwfsEH"
+    "firebasekey": "-MVvhwqcPvH6_LgwfsEH",
+    "ingredients": ["-MVxJugoKnuS-CmIPI4-", "-MVxJsN5OwfgAJQgr88V", "-MVxK0suYalyIvOtdMSd"]
   },
   "-MVvj2UFvvjAR3Raku4f": {
     "title": "Crawfish Étouffée",
@@ -37,7 +41,8 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$10.29",
     "available": "True",
-    "firebasekey": "-MVvj2UFvvjAR3Raku4f"
+    "firebasekey": "-MVvj2UFvvjAR3Raku4f",
+    "ingredients": ["-MVxK3R1gXiyIeeuWI4B", "-MVxJsN5OwfgAJQgr88V","-MVxIvqqqbS2AzG25Ls2", "-MVxJc6QjwwolEZhQlzZ", "-MVxJxDtSwnMljDlY3zt", "-MVxK6ox_oGpmr7GnUel"]
   },
   "-MVvkE6dWOzGvEOjuxfq": {
     "title": "Charbroiled Oysters",
@@ -45,6 +50,7 @@
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
     "price": "$14.99",
     "available": "True",
-    "firebasekey": "-MVvkE6dWOzGvEOjuxfq"
+    "firebasekey": "-MVvkE6dWOzGvEOjuxfq",
+    "ingredients": ["-MVxK93udD2YkIRiepnA", "-MVxKAWfdGGTpvtkCUia", "-MVxKBw0GksBUsl90Elz", "-MVxKD7w1yBci7ATP0ag"]
   }
 }

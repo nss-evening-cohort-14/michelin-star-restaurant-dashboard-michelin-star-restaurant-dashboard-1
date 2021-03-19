@@ -11,6 +11,7 @@ const showMenuItems = (array) => {
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
       <p>${item.price}</p>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebasekey}">View Ingredients</button>
     </div>
     </div>`;
   });
@@ -29,6 +30,7 @@ const showLoginMenuItems = (array) => {
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
       <p>${item.price}</p>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebasekey}">View Ingredients</button>
       <button type="button" class="btn btn-danger" id="delete-menu-item--${item.firebasekey}">Delete</button>
     </div>
     </div>`;
