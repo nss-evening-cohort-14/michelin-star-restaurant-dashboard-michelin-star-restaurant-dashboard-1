@@ -1,6 +1,7 @@
 const showStaff = (staffArray, user) => {
   document.querySelector('#view').innerHTML = '';
   document.querySelector('#stage').innerHTML = '';
+  document.querySelector('#form-container').innerHTML = '';
   document.querySelector('#view').innerHTML = `
     <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
   `;

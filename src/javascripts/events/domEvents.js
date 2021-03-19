@@ -59,7 +59,8 @@ const domEvents = (user) => {
         image: document.querySelector('#itemImage').value,
         title: document.querySelector('#itemTitle').value,
         description: document.querySelector('#itemDescription').value,
-        price: document.querySelector('#itemPrice').value
+        price: document.querySelector('#itemPrice').value,
+        available: document.querySelector('#available').checked
       };
       createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
     }
