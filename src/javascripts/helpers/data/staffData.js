@@ -21,4 +21,15 @@ const deleteStaff = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getStaff, deleteStaff };
+const createStaff = (objectBody) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/staff.json`, objectBody)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/staff/${response.data.name}.json`, body)
+        .then(() => {
+          getStaff().then((staffArray) => resolve(staffArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export { getStaff, deleteStaff, createStaff };
