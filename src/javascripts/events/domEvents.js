@@ -2,12 +2,13 @@ import { createIngredient, deleteIngredients } from '../helpers/data/ingredients
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import { deleteMenuItems } from '../helpers/data/menuData';
-import { deleteReservation } from '../helpers/data/reservationData';
+import { createReservation, deleteReservation } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
+import addReservationForm from '../components/forms/addReservationForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -43,6 +44,27 @@ const domEvents = (user) => {
     if (e.target.id.includes('delete-menu-item')) {
       const firebaseKey = e.target.id.split('--')[1];
       deleteMenuItems(firebaseKey).then((menuArray) => showLoginMenuItems(menuArray));
+    }
+
+    // CREATE RESERVATION FORM POPUP
+    if (e.target.id.includes('addReservation')) {
+      e.preventDefault();
+      formModal('Add Reservation');
+      addReservationForm();
+    }
+
+    // CREATE RESERVATION
+    if (e.target.id.includes('submit-reservation')) {
+      e.preventDefault();
+      const resObject = {
+        name: document.querySelector('#last-name').value,
+        party_size: document.querySelector('#party-size').value,
+        date: document.querySelector('#res-date').value,
+        time: document.querySelector('#res-time').value,
+        notes: document.querySelector('#res-notes').value,
+      };
+      createReservation(resObject).then((reservations) => showLoginReservations(reservations));
+      $('#formModal').modal('toggle');
     }
 
     // Delete Staff
