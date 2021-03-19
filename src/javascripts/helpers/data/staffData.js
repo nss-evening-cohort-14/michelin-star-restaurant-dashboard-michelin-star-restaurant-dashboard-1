@@ -1,4 +1,5 @@
 import axios from 'axios';
+import showStaff from '../../components/staff/showStaff';
 import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -21,4 +22,15 @@ const deleteStaff = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getStaff, deleteStaff };
+const createStaff = (objectBody) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/staff.json`, objectBody)
+    .then((response) => {
+      const body = { firebaseKey: response.data };
+      axios.patch(`${dbUrl}/staff/${response.data.name}.json`, body)
+        .then(() => {
+          getStaff().then((staffArray) => showStaff(staffArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export { getStaff, deleteStaff, createStaff };

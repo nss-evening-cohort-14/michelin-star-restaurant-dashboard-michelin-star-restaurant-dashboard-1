@@ -8,6 +8,7 @@ import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
+import addStaffForm from '../components/forms/addStaffForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -58,6 +59,12 @@ const domEvents = (user) => {
         const firebaseKey = e.target.id.split('--')[1];
         deleteReservation(firebaseKey).then((resArray) => showLoginReservations(resArray));
       }
+    }
+    // Add staff form
+    if (e.target.id.includes('add-staff-member')) {
+      e.preventDefault();
+      formModal('Add Staff Member');
+      addStaffForm();
     }
   });
 };
