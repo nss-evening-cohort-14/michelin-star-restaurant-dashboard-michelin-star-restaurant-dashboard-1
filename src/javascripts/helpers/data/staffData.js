@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseConfig from './apiKeys';
+import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 
@@ -15,4 +15,10 @@ const getStaff = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export default getStaff;
+const deleteStaff = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/staff/${firebaseKey}.json`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+export { getStaff, deleteStaff };
