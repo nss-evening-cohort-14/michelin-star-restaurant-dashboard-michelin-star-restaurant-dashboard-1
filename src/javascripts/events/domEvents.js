@@ -5,7 +5,7 @@ import { deleteMenuItems } from '../helpers/data/menuData';
 import { deleteReservation } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
-import { deleteStaff, getStaff } from '../helpers/data/staffData';
+import { createStaff, deleteStaff, getStaff } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
 import addStaffForm from '../components/forms/addStaffForm';
@@ -65,6 +65,21 @@ const domEvents = (user) => {
       e.preventDefault();
       formModal('Add Staff Member');
       addStaffForm();
+    }
+    if (e.target.id.includes('submit-staff')) {
+      e.preventDefault();
+      const staffObject = {
+        first_name: document.querySelector('#new-first-name').value,
+        last_name: document.querySelector('#new-last-name').value,
+        job_title: document.querySelector('#new-position').value,
+        image: document.querySelector('#new-image-url').value,
+        bio: document.querySelector('#new-staff-bio').value,
+      };
+
+      createStaff(staffObject).then(() => getStaff()
+        .then((staffArray) => showStaff(staffArray, user)));
+
+      $('#formModal').modal('toggle');
     }
   });
 };
