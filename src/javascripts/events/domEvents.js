@@ -3,7 +3,7 @@ import { showLoginIngredients } from '../components/ingredients/showIngredients'
 import { showLoginMenuItems } from '../components/menu/menu';
 import { deleteMenuItems } from '../helpers/data/menuData';
 import { deleteReservation } from '../helpers/data/reservationData';
-import { showUserReservations } from '../components/reservations/reservations';
+import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import { deleteStaff, getStaff } from '../helpers/data/staffData';
 
@@ -37,7 +37,7 @@ const domEvents = (user) => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const firebaseKey = e.target.id.split('--')[1];
-        deleteReservation(firebaseKey).then((resArray) => showUserReservations(resArray));
+        deleteReservation(firebaseKey).then((resArray) => showLoginReservations(resArray));
       }
     }
   });
