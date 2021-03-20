@@ -4,7 +4,9 @@ import { showLoginMenuItems } from '../components/menu/menu';
 import {
   createReservation, deleteReservation, getSingleReservation, updateReservation
 } from '../helpers/data/reservationData';
-import { createMenuItems, deleteMenuItems } from '../helpers/data/menuData';
+import {
+  createMenuItems, deleteMenuItems, getSingleMenuItem, updateMenuItems
+} from '../helpers/data/menuData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import createMenuItemForm from '../components/forms/createMenuItemForm';
@@ -16,6 +18,7 @@ import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
+import editMenuItemForm from '../components/forms/editMenuItems';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -54,18 +57,12 @@ const domEvents = (user) => {
       deleteMenuItems(firebaseKey).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
-    // View Menu Ingredients
+    // SHOW MENU INGREDIENTS
     if (e.target.id.includes('view-menu-ingredients')) {
       e.preventDefault();
       const firebaseKey = e.target.id.split('--')[1];
       getMenuIngredients(firebaseKey).then((menuItem) => menuIngredients(menuItem));
       formModal('Ingredients');
-    }
-    // CREATE RESERVATION FORM POPUP
-    if (e.target.id.includes('addReservation')) {
-      e.preventDefault();
-      formModal('Add Reservation');
-      addReservationForm();
     }
 
     // CREATE RESERVATION
@@ -130,7 +127,55 @@ const domEvents = (user) => {
       createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
-    // Show Ingredients Modal
+    // SHOW FORM TO EDIT MENU ITEM
+    if (e.target.id.includes('edit-menu-item')) {
+      const firebaseKey = e.target.id.split('--')[1];
+      formModal('Edit Menu');
+      getSingleMenuItem(firebaseKey).then((menuObject) => editMenuItemForm(menuObject));
+    }
+
+    // SUBMIT EDIT MENU ITEM
+    if (e.target.id.includes('update-menu-item')) {
+      const firebaseKey = e.target.id.split('--')[1];
+      e.preventDefault();
+      const checkBoxes = [];
+      const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+      markedCheckbox.forEach((checkbox) => {
+        if (checkbox.value !== 'on') {
+          checkBoxes.push(checkbox.value);
+        }
+      });
+      const itemObject = {
+        image: document.querySelector('#itemImage').value,
+        title: document.querySelector('#itemTitle').value,
+        description: document.querySelector('#itemDescription').value,
+        ingredients: checkBoxes,
+        price: document.querySelector('#itemPrice').value,
+        available: document.querySelector('#available').checked
+      };
+      updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    }
+
+    // CREATE RESERVATION FORM POPUP
+    if (e.target.id.includes('addReservation')) {
+      e.preventDefault();
+      formModal('Add Reservation');
+      addReservationForm();
+    }
+
+    // CREATE RESERVATION
+    if (e.target.id.includes('submit-reservation')) {
+      e.preventDefault();
+      const resObject = {
+        name: document.querySelector('#last-name').value,
+        party_size: document.querySelector('#party-size').value,
+        date: document.querySelector('#res-date').value,
+        time: document.querySelector('#res-time').value,
+        notes: document.querySelector('#res-notes').value,
+      };
+      createReservation(resObject).then((reservations) => showLoginReservations(reservations));
+      $('#formModal').modal('toggle');
+    }
 
     // Delete Staff
     if (e.target.id.includes('delete-staff')) {

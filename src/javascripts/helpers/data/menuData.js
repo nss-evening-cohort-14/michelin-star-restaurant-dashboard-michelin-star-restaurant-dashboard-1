@@ -12,7 +12,14 @@ const getMenuItems = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// Get a single Menu Item
+// GET SINGLE MENU ITEM
+const getSingleMenuItem = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/menu/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+// GET SINGLE MENU ITEM INGREDIENT
 const getSingleMenuItemIngredients = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/menu/${firebaseKey}.json`)
     .then((response) => resolve(response.data.ingredients))
@@ -38,6 +45,13 @@ const createMenuItems = (menuObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+// UPDATE MENU ITEMS
+const updateMenuItems = (firebaseKey, menuObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/menu/${firebaseKey}.json`, menuObject)
+    .then(() => getMenuItems()).then((menuArray) => resolve(menuArray))
+    .catch((error) => reject(error));
+});
+
 export {
-  getMenuItems, deleteMenuItems, createMenuItems, getSingleMenuItemIngredients
+  getMenuItems, deleteMenuItems, createMenuItems, getSingleMenuItemIngredients, updateMenuItems, getSingleMenuItem
 };
