@@ -153,18 +153,18 @@ const domEvents = (user) => {
       getSingleStaff(firebaseKey).then((staffObject) => updateStaffForm(staffObject));
     }
 
-    if (e.target.id.includes('submit-update-staff')) {
-      e.preventDefault();
+    if (e.target.id.includes('edit-this-staff')) {
       const firebaseKey = e.target.id.split('--')[1];
       const staffObject = {
         first_name: document.querySelector('#update-first-name').value,
         last_name: document.querySelector('#update-last-name').value,
         job_title: document.querySelector('#update-position').value,
         image: document.querySelector('#update-image-url').value,
-        bio: document.querySelector('#update-staff-bio').value,
+        bio: document.querySelector('#update-bio').value,
       };
+
       updateStaff(firebaseKey, staffObject).then(() => getStaff()
-        .then((staffArray) => showStaff(staffArray)));
+        .then((staffArray) => showStaff(staffArray, user)));
 
       $('#formModal').modal('toggle');
     }
