@@ -20,7 +20,6 @@ const addReservationForm = () => {
     <label for="Reservation Date">Notes: </label>
     <input type="notes" class="form-control" id="res-notes" placeholder="Enter Notes" required>
   </div>
-  </div>
   <button type="submit" id="submit-reservation" class="btn btn-primary">Submit Reservation</button>
   </form>`;
 };
