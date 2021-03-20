@@ -1,3 +1,5 @@
+import selectIngredients from '../menu/selectIngredient';
+
 const createMenuItemForm = () => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#view').innerHTML = '';
@@ -28,6 +30,8 @@ const createMenuItemForm = () => {
   </div>
   <button type="submit" id="create-menu-item" class="btn btn-primary">Create Menu Item</button>
 </form>`;
+
+  selectIngredients();
 };
 
 export default createMenuItemForm;

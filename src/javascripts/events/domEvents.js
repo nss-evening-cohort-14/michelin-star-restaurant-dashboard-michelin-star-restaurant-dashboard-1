@@ -89,6 +89,7 @@ const domEvents = (user) => {
         image: document.querySelector('#itemImage').value,
         title: document.querySelector('#itemTitle').value,
         description: document.querySelector('#itemDescription').value,
+        ingredients: document.querySelector('#select-ingredients').value,
         price: document.querySelector('#itemPrice').value,
         available: document.querySelector('#available').checked
       };
