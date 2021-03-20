@@ -13,8 +13,19 @@ const getReservations = () => new Promise((resolve, reject) => {
 
 const deleteReservation = (firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/reservations/${firebaseKey}.json`)
-    .then(() => getReservations().then((booksArray) => resolve(booksArray)))
+    .then(() => getReservations().then((resArray) => resolve(resArray)))
     .catch((error) => reject(error));
 });
 
-export { getReservations, deleteReservation };
+const createReservation = (resObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/reservations.json`, resObject)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/reservations/${response.data.name}.json`, body)
+        .then(() => {
+          getReservations().then((resArray) => resolve(resArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export { getReservations, deleteReservation, createReservation };

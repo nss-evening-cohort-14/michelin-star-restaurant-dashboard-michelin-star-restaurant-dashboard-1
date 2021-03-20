@@ -11,12 +11,32 @@ const getIngredients = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// Delete Calls
+// Get Single Ingredient
+const getSingleIngredient = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/ingredients/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
+// Delete Calls
 const deleteIngredients = (firebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/ingredients/${firebaseKey}.json`)
     .then(() => getIngredients().then((ingredients) => resolve(ingredients)))
     .catch((error) => reject(error));
 });
 
-export { getIngredients, deleteIngredients };
+// Create calls
+const createIngredient = (ingredientObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/ingredients.json`, ingredientObject)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/ingredients/${response.data.name}.json`, body)
+        .then(() => {
+          getIngredients().then((ingredientsArray) => resolve(ingredientsArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export {
+  getIngredients, deleteIngredients, createIngredient, getSingleIngredient
+};
