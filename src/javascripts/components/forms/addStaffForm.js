@@ -6,7 +6,7 @@ const addStaffForm = () => {
         <input type="text" class="form-control" id="new-first-name" placeholder="First Name">
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+        <label for="new-last-name" class="form-label">Last Name</label>
         <input type="text" class="form-control" id="new-last-name" placeholder="Last Name">
       </div>
       <div class="mb-3">

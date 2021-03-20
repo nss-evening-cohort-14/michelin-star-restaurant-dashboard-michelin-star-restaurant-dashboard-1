@@ -1,4 +1,4 @@
-import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
+import { createIngredient, deleteIngredients, updateIngredient } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import {
@@ -10,13 +10,17 @@ import {
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import createMenuItemForm from '../components/forms/createMenuItemForm';
-import { createStaff, deleteStaff, getStaff } from '../helpers/data/staffData';
+import {
+  createStaff, deleteStaff, getSingleStaff, getStaff, updateStaff
+} from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
 import getMenuIngredients from '../helpers/data/menuIngredientsData';
 import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
+import editIngredientForm from '../components/forms/editIngredientForm';
+import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 
@@ -48,6 +52,26 @@ const domEvents = (user) => {
         name: document.querySelector('#ingredientName').value
       };
       createIngredient(ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
+      $('#formModal').modal('toggle');
+    }
+
+    // Edit Ingredient
+    if (e.target.id.includes('editIngredient')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      formModal('Edit Ingredient');
+      editIngredientForm(firebaseKey);
+    }
+
+    // Submit on Edit Ingredient Form
+    if (e.target.id.includes('submitEditIngredient')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      const ingredientObject = {
+        firebaseKey,
+        name: document.querySelector('#newIngredientName').value
+      };
+      updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
       $('#formModal').modal('toggle');
     }
 
@@ -210,6 +234,29 @@ const domEvents = (user) => {
       };
 
       createStaff(staffObject).then(() => getStaff()
+        .then((staffArray) => showStaff(staffArray, user)));
+
+      $('#formModal').modal('toggle');
+    }
+    if (e.target.id.includes('update-staff')) {
+      e.preventDefault();
+      formModal('Update Staff Info');
+      const firebaseKey = e.target.id.split('--')[1];
+      getSingleStaff(firebaseKey).then((staffObject) => updateStaffForm(staffObject));
+    }
+
+    if (e.target.id.includes('edit-this-staff')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('--')[1];
+      const staffObject = {
+        first_name: document.querySelector('#update-first-name').value,
+        last_name: document.querySelector('#update-last-name').value,
+        job_title: document.querySelector('#update-position').value,
+        image: document.querySelector('#update-image-url').value,
+        bio: document.querySelector('#update-bio').value,
+      };
+
+      updateStaff(firebaseKey, staffObject).then(() => getStaff()
         .then((staffArray) => showStaff(staffArray, user)));
 
       $('#formModal').modal('toggle');
