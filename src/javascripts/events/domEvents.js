@@ -6,7 +6,9 @@ import { createMenuItems, deleteMenuItems } from '../helpers/data/menuData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import createMenuItemForm from '../components/forms/createMenuItemForm';
-import { createStaff, deleteStaff, getStaff } from '../helpers/data/staffData';
+import {
+  createStaff, deleteStaff, getSingleStaff, getStaff, updateStaff
+} from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
 import getMenuIngredients from '../helpers/data/menuIngredientsData';
@@ -147,7 +149,24 @@ const domEvents = (user) => {
     if (e.target.id.includes('update-staff')) {
       e.preventDefault();
       formModal('Update Staff Info');
-      updateStaffForm();
+      const firebaseKey = e.target.id.split('--')[1];
+      getSingleStaff(firebaseKey).then((staffObject) => updateStaffForm(staffObject));
+    }
+
+    if (e.target.id.includes('submit-update-staff')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('--')[1];
+      const staffObject = {
+        first_name: document.querySelector('#update-first-name').value,
+        last_name: document.querySelector('#update-last-name').value,
+        job_title: document.querySelector('#update-position').value,
+        image: document.querySelector('#update-image-url').value,
+        bio: document.querySelector('#update-staff-bio').value,
+      };
+      updateStaff(firebaseKey, staffObject).then(() => getStaff()
+        .then((staffArray) => showStaff(staffArray)));
+
+      $('#formModal').modal('toggle');
     }
   });
 };
