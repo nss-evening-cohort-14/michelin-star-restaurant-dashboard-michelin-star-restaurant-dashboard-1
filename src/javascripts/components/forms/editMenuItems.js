@@ -2,7 +2,7 @@ import selectIngredients from '../menu/selectIngredient';
 
 const editMenuItemForm = (menuObject) => {
   document.querySelector('#modal-body').innerHTML = `
-  <form id="edit-menu-item-form" class="mb-4">
+  <form id="edit-menu-form" class="mb-4">
   <div class="form-group">
     <label for="itemImage">Menu Item Image</label>
     <input type="url" class="form-control" id="itemImage" placeholder="Update Image" value="${menuObject.image}" required>
@@ -25,7 +25,7 @@ const editMenuItemForm = (menuObject) => {
     <input type="checkbox" class="form-check-input" id="available" value="${menuObject.available && 'checked'}">
     <label class="form-check-label" for="available">Availabe?</label>
   </div>
-  <button type="submit" id="update-menu-item--${menuObject.firebaseKey}" class="btn btn-primary">Update Menu Item</button>
+  <button type="submit" data-toggle="modal" data-target="#formModal" id="update-menu-item--${menuObject.firebaseKey}" class="btn btn-primary">Update Menu Item</button>
 </form>`;
 
   selectIngredients(menuObject);

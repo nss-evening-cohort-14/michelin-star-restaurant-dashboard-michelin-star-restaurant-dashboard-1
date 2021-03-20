@@ -91,13 +91,13 @@ const domEvents = (user) => {
     // SHOW FORM TO EDIT MENU ITEM
     if (e.target.id.includes('edit-menu-item')) {
       const firebaseKey = e.target.id.split('--')[1];
-      console.warn(firebaseKey);
       formModal('Edit Menu');
       getSingleMenuItem(firebaseKey).then((menuObject) => editMenuItemForm(menuObject));
     }
 
     // SUBMIT EDIT MENU ITEM
     if (e.target.id.includes('update-menu-item')) {
+      const firebaseKey = e.target.id.split('--')[1];
       e.preventDefault();
       const checkBoxes = [];
       const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -114,7 +114,7 @@ const domEvents = (user) => {
         price: document.querySelector('#itemPrice').value,
         available: document.querySelector('#available').checked
       };
-      updateMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+      updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
     // CREATE RESERVATION FORM POPUP
