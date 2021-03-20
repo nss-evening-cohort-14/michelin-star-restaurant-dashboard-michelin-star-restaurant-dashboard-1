@@ -13,6 +13,7 @@ import getMenuIngredients from '../helpers/data/menuIngredientsData';
 import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
+import updateStaffForm from '../components/forms/updateStaffForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -142,6 +143,11 @@ const domEvents = (user) => {
         .then((staffArray) => showStaff(staffArray, user)));
 
       $('#formModal').modal('toggle');
+    }
+    if (e.target.id.includes('update-staff')) {
+      e.preventDefault();
+      formModal('Update Staff Info');
+      updateStaffForm();
     }
   });
 };
