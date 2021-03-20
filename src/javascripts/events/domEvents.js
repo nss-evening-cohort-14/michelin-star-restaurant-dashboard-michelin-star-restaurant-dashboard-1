@@ -28,6 +28,7 @@ const domEvents = (user) => {
         deleteIngredients(firebaseKey).then((ingredients) => showLoginIngredients(ingredients));
       }
     }
+
     // Create Ingredient
     if (e.target.id.includes('addIngredient')) {
       e.preventDefault();
@@ -85,10 +86,18 @@ const domEvents = (user) => {
     // SUBMIT CREATE MENU ITEM
     if (e.target.id.includes('create-menu-item')) {
       e.preventDefault();
+      const checkBoxes = [];
+      const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+      markedCheckbox.forEach((checkbox) => {
+        if (checkbox.value !== 'on') {
+          checkBoxes.push(checkbox.value);
+        }
+      });
       const itemObject = {
         image: document.querySelector('#itemImage').value,
         title: document.querySelector('#itemTitle').value,
         description: document.querySelector('#itemDescription').value,
+        ingredients: checkBoxes,
         price: document.querySelector('#itemPrice').value,
         available: document.querySelector('#available').checked
       };
