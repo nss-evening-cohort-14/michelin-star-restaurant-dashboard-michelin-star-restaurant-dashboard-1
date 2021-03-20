@@ -37,6 +37,14 @@ const createIngredient = (ingredientObject) => new Promise((resolve, reject) => 
     }).catch((error) => reject(error));
 });
 
+// Update Ingredients
+const updateIngredient = (firebaseKey, ingredientObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/ingredients/${firebaseKey}.json`, ingredientObject)
+    .then(() => getIngredients())
+    .then((ingredientsArray) => resolve(ingredientsArray))
+    .catch((error) => reject(error));
+});
+
 export {
-  getIngredients, deleteIngredients, createIngredient, getSingleIngredient
+  getIngredients, deleteIngredients, createIngredient, getSingleIngredient, updateIngredient
 };

@@ -1,4 +1,4 @@
-import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
+import { createIngredient, deleteIngredients, updateIngredient } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import {
@@ -19,6 +19,7 @@ import getMenuIngredients from '../helpers/data/menuIngredientsData';
 import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
+import editIngredientForm from '../components/forms/editIngredientForm';
 import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
@@ -51,6 +52,26 @@ const domEvents = (user) => {
         name: document.querySelector('#ingredientName').value
       };
       createIngredient(ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
+      $('#formModal').modal('toggle');
+    }
+
+    // Edit Ingredient
+    if (e.target.id.includes('editIngredient')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      formModal('Edit Ingredient');
+      editIngredientForm(firebaseKey);
+    }
+
+    // Submit on Edit Ingredient Form
+    if (e.target.id.includes('submitEditIngredient')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      const ingredientObject = {
+        firebaseKey,
+        name: document.querySelector('#newIngredientName').value
+      };
+      updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
       $('#formModal').modal('toggle');
     }
 
@@ -225,6 +246,7 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('edit-this-staff')) {
+      e.preventDefault();
       const firebaseKey = e.target.id.split('--')[1];
       const staffObject = {
         first_name: document.querySelector('#update-first-name').value,
