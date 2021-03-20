@@ -2,7 +2,6 @@ import 'firebase/auth';
 import { getIngredients } from '../../helpers/data/ingredientsData';
 
 const selectIngredients = (array = []) => {
-  console.warn(array);
   let domString = `<ul>
     <li class="dropdown">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
