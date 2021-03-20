@@ -3,30 +3,27 @@ import 'firebase/auth';
 import { getIngredients } from '../../helpers/data/ingredientsData';
 
 const selectIngredients = () => {
-  let domstring = `<ul>
+  let domString = `<ul>
     <li class="dropdown">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" id="ingredients-list">
             <li>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Random Ingredient
-                    </label>
-                </div>
-            </li>
-        </ul>
-    </li>
-  </ul>`;
+            </li>`;
 
   getIngredients().then((ingredientsArray) => {
-    ingredientsArray.foreach((ingredient) => {
-      domstring += `<input type="checkbox">${ingredient.title}`;
+    ingredientsArray.forEach((ingredient) => {
+      domString += `<li>
+      <div class="checkbox">
+          <label>
+              <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}"> ${ingredient.name}
+          </label>
+      </div>
+  </li>`;
     });
+    domString += '</ul> </li> </ul>';
+
+    document.querySelector('#select-ingredients').innerHTML = domString;
   });
-
-  domstring += '</select>';
-
-  document.querySelector('#select-ingredients').innerHTML = domstring;
 };
 
 export default selectIngredients;
