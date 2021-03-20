@@ -5,7 +5,7 @@ const createMenuItemForm = () => {
   document.querySelector('#view').innerHTML = '';
 
   document.querySelector('#form-container').innerHTML = `
-  <form id="create-menu-item-form" class="mb-4">
+  <form id="create-menu-form" class="mb-4">
   <div class="form-group">
     <label for="itemImage">Menu Item Image</label>
     <input type="url" class="form-control" id="itemImage" placeholder="Menu Image" required>
