@@ -35,7 +35,7 @@ const getSingleReservation = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// UPDATE PIN
+// UPDATE RESERVATION
 const updateReservation = (firebaseKey, resObject) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/reservations/${firebaseKey}.json`, resObject)
     .then(() => getReservations()).then((resArray) => resolve(resArray))
