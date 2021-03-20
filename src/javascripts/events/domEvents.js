@@ -1,7 +1,9 @@
 import { createIngredient, deleteIngredients } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
-import { createReservation, deleteReservation } from '../helpers/data/reservationData';
+import {
+  createReservation, deleteReservation, getSingleReservation, updateReservation
+} from '../helpers/data/reservationData';
 import { createMenuItems, deleteMenuItems } from '../helpers/data/menuData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
@@ -13,6 +15,7 @@ import getMenuIngredients from '../helpers/data/menuIngredientsData';
 import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
+import editReservationForm from '../components/forms/editReservationForm';
 
 const domEvents = (user) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -78,6 +81,29 @@ const domEvents = (user) => {
       createReservation(resObject).then((reservations) => showLoginReservations(reservations));
       $('#formModal').modal('toggle');
     }
+
+    // CLICK EVENT FOR SHOWING MODAL FORM FOR EDITING A RESERVATION
+    if (e.target.id.includes('edit-res-btn')) {
+      const firebaseKey = e.target.id.split('--')[1];
+      formModal('Edit Reservation');
+      getSingleReservation(firebaseKey).then((resObject) => editReservationForm(resObject));
+    }
+
+    // CLICK EVENT FOR EDITING A RESERVATION
+    if (e.target.id.includes('update-res')) {
+      const firebaseKey = e.target.id.split('--')[1];
+      e.preventDefault();
+      const resObject = {
+        name: document.querySelector('#last-name').value,
+        party_size: document.querySelector('#party-size').value,
+        date: document.querySelector('#res-date').value,
+        time: document.querySelector('#res-time').value,
+        notes: document.querySelector('#res-notes').value,
+      };
+      updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
+      $('#formModal').modal('toggle');
+    }
+
     // SHOW FORM TO CREATE MENU ITEM
     if (e.target.id.includes('add-menu-btn')) {
       createMenuItemForm();

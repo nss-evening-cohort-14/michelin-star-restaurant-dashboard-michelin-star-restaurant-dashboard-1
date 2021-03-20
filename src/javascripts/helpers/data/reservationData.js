@@ -28,4 +28,20 @@ const createReservation = (resObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getReservations, deleteReservation, createReservation };
+// GET SINGLE RESERVATION
+const getSingleReservation = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/reservations/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+// UPDATE PIN
+const updateReservation = (firebaseKey, resObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/reservations/${firebaseKey}.json`, resObject)
+    .then(() => getReservations()).then((resArray) => resolve(resArray))
+    .catch((error) => reject(error));
+});
+
+export {
+  getReservations, deleteReservation, createReservation, getSingleReservation, updateReservation
+};
