@@ -1,7 +1,7 @@
 import 'firebase/auth';
 import { getIngredients } from '../../helpers/data/ingredientsData';
 
-const selectIngredients = () => {
+const selectIngredients = (array = []) => {
   let domString = `<ul>
     <li class="dropdown">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
@@ -11,14 +11,25 @@ const selectIngredients = () => {
 
   getIngredients().then((ingredientsArray) => {
     ingredientsArray.forEach((ingredient) => {
-      domString += `<li>
+      if (array.includes(ingredient.firebaseKey)) {
+        domString += `<li>
       <div class="checkbox">
           <label>
-              <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}"> ${ingredient.name}
+              <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}" checked> ${ingredient.name}
           </label>
       </div>
   </li>`;
+      } else {
+        domString += `<li>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}"> ${ingredient.name}
+            </label>
+        </div>
+    </li>`;
+      }
     });
+
     domString += '</ul> </li> </ul>';
 
     document.querySelector('#select-ingredients').innerHTML = domString;
