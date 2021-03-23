@@ -22,10 +22,6 @@ const editMenuItemForm = (menuObject) => {
   </div>
   <div class="form-group" id="select-ingredients">
   </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="available" value="${menuObject.available && 'checked'}">
-    <label class="form-check-label" for="available">Availabe?</label>
-  </div>
   <button type="submit" data-toggle="modal" data-target="#formModal" id="update-menu-item--${menuObject.firebaseKey}" class="btn btn-primary">Update Menu Item</button>
 </form>`;
 
