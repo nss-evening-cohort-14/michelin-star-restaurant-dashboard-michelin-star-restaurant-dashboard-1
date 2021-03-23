@@ -117,6 +117,15 @@ const domEvents = (user) => {
       updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
     }
 
+    // FILTER MENU ITEMS
+    if (e.target.id.includes('submitMenuFilter')) {
+      const searchString = document.querySelector('#menuFilter').value;
+      const filteredMenu = Array.filter((menu) => menu.ingredients.includes(searchString));
+      console.warn(searchString);
+      console.warn(filteredMenu);
+      // getMenuItems(filteredMenu);
+    }
+
     // CREATE RESERVATION FORM POPUP
     if (e.target.id.includes('addReservation')) {
       e.preventDefault();
