@@ -1,3 +1,4 @@
+import getMenuIngredients from '../../helpers/data/menuIngredientsData';
 import selectIngredients from '../menu/selectIngredient';
 
 const editMenuItemForm = (menuObject) => {
@@ -28,7 +29,7 @@ const editMenuItemForm = (menuObject) => {
   <button type="submit" data-toggle="modal" data-target="#formModal" id="update-menu-item--${menuObject.firebaseKey}" class="btn btn-primary">Update Menu Item</button>
 </form>`;
 
-  selectIngredients(menuObject);
+  getMenuIngredients(menuObject.firebaseKey).then((response) => selectIngredients(response.map((ingredientObject) => ingredientObject.firebaseKey)));
 };
 
 export default editMenuItemForm;
