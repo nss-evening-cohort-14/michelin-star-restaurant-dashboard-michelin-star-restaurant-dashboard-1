@@ -11,11 +11,7 @@ const showMenuItems = (array) => {
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
       <div class="pb-2">
-<<<<<<< HEAD
-      <button type="button" class="btn btn-link" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebaseKey}">View Ingredients</button>
-=======
       <button type="button" class="btn btn-link" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebaseKey}">Show Full Ingredient List</button>
->>>>>>> a64b37acc2469616f0644207970dcb9f10ee5932
       </div>
       <p>${item.price}</p>
     </div>
