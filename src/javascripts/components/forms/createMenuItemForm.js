@@ -24,10 +24,6 @@ const createMenuItemForm = () => {
   </div>
   <div class="form-group" id="select-ingredients">
   </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="available">
-    <label class="form-check-label" for="available">Availabe?</label>
-  </div>
   <button type="submit" id="create-menu-item" class="btn btn-primary">Create Menu Item</button>
 </form>`;
 
