@@ -27,6 +27,7 @@ import editIngredientForm from '../components/forms/editIngredientForm';
 import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
+// import filterMenu from '../components/menu/filterMenu';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -91,14 +92,7 @@ const domEventListeners = (e) => {
     formModal('Ingredients');
   }
 
-  // FILTER MENU ITEMS
-  if (e.target.id.includes('submitMenuFilter')) {
-    const searchString = document.querySelector('#menuFilter').value;
-    const filteredMenu = Array.filter((menu) => menu.ingredients.includes(searchString));
-    console.warn(searchString);
-    console.warn(filteredMenu);
-    // getMenuItems(filteredMenu);
-  }
+  // SHOW FILTER MENU ITEMS DROPDOWN
 
   // CLICK EVENT FOR SHOWING MODAL FORM FOR EDITING A RESERVATION
   if (e.target.id.includes('edit-res-btn')) {
