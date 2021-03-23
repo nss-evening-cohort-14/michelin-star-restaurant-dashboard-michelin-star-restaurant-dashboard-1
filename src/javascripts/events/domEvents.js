@@ -134,7 +134,6 @@ const domEventListeners = (e) => {
       description: document.querySelector('#itemDescription').value,
       ingredients: checkBoxes,
       price: document.querySelector('#itemPrice').value,
-      available: document.querySelector('#available').checked
     };
     createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
   }
@@ -163,7 +162,6 @@ const domEventListeners = (e) => {
       description: document.querySelector('#itemDescription').value,
       ingredients: checkBoxes,
       price: document.querySelector('#itemPrice').value,
-      available: document.querySelector('#available').checked
     };
     updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
   }
