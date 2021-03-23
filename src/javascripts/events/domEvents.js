@@ -28,7 +28,6 @@ import editMenuItemForm from '../components/forms/editMenuItems';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
-  console.warn(e, user);
   // Click Events for Ingredients
   // Delete Ingredient
   if (e.target.id.includes('deleteIngredient')) {
