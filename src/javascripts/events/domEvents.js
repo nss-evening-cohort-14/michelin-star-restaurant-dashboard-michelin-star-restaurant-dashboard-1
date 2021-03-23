@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { createIngredient, deleteIngredients, updateIngredient } from '../helpers/data/ingredientsData';
+import {
+  createIngredient, deleteIngredients, getSingleIngredient, updateIngredient
+} from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { showLoginMenuItems } from '../components/menu/menu';
 import {
@@ -60,7 +62,7 @@ const domEventListeners = (e) => {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Edit Ingredient');
-    editIngredientForm(firebaseKey);
+    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient));
   }
 
   // Submit on Edit Ingredient Form
