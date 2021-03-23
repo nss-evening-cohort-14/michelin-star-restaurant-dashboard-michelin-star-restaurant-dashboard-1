@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import domEvents from '../events/domEvents';
+import { domEvents } from '../events/domEvents';
 
 const signIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
