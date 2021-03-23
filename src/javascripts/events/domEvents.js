@@ -27,6 +27,7 @@ import editIngredientForm from '../components/forms/editIngredientForm';
 import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
+import getAllStaff from '../helpers/data/getAllStaff';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -246,6 +247,10 @@ const domEventListeners = (e) => {
       .then((staffArray) => showStaff(staffArray, user)));
 
     $('#formModal').modal('toggle');
+  }
+
+  if (e.target.id.includes('dropdown-staff-btn')) {
+    getAllStaff();
   }
 };
 
