@@ -1,8 +1,7 @@
+import filterMenu from './filterMenu';
+
 const showMenuItems = (array) => {
-  document.querySelector('#form-container').innerHTML = `<form class="form-inline my-2 my-lg-0">
-  <input class="form-control mr-sm-2" id="menuFilter2" type="search" placeholder="Filter by Ingredient" aria-label="Search">
-  <button class="btn btn-outline-success id="submitMenuFilter2" my-2 my-sm-0" type="submit">Filter</button>
-</form>`;
+  filterMenu();
   document.querySelector('#view').innerHTML = '';
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#modal-container').innerHTML = '';
@@ -23,10 +22,7 @@ const showMenuItems = (array) => {
 };
 
 const showLoginMenuItems = (array) => {
-  document.querySelector('#form-container').innerHTML = `<form class="form-inline my-2 my-lg-0">
-  <input class="form-control mr-sm-2" id="menuFilter" type="search" placeholder="Filter by Ingredient" aria-label="Search">
-  <button class="btn btn-outline-success id="submitMenuFilter" my-2 my-sm-0" type="submit">Filter</button>
-</form>`;
+  filterMenu();
   document.querySelector('#view').innerHTML = '';
   document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-light" id="add-menu-btn">Add Menu Item</button>';
   document.querySelector('#modal-container').innerHTML = '';

@@ -93,6 +93,7 @@ const domEventListeners = (e) => {
   }
 
   // SHOW FILTER MENU ITEMS DROPDOWN
+  // filterMenu();
 
   // CLICK EVENT FOR SHOWING MODAL FORM FOR EDITING A RESERVATION
   if (e.target.id.includes('edit-res-btn')) {
