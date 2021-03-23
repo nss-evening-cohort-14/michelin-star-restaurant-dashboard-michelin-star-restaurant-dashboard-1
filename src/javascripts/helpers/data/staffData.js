@@ -32,4 +32,18 @@ const createStaff = (objectBody) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getStaff, deleteStaff, createStaff };
+const getSingleStaff = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/staff/${firebaseKey}.json`)
+    .then((reponse) => resolve(reponse.data))
+    .catch((error) => reject(error));
+});
+
+const updateStaff = (firebaseKey, staffObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/staff/${firebaseKey}.json`, staffObject)
+    .then(() => getStaff().then((staffArray) => resolve(staffArray)))
+    .catch((error) => reject(error));
+});
+
+export {
+  getStaff, deleteStaff, createStaff, updateStaff, getSingleStaff
+};
