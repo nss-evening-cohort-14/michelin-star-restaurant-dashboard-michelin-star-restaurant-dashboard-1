@@ -16,9 +16,10 @@ const showReservations = (array) => {
 };
 
 const showLoginReservations = (array) => {
-  document.querySelector('#form-container').innerHTML = '<button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#formModal" id="addReservation">Add a New Reservation</button>';
-  document.querySelector('#view').innerHTML = '';
   document.querySelector('#stage').innerHTML = '';
+  document.querySelector('#form-container').innerHTML = '';
+  document.querySelector('#view').innerHTML = '';
+  document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#formModal" id="addReservation">Add a New Reservation</button>';
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
     <ul class="list-group-res">
