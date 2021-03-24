@@ -1,21 +1,16 @@
+import filterStaff from './filterStaffList';
+
 const showStaff = (staffArray, user) => {
   if (user) {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
-    document.querySelector('#form-container').innerHTML = '';
     document.querySelector('#stage').innerHTML = `
-    <button type="button" class="btn btn-info my-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle my-2" type="button" id="dropdown-staff-btn" data-bs-toggle="dropdown" aria-expanded="false">
-        Filter by Position
-      </button>
-      <ul class="dropdown-menu" id="dropdown-staff-list" aria-labelledby="dropdownMenuButton1">
-      </ul>
-    </div>
-    `;
+      <button type="button" class="btn btn-info my-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>
+      `;
     document.querySelector('#view').innerHTML = `
     <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
   `;
+    filterStaff();
     staffArray.forEach((item) => {
       document.querySelector('#staff-container').innerHTML += `
       <div class="card m-3" style="width: 18rem;">
@@ -35,11 +30,11 @@ const showStaff = (staffArray, user) => {
   } else {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
-    document.querySelector('#form-container').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
     document.querySelector('#view').innerHTML = `
       <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
     `;
+    filterStaff();
     staffArray.forEach((item) => {
       document.querySelector('#staff-container ').innerHTML += `
       <div class="card m-3" style="width: 18rem;">
