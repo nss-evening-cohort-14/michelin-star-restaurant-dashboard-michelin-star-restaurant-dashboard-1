@@ -3,7 +3,6 @@ import { getStaff } from '../../helpers/data/staffData';
 const filterStaff = () => {
   let domString = `
     <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="filter-all-staff">
-      <option selected>Filter by Position</option>
   `;
 
   getStaff().then((staffArray) => {
