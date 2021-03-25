@@ -1,5 +1,5 @@
 import { getSingleIngredient } from './ingredientsData';
-import { getSingleMenuItemIngredients } from './menuData';
+import { getMenuItems, getSingleMenuItemIngredients } from './menuData';
 
 const getMenuIngredients = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleMenuItemIngredients(firebaseKey).then((ingredientsArray) => {
@@ -9,4 +9,11 @@ const getMenuIngredients = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default getMenuIngredients;
+const getFilterMenuItems = (ingredientArray) => new Promise((resolve, reject) => {
+  getMenuItems().then((menuArray) => {
+    const result = menuArray.filter((item) => ingredientArray.every((ingredient) => item.ingredients.includes(ingredient)));
+    resolve(result);
+  }).catch((error) => reject(error));
+});
+
+export { getMenuIngredients, getFilterMenuItems };
