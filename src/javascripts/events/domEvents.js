@@ -19,7 +19,7 @@ import {
 } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
-import getMenuIngredients from '../helpers/data/menuIngredientsData';
+import { getMenuIngredients } from '../helpers/data/menuIngredientsData';
 import menuIngredients from '../components/forms/ingredientModal';
 import addReservationForm from '../components/forms/addReservationForm';
 import addStaffForm from '../components/forms/addStaffForm';
@@ -27,6 +27,7 @@ import editIngredientForm from '../components/forms/editIngredientForm';
 import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
+import filterSubmit from '../components/menu/filterSubmit';
 // import filterMenu from '../components/menu/filterMenu';
 
 const domEventListeners = (e) => {
@@ -93,7 +94,6 @@ const domEventListeners = (e) => {
   }
 
   // SHOW FILTER MENU ITEMS DROPDOWN
-  // filterMenu();
 
   // CLICK EVENT FOR SHOWING MODAL FORM FOR EDITING A RESERVATION
   if (e.target.id.includes('edit-res-btn')) {
@@ -139,7 +139,12 @@ const domEventListeners = (e) => {
       ingredients: checkBoxes,
       price: document.querySelector('#itemPrice').value,
     };
-    createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    if (itemObject.ingredients.length < 1) {
+      // eslint-disable-next-line no-alert
+      window.confirm('Please add at least 1 Ingredient');
+    } else {
+      createMenuItems(itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    }
   }
 
   // SHOW FORM TO EDIT MENU ITEM
@@ -147,6 +152,15 @@ const domEventListeners = (e) => {
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Edit Menu');
     getSingleMenuItem(firebaseKey).then((menuObject) => editMenuItemForm(menuObject));
+  }
+  // Filter Menu Items
+  if (e.target.id.includes('filterIngredientCheckbox')) {
+    const checkBoxes = [];
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      checkBoxes.push(checkbox.value);
+    });
+    filterSubmit(checkBoxes);
   }
 
   // SUBMIT EDIT MENU ITEM
