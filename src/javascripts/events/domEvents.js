@@ -28,7 +28,6 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
-// import filterMenu from '../components/menu/filterMenu';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -93,8 +92,6 @@ const domEventListeners = (e) => {
     formModal('Ingredients');
   }
 
-  // SHOW FILTER MENU ITEMS DROPDOWN
-
   // CLICK EVENT FOR SHOWING MODAL FORM FOR EDITING A RESERVATION
   if (e.target.id.includes('edit-res-btn')) {
     const firebaseKey = e.target.id.split('--')[1];
@@ -153,6 +150,7 @@ const domEventListeners = (e) => {
     formModal('Edit Menu');
     getSingleMenuItem(firebaseKey).then((menuObject) => editMenuItemForm(menuObject));
   }
+
   // Filter Menu Items
   if (e.target.id.includes('filterIngredientCheckbox')) {
     const checkBoxes = [];
@@ -181,7 +179,12 @@ const domEventListeners = (e) => {
       ingredients: checkBoxes,
       price: document.querySelector('#itemPrice').value,
     };
-    updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    if (itemObject.ingredients.length < 1) {
+      // eslint-disable-next-line no-alert
+      window.confirm('Please add at least 1 Ingredient');
+    } else {
+      updateMenuItems(firebaseKey, itemObject).then((menuArray) => showLoginMenuItems(menuArray));
+    }
   }
 
   // CREATE RESERVATION FORM POPUP
