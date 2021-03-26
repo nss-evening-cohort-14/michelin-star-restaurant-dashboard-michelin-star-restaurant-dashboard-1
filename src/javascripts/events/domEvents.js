@@ -270,8 +270,10 @@ const domEventListeners = (e) => {
   }
 
   if (e.target.id.includes('filter-all-staff')) {
-    const positionValue = document.getElementById('filter-all-staff').value;
-    filterPosition(positionValue).then((response) => showStaff(response));
+    const value = document.getElementById('filter-all-staff');
+    const filteredStaffOption = value.options[value.selectedIndex].value;
+    console.warn(filteredStaffOption);
+    filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
   }
 };
 

@@ -4,13 +4,16 @@ const showStaff = (staffArray, user) => {
   if (user) {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
+    document.querySelector('#form-container').innerHTML = '';
     document.querySelector('#stage').innerHTML = `
       <button type="button" class="btn btn-info my-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>
       `;
     document.querySelector('#view').innerHTML = `
     <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
-  `;
+      `;
+
     filterStaff();
+
     staffArray.forEach((item) => {
       document.querySelector('#staff-container').innerHTML += `
       <div class="card m-3" style="width: 18rem;">
