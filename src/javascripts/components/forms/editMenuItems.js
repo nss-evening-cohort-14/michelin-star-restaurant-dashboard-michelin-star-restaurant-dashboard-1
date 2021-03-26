@@ -1,4 +1,4 @@
-import getMenuIngredients from '../../helpers/data/menuIngredientsData';
+import { getMenuIngredients } from '../../helpers/data/menuIngredientsData';
 import selectIngredients from '../menu/selectIngredient';
 
 const editMenuItemForm = (menuObject) => {
