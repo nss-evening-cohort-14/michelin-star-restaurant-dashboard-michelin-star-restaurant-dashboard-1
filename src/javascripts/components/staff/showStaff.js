@@ -3,7 +3,7 @@ const showStaff = (staffArray, user) => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#filter-container').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
-  document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>';
+  document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-dark mt-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>';
   document.querySelector('#view').innerHTML = `
     <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
   `;
@@ -18,7 +18,7 @@ const showStaff = (staffArray, user) => {
           <h5 class="card-title">${item.job_title}</h5>
           <p class="card-text">${item.bio}</p>
           <div class="staff-member-buttons">
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#formModal" id="update-staff--${item.firebaseKey}">Update</button>
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#formModal" id="update-staff--${item.firebaseKey}">Update</button>
             <button class="btn btn-danger" type="button" id="delete-staff--${item.firebaseKey}">Delete</button>
           </div>
         </div>

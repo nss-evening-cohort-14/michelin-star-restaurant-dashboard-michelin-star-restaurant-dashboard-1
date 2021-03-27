@@ -2,18 +2,19 @@ const showSeating = (array) => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#filter-container').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
-  document.querySelector('#view').innerHTML = `<div class="card mt-2" style="width: 18rem;">
-  <ul class="list-group list-group-flush" id="ingredients-list">
-  </ul>
-</div>`;
+  document.querySelector('#view').innerHTML = `<div id="seating-list">
+  </div>`;
   array.forEach((item) => {
     let status = 'Reserved';
     if (item.status) {
       status = 'Open';
     }
-    document.querySelector('#ingredients-list').innerHTML += `
-    <li class="list-group-item">Table ${item.table_number} is ${status}. </br>
-    Total Seats: ${item.table_capacity}</li>`;
+    document.querySelector('#seating-list').innerHTML += `<div class="card" id="seating-card" style="width: 15rem;">
+      <div class="card-body">
+        <p>Table ${item.table_number} is ${status}. </br>
+        Total Seats: ${item.table_capacity}</p>
+      </div>
+    </div>`;
   });
 };
 

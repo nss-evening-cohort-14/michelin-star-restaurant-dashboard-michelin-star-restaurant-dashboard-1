@@ -25,7 +25,7 @@ const showMenuItems = (array) => {
 const showLoginMenuItems = (array) => {
   filterMenu();
   document.querySelector('#view').innerHTML = '';
-  document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-light" id="add-menu-btn">Add Menu Item</button>';
+  document.querySelector('#stage').innerHTML = '<button type="button" class="btn btn-dark" id="add-menu-btn">Add Menu Item</button>';
   document.querySelector('#modal-container').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
 
