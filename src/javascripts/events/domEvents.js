@@ -15,7 +15,7 @@ import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
 import createMenuItemForm from '../components/forms/createMenuItemForm';
 import {
-  createStaff, deleteStaff, getSingleStaff, getStaff, updateStaff
+  createStaff, deleteStaff, filterPosition, getSingleStaff, getStaff, updateStaff
 } from '../helpers/data/staffData';
 import formModal from '../components/forms/formModal';
 import addIngredientForm from '../components/forms/addIngredientForm';
@@ -267,6 +267,16 @@ const domEventListeners = (e) => {
       .then((staffArray) => showStaff(staffArray, user)));
 
     $('#formModal').modal('toggle');
+  }
+
+  if (e.target.id.includes('filter-staff-submit')) {
+    const value = document.getElementById('filter-all-staff');
+    const filteredStaffOption = value.options[value.selectedIndex].value;
+    if (filteredStaffOption === 'all-staff') {
+      getStaff().then((staffArray) => showStaff(staffArray, user));
+    } else {
+      filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
+    }
   }
 };
 
