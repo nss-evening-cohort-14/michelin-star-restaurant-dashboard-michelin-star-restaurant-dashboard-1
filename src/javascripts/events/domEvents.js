@@ -269,10 +269,9 @@ const domEventListeners = (e) => {
     $('#formModal').modal('toggle');
   }
 
-  if (e.target.id.includes('filter-all-staff')) {
+  if (e.target.id.includes('filter-staff-submit')) {
     const value = document.getElementById('filter-all-staff');
     const filteredStaffOption = value.options[value.selectedIndex].value;
-    console.warn(filteredStaffOption);
     filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
   }
 };

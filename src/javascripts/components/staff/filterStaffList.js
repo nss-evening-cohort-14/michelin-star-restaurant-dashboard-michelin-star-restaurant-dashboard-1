@@ -14,7 +14,10 @@ const filterStaff = () => {
       `;
     });
 
-    domString += '</select>';
+    domString += `
+      </select>
+      <button type="button" class="btn btn-primary" id="filter-staff-submit">Filter Staff</button>
+    `;
 
     document.querySelector('#filter-container').innerHTML = domString;
   });

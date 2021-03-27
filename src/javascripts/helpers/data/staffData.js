@@ -46,7 +46,7 @@ const updateStaff = (firebaseKey, staffObject) => new Promise((resolve, reject) 
 
 const filterPosition = (position) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/staff.json?orderBy="job_title"&equalTo="${position}"`)
-    .then((response) => resolve([response.data]))
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
