@@ -4,6 +4,7 @@ const showStaff = (staffArray, user) => {
   if (user) {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
+    document.querySelector('#filter-container').innerHTML = '';
     document.querySelector('#form-container').innerHTML = `
       <div class="d-flex flex-wrap justify-content-center align-content-around flex-column" id="staff-filter-container"></div> 
     `;
@@ -35,6 +36,7 @@ const showStaff = (staffArray, user) => {
   } else {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
+    document.querySelector('#filter-container').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
     document.querySelector('#form-container').innerHTML = `
       <div class="d-flex flex-wrap justify-content-center align-content-around flex-column" id="staff-filter-container"></div> 
