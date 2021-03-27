@@ -9,7 +9,7 @@ const showStaff = (staffArray, user) => {
       <div class="d-flex flex-wrap justify-content-center align-content-around flex-column" id="staff-filter-container"></div> 
     `;
     document.querySelector('#stage').innerHTML = `
-      <button type="button" class="btn btn-info my-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>
+      <button type="button" class="btn btn-dark my-2" data-toggle="modal" data-target="#formModal" id="add-staff-member">Add Staff Member</button>
       `;
     document.querySelector('#view').innerHTML = `
     <div class="d-flex flex-wrap justify-content-around align-items-center" id="staff-container"></div>
@@ -26,7 +26,7 @@ const showStaff = (staffArray, user) => {
           <h5 class="card-title">${item.job_title}</h5>
           <p class="card-text">${item.bio}</p>
           <div class="staff-member-buttons">
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#formModal" id="update-staff--${item.firebaseKey}">Update</button>
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#formModal" id="update-staff--${item.firebaseKey}">Update</button>
             <button class="btn btn-danger" type="button" id="delete-staff--${item.firebaseKey}">Delete</button>
           </div>
         </div>

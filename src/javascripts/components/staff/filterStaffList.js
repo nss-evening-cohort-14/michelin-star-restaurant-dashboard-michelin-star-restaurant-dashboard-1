@@ -16,7 +16,7 @@ const filterStaff = () => {
 
     domString += `
       </select>
-      <button type="button" class="btn btn-primary m-2" id="filter-staff-submit">Filter Staff</button>
+      <button type="button" class="btn btn-secondary m-2" id="filter-staff-submit">Filter Staff</button>
     `;
 
     document.querySelector('#staff-filter-container').innerHTML = domString;
