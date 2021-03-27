@@ -272,7 +272,11 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('filter-staff-submit')) {
     const value = document.getElementById('filter-all-staff');
     const filteredStaffOption = value.options[value.selectedIndex].value;
-    filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
+    if (filteredStaffOption === 'all-staff') {
+      getStaff().then((staffArray) => showStaff(staffArray, user));
+    } else {
+      filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
+    }
   }
 };
 

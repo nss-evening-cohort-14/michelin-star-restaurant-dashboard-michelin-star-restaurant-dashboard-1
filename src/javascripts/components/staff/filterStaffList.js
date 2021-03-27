@@ -2,8 +2,8 @@ import { getStaff } from '../../helpers/data/staffData';
 
 const filterStaff = () => {
   let domString = `
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="filter-all-staff">
-
+    <select class="form-select form-select-sm m-2" aria-label=".form-select-sm example" id="filter-all-staff">
+      <option value="all-staff">All Staff</option>
   `;
 
   getStaff().then((staffArray) => {
@@ -16,10 +16,10 @@ const filterStaff = () => {
 
     domString += `
       </select>
-      <button type="button" class="btn btn-primary" id="filter-staff-submit">Filter Staff</button>
+      <button type="button" class="btn btn-primary m-2" id="filter-staff-submit">Filter Staff</button>
     `;
 
-    document.querySelector('#filter-container').innerHTML = domString;
+    document.querySelector('#staff-filter-container').innerHTML = domString;
   });
 };
 
