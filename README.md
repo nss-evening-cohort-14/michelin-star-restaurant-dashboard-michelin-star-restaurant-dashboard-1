@@ -1,9 +1,7 @@
 # Michelin Star Restaurant Dashboard
 
 ### Product Owner
-Your PO is assigned as an approver and feedback for your application. They are not there to guide you through code. If you have code related needs, submit a completed issue ticket.
-
-PO: **Trinity**
+**Trinity**
 
 ### Description
 Welcome to Laissez les bons Temps Roulere.  The only restaurant in the world to have to have 27 Michelin stars. Laissez les bons Temps Roulere is a creole, soul food fusion restaurant using only the freshest ingredients from local farms.
