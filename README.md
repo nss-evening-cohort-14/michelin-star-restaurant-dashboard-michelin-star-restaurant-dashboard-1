@@ -1,41 +1,25 @@
-# Michelin Star Restaurant Dashboard
-
-### Product Owner
-**Trinity**
-
+# Michelin Star Restaurant Dashboard [![Netlify Status](https://api.netlify.com/api/v1/badges/7bf1cb09-6f1a-4d46-860b-9a513af5611a/deploy-status)](https://app.netlify.com/sites/michelin-star-restaurant/deploys)
 ### Description
-Welcome to Laissez les bons Temps Roulere.  The only restaurant in the world to have to have 27 Michelin stars. Laissez les bons Temps Roulere is a creole, soul food fusion restaurant using only the freshest ingredients from local farms.
+Welcome to the Laissez les bons Temps Roulere restaurant dashboard. This app allows the user to manage restaurant's menu, ingredients, staff, seating, and reservations.
 
-Now that Laissez les bons Temps Rouler has received its 27th star its owners would like to bring the restaurant into the modern age and build it a nice application.  You will be helping them keep track of staff, ingredients, reservations, and Menu Items.
+### Relevant Links
+- Deployed App: https://michelin-star-restaurant.netlify.app/
+- ERD: https://dbdiagram.io/d/604f20b8fcdcb6230b242c56
+- Figma Wireframes: https://www.figma.com/file/uNKHUgH23lxlhQ0hpfgY5Z/Michelin-Five-Star-Restaurant?node-id=0%3A1
+### Technologies Utilized
+- HTML, SCSS, Javascript
+- Google Firebase
+- Webpack
+- Figma 
 
-### Requirements
-* Complete Planning
-    * Make sure to break down tickets into milestones, include an ERD and a Workflow Diagram of how you will tackle each part of the application
-    * NOTE: This includes setting up a development branch that branches off of the main branch to test your team's code and for review by the PO
-* Set up deployment EARLY and deploy with every milestone so that the PO can see the web interface
-* Add Webpack to the Project
-* Authenticate to perform any actions (CUD)
-* Staff module
-* Ingredients module
-* Reservations module
-* Seating module
-* Menu Items module
-* Filter Menu Items on ingredients
-
-### User Stories
-
-#### Authentication
-- As a user, I should be able to log in to add, edit, or delete from any of the modules.
-- As a user, if I'm not authenticated, I can only read the information.
-- As a user, I should be able to login using Google
-- As a user, I should be able to logout
-
+### User Story
+After being authenticated by Google, a user has full CRUD ability for the data in each of the following pages, which can all be accessed using the tabs located in the nav bar.
 #### Staff
 - As a user, I should be able to add new staff members
 - As a user, I should be able to delete staff members
 - As a user, I should be able to edit the staff members
 - As a user, I should be able to view all the staff members
-- As a user, I should be able to filter the staff member list my staff member type (ie show only waiters or busboys)
+- As a user, I should be able to filter the staff member list my staff member position
 
 #### Ingredients
 - As a user, I should be able to add new ingredients to my restaurant inventory
@@ -60,3 +44,10 @@ Now that Laissez les bons Temps Rouler has received its 27th star its owners wou
 - As a user, I should be able to view all the menu items based on the ingredients they contain (ie only show menu items that have tomatoes)
 - As a user, I should be able to add ingredients to my menu items
 - As a user, I should be able to remove ingredients to my menu items
+
+### Loom
+### Contributors
+- Ellie Walker: https://github.com/elliewalkersm 
+- Rob Cole: https://github.com/robertncole1
+- Casey Walker: https://github.com/caseywalker
+- Sean Rossettie: https://github.com/seancrossettie
