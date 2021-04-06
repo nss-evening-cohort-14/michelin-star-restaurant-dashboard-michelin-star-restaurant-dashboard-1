@@ -3,7 +3,7 @@ import selectIngredients from '../menu/selectIngredient';
 const createMenuItemForm = () => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#view').innerHTML = '';
-
+  document.querySelector('#filter-container').innerHTML = '';
   document.querySelector('#form-container').innerHTML = `
   <form id="create-menu-form" class="mb-4">
   <div class="form-group">
@@ -26,7 +26,6 @@ const createMenuItemForm = () => {
   </div>
   <button type="submit" id="create-menu-item" class="btn btn-primary">Create Menu Item</button>
 </form>`;
-
   selectIngredients();
 };
 
