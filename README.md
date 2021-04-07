@@ -3,7 +3,7 @@
 Welcome to the Laissez les bons Temps Roulere restaurant dashboard. This app allows the user to manage restaurant's menu, ingredients, staff, seating, and reservations.
 
 ### Relevant Links
-- Deployed App: https://michelin-star-restaurant.netlify.app/
+- Deployed App: https://labaguette.netlify.app/
 - ERD: https://dbdiagram.io/d/604f20b8fcdcb6230b242c56
 - Figma Wireframes: https://www.figma.com/file/uNKHUgH23lxlhQ0hpfgY5Z/Michelin-Five-Star-Restaurant?node-id=0%3A1
 ### Technologies Utilized
