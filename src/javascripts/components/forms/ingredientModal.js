@@ -3,7 +3,6 @@ const menuIngredients = (array) => {
 <div class="text-capitalize" id="menu-ingredients">
 </div>`;
   array.forEach((ingredient) => {
-    console.warn(ingredient);
     document.querySelector('#menu-ingredients').innerHTML += `<p>${ingredient.name}</p> </br>`;
   });
 };
