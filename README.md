@@ -4,8 +4,10 @@ Welcome to the Laissez les bons Temps Roulere restaurant dashboard. This app all
 
 ### Relevant Links
 - Deployed App: https://labaguette.netlify.app/
-- ERD: https://dbdiagram.io/d/604f20b8fcdcb6230b242c56
-- Figma Wireframes: https://www.figma.com/file/uNKHUgH23lxlhQ0hpfgY5Z/Michelin-Five-Star-Restaurant?node-id=0%3A1
+- ERD: https://dbdiagram.io/d/606d0baaecb54e10c33f0247
+- Canva Wireframes: https://www.canva.com/design/DAEYsXpgJ_k/wPSiFM3CGEfQydp5HuCDTQ/view?utm_content=DAEYsXpgJ_k&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
+- Color Palette:
+![color palette](https://user-images.githubusercontent.com/67122062/113798964-c7faa180-9719-11eb-8286-2f9713da34fa.png)
 ### Technologies Utilized
 - HTML, SCSS, Javascript
 - Google Firebase
