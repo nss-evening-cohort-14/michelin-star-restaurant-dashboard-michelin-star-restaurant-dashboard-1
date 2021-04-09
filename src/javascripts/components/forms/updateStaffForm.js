@@ -1,3 +1,6 @@
+import { getSingleStaffReservationInfo } from '../../helpers/data/staffReservationData';
+import selectReservation from '../staff/selectReservations';
+
 const updateStaffForm = (staffObject) => {
   document.querySelector('#modal-body').innerHTML = `
     <form class="mb-4">
@@ -21,9 +24,14 @@ const updateStaffForm = (staffObject) => {
         <label for="update-bio" class="form-label">Bio</label>
         <input type="text" class="form-control" id="update-bio" placeholder="Bio" value="${staffObject.bio}">
       </div>
+      <div class="mb-3" id="reservation-dropdown-container"></div>
       <button type="submit" id="edit-this-staff--${staffObject.firebaseKey}" class="btn btn-primary">Update Staff</button>
     </form>
   `;
+  getSingleStaffReservationInfo(staffObject.firebaseKey).then((response) => {
+    const reservationArray = response.map((element) => element.reservation_id);
+    selectReservation(reservationArray);
+  });
 };
 
 export default updateStaffForm;
