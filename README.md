@@ -4,50 +4,49 @@ Welcome to the Laissez les bons Temps Roulere restaurant dashboard. This app all
 
 ### Relevant Links
 - Deployed App: https://labaguette.netlify.app/
-- ERD: https://dbdiagram.io/d/604f20b8fcdcb6230b242c56
-- Figma Wireframes: https://www.figma.com/file/uNKHUgH23lxlhQ0hpfgY5Z/Michelin-Five-Star-Restaurant?node-id=0%3A1
+- ERD: https://dbdiagram.io/d/606d0baaecb54e10c33f0247
+- Canva Wireframes: https://www.canva.com/design/DAEYsXpgJ_k/wPSiFM3CGEfQydp5HuCDTQ/view?utm_content=DAEYsXpgJ_k&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
+- Color Palette:
+![color palette](https://user-images.githubusercontent.com/67122062/113798964-c7faa180-9719-11eb-8286-2f9713da34fa.png)
 ### Technologies Utilized
 - HTML, SCSS, Javascript
 - Google Firebase
 - Webpack
 - Figma 
 
-### User Story
-After being authenticated by Google, a user has full CRUD ability for the data in each of the following pages, which can all be accessed using the tabs located in the nav bar.
-#### Staff
-- As a user, I should be able to add new staff members
-- As a user, I should be able to delete staff members
-- As a user, I should be able to edit the staff members
-- As a user, I should be able to view all the staff members
-- As a user, I should be able to filter the staff member list my staff member position
+### User Stories
 
-#### Ingredients
-- As a user, I should be able to add new ingredients to my restaurant inventory
-- As a user, I should be able to delete ingredients
-- As a user, I should be able to edit the ingredients
-- As a user, I should be able to view all the ingredients
+All of the following user stories assume the user is authenticated unless otherwise stated.
 
-#### Reservations
-- As a user, I should be able to add new reservations to my restaurant
-- As a user, I should be able to delete reservations
-- As a user, I should be able to edit the reservations
-- As a user, I should be able to view all the reservations
+Reservations
 
-#### Seating
-- As a user, I should be able to view all seating options
+As a user can assign staff members to reservations.
+As a user I can tell if a reservation has all the staff they need (waiter, bar tender, bussboy, etc.)
+As a user can assign a table to a reservation.
+As a user I can only assign a table with the appropriate number of seats for that party (ie a reservation for 4 should not be assigned to a table with 2 seats).
+As a user can view a single reservation page that displays all the information about that reservation.
 
-#### Menu Items
-- As a user, I should be able to add new menu items to my restaurant
-- As a user, I should be able to delete menu items
-- As a user, I should be able to edit the menu items
-- As a user, I should be able to view all the menu items
-- As a user, I should be able to view all the menu items based on the ingredients they contain (ie only show menu items that have tomatoes)
-- As a user, I should be able to add ingredients to my menu items
-- As a user, I should be able to remove ingredients to my menu items
+Orders
+
+As a user can assign menu items to reservations
+As a user I should not be able to assign a menu item to a reservation if any of the ingredients from that menu item are sold out.
+As a user can create a final bill for each reservation. This bill should show up on the single reservation pages.
+
+Reporting
+
+As a user I can see what the total revenue is for my restaurant since I opened.
+As a user I can see what the revenue is for my restaurant over a 7 day period.
+As a user I can see what the revenue is for my restaurant over a particular day.
+As a user can track the amount of ingredients used on a single day.
+As a user can track the amount of ingredients used over a 7 day period.
+As a user can track the amount of ingredients used since my restaurant opened.
+As a user can see a list of the top 10 most popular menu items.
+As a user can see a list of the 10 least popular menu items.
 
 ### Loom
 ### Contributors
-- Ellie Walker: https://github.com/elliewalkersm 
-- Rob Cole: https://github.com/robertncole1
-- Casey Walker: https://github.com/caseywalker
-- Sean Rossettie: https://github.com/seancrossettie
+
+- Jesse Robinson: @jrobinson0529
+- Katy Fry: @katherinevfry
+- Chie Stroud: @chiestroud
+- Holly Parsons: @hmparsons-sde
