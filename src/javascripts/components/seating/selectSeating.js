@@ -1,8 +1,8 @@
 import { getReservations } from '../../helpers/data/reservationData';
 
-const selectReservation = (seatingObject = {}) => {
+const selectReservationTable = (seatingObject = []) => {
   let domString = `<label for="table">Select a Reservation</label>
-  <select class="form-control" id="board" required>
+  <select class="form-control" id="reservation-option" required>
   <option value="">Select a Reservation</option>`;
 
   getReservations().then((reservationsArray) => {
@@ -18,4 +18,4 @@ const selectReservation = (seatingObject = {}) => {
   });
 };
 
-export default selectReservation;
+export default selectReservationTable;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
 import { getSingleReservation } from './reservationData';
-import { getSingleTable } from './seatingData';
+import { getSeating, getSingleTable } from './seatingData';
 
 const dbUrl = firebaseConfig.databaseURL;
 
@@ -20,4 +20,18 @@ const getSeatingReservations = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getSeatingReservations;
+const postSeatingResData = (seatingResObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/seating_reservations.json`, seatingResObject)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/seating_reservations/${response.data.name}.json`, body)
+        .then(() => {
+          getSeating().then((seatingArray) => resolve(seatingArray));
+        });
+    }).catch((error) => reject(error));
+});
+
+export {
+  getSeatingReservations,
+  postSeatingResData
+};

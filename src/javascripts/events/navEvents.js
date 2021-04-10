@@ -8,7 +8,6 @@ import showStaff from '../components/staff/showStaff';
 import { getStaff } from '../helpers/data/staffData';
 import { getReservations } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
-import selectReservation from '../components/seating/selectSeating';
 
 // Events for Navbar, READ only
 const navEvents = (user) => {
@@ -35,7 +34,6 @@ const navEvents = (user) => {
   document.querySelector('#nav-seating').addEventListener('click', (e) => {
     e.preventDefault();
     getSeating().then((seats) => showSeating(seats));
-    selectReservation();
   });
 };
 
