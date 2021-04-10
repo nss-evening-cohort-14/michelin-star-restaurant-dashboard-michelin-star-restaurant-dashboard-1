@@ -31,6 +31,10 @@ import filterSubmit from '../components/menu/filterSubmit';
 import {
   createStaffReservation, deleteStaffReservationRelationship, fullyStaffed, getSingleStaffReservationInfo
 } from '../helpers/data/staffReservationData';
+import { getSingleTable } from '../helpers/data/seatingData';
+import editSeatingForm from '../components/forms/editSeatingForm';
+import { postSeatingResData } from '../helpers/data/seatingReservationsData';
+import showSeating from '../components/seating/seating';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -311,6 +315,24 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('staff-btn')) {
     const firebaseKey = e.target.id.split('--')[1];
     getSingleStaff(firebaseKey).then((response) => console.warn(response));
+  }
+
+  // event for showing edit seating modal
+  if (e.target.id.includes('edit-table')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    formModal('Assign Table to Rservation');
+    getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
+  }
+  // send data to seatingReservation node
+  if (e.target.id.includes('update-table')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    e.preventDefault();
+    const seatingResObject = {
+      reservation_id: document.querySelector('#reservation-option').value,
+      table_id: firebaseKey
+    };
+    postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
+    $('#formModal').modal('toggle');
   }
 };
 const domEvents = () => {
