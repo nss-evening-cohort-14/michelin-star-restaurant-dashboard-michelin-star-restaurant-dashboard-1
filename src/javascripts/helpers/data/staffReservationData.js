@@ -1,6 +1,6 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
-import { getStaff } from './staffData';
+import { getSingleStaff, getStaff } from './staffData';
 
 const dbUrl = firebaseConfig.databaseURL;
 const createStaffReservation = (staffReservationObject) => new Promise((resolve, reject) => {
@@ -31,9 +31,17 @@ const getSingleReservationStaffInfo = (reservationId) => new Promise((resolve, r
 });
 const fullyStaffed = (reservationId) => {
   getSingleReservationStaffInfo(reservationId).then((response) => {
-    const staffArray = Object.values(response).map((x) => (x));
-    console.warn(staffArray);
-    return staffArray;
+    const staffArray = Object.values(response).map((x) => getSingleStaff(x.staff_id));
+    const jobArray = [];
+    Promise.all(staffArray).then((array) => array.map((element) => {
+      const newArray = jobArray;
+      newArray.push(element.job_title);
+      if (newArray.includes('Bartender') && newArray.includes('Waiter') && newArray.includes('General Manager') && newArray.includes('Line Cook')) {
+        const body = { fullyStaffed: true };
+        axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
+      }
+      return newArray;
+    }));
   });
 };
 export {
