@@ -39,6 +39,9 @@ const fullyStaffed = (reservationId) => {
       if (newArray.includes('Bartender') && newArray.includes('Waiter') && newArray.includes('General Manager') && newArray.includes('Line Cook')) {
         const body = { fullyStaffed: true };
         axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
+      } else {
+        const body = { fullyStaffed: false };
+        axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
       }
       return newArray;
     }));
