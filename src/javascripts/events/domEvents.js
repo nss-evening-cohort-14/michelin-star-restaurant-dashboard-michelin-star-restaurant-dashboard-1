@@ -28,7 +28,9 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
-import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
+import {
+  createStaffReservation, deleteStaffReservationRelationship, fullyStaffed, getSingleStaffReservationInfo
+} from '../helpers/data/staffReservationData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -270,7 +272,9 @@ const domEventListeners = (e) => {
           staff_id: firebaseKey,
           reservation_id: checkbox.value
         };
-        createStaffReservation(staffReservationObject).then((response) => showStaff(response, user));
+        createStaffReservation(staffReservationObject).then((response) => showStaff(response, user)).then(() => {
+          fullyStaffed(checkbox.value);
+        });
       }
     });
     let deleteArray; // Needed to create a variable outside of the function scope below
@@ -287,6 +291,7 @@ const domEventListeners = (e) => {
         });
       }
     });
+
     updateStaff(firebaseKey, staffObject).then(() => getStaff()
       .then((staffArray) => showStaff(staffArray, user)));
 

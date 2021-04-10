@@ -24,5 +24,22 @@ const deleteStaffReservationRelationship = (firebaseKey) => new Promise((resolve
     .then((response) => resolve(response))
     .catch((error) => reject(error));
 });
-
-export { getSingleStaffReservationInfo, createStaffReservation, deleteStaffReservationRelationship };
+const getSingleReservationStaffInfo = (reservationId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/staff_reservation.json?orderBy="reservation_id"&equalTo="${reservationId}"`)
+    .then((response) => resolve((response.data)))
+    .catch((error) => reject(error));
+});
+const fullyStaffed = (reservationId) => {
+  getSingleReservationStaffInfo(reservationId).then((response) => {
+    const staffArray = Object.values(response).map((x) => (x));
+    console.warn(staffArray);
+    return staffArray;
+  });
+};
+export {
+  getSingleStaffReservationInfo,
+  createStaffReservation,
+  deleteStaffReservationRelationship,
+  getSingleReservationStaffInfo,
+  fullyStaffed,
+};
