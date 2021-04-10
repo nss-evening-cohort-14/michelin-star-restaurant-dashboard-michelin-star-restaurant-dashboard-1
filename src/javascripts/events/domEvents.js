@@ -28,7 +28,6 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
-import selectMenuItem from '../components/menu/selectMenuItem';
 import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
 
 const domEventListeners = (e) => {
@@ -112,6 +111,17 @@ const domEventListeners = (e) => {
       time: document.querySelector('#res-time').value,
       notes: document.querySelector('#res-notes').value,
     };
+    // const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    // markedCheckbox.forEach((checkbox) => {
+    //   if (checkbox.value !== '') {
+    //     const menuReservationObject = {
+    //       menu_id: checkbox.value,
+    //       reservation_id: firebaseKey
+    //     };
+    //     createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
+    //   }
+    // });
+
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
     $('#formModal').modal('toggle');
   }
@@ -302,15 +312,6 @@ const domEventListeners = (e) => {
     } else {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
-  }
-
-  if (e.target.id.includes('add-menuItem')) {
-    selectMenuItem();
-  }
-
-  if (e.target.id.includes('update-menuItem')) {
-    const firebaseKey = e.target.id;
-    console.warn(firebaseKey);
   }
   // Get single staff members reservations that they are assigned to
   if (e.target.id.includes('staff-btn')) {

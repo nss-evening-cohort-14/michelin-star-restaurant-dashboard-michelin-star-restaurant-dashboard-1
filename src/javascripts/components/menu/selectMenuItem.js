@@ -1,50 +1,33 @@
-// import { getMenuItems } from '../../helpers/data/menuData';
-// import menuFilter from './menuFilter';
-
-import { getIngredients } from '../../helpers/data/ingredientsData';
-
-// const selectMenuItem = () => {
-//   document.querySelector('#view').innerHTML = '';
-//   document.querySelector('#filter-container').innerHTML = '';
-//   document.querySelector('#form-container').innerHTML = '';
-//   getMenuItems().then((menuArray) => menuFilter(menuArray));
-// };
-
-// export default selectMenuItem;
+import { getMenuItems } from '../../helpers/data/menuData';
 
 const selectMenuItem = (array = []) => {
-  document.querySelector('#update-menuItem').innerHTML = '';
+  $('#filter-container').empty();
   let domString = `<ul>
-    <li class="dropdown">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
-        <ul class="dropdown-menu" id="ingredients-list">
-            <li>
-            </li>`;
-
-  getIngredients().then((ingredientsArray) => {
-    ingredientsArray.forEach((ingredient) => {
-      if (array.includes(ingredient.firebaseKey)) {
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Menu<b class="caret"></b></a>
+          <ul class="dropdown-menu" id="reservation-list">`;
+  getMenuItems().then((menuArray) => {
+    menuArray.map((menu) => {
+      if (array.includes(menu.firebaseKey)) {
         domString += `<li>
-      <div class="checkbox">
-          <label>
-              <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}" checked> ${ingredient.name}
-          </label>
-      </div>
-  </li>`; console.warn(ingredient.name);
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="${menu.title}" class="menuItem-check" id="menuItemCheckBox${menu.title}" value="${menu.firebaseKey}" checked> ${menu.title}
+                        </label>
+                      </div>
+                    </li>`;
       } else {
         domString += `<li>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}"> ${ingredient.name}
-            </label>
-        </div>
-    </li>`;
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="${menu.title}" class="menuItem-check" id="menuItemCheckBox${menu.title}" value="${menu.firebaseKey}"> ${menu.title}
+                          </label>
+                        </div>
+                      </li>`;
       }
+      return domString;
     });
-
-    domString += '</ul> </li> </ul>';
-
-    document.querySelector('#select-ingredients').innerHTML = domString;
+    $('#update-menuItem-container').html(domString);
   });
 };
 
