@@ -3,7 +3,7 @@
     "title": "Po Boy",
     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiOcsWP2pNl-fuD1abHz4Of5e0pfSjjiuW-A&usqp=CAU",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$9.99",
+    "price": "9.99",
     "available": "True",
     "firebaseKey": "-MVvegv2k0wPieOVEFc7",
     "ingredients": ["-MVxIo-pDIAbUH6jYtSv", "-MVxIvqqqbS2AzG25Ls2", "-MVxJUBooq8-N6V1P0DI", "-MVxJY4fFWYg5BZDzWbe", "-MVxJaCfcjF54RvJqZYH", "-MVxJc6QjwwolEZhQlzZ"]
@@ -12,7 +12,7 @@
     "title": "VooDoo Chicken",
     "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/voodootenders-1571936470.png?crop=1.00xw:0.605xh;0,0.287xh&resize=480:*",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$12.99",
+    "price": "12.99",
     "available": "False",
     "firebaseKey": "-MVvgW-ax_fs0TChp7i1",
     "ingredients": ["-MVxJgGJNCYH8tqhHoxp", "-MVxIvqqqbS2AzG25Ls2", "-MVxJoQdnYjceeDBA7O1", "-MVxJsN5OwfgAJQgr88V"]
@@ -21,7 +21,7 @@
     "title": "Jambalaya",
     "image": "https://www.lecremedelacrumb.com/wp-content/uploads/2019/05/sheet-pan-jambalaya-3.jpg",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$14.29",
+    "price": "14.29",
     "available": "True",
     "firebaseKey": "-MVvgkAUHzQS45pBEyXp",
     "ingredients": ["-MVxJgGJNCYH8tqhHoxp", "-MVxJugoKnuS-CmIPI4-", "-MVxJsN5OwfgAJQgr88V", "-MVxIo-pDIAbUH6jYtSv", "-MVxJoQdnYjceeDBA7O1", "-MVxJptNSWhQfrCcG9lw", "-MVxJzJFH0RtS3ApJePJ"]
@@ -30,7 +30,7 @@
     "title": "Red Beans and Rice",
     "image": "https://www.budgetbytes.com/wp-content/uploads/2010/03/Louisiana-Red-Beans-and-Rice-bowl.jpg",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$8.99",
+    "price": "8.99",
     "available": "False",
     "firebaseKey": "-MVvhwqcPvH6_LgwfsEH",
     "ingredients": ["-MVxJugoKnuS-CmIPI4-", "-MVxJsN5OwfgAJQgr88V", "-MVxK0suYalyIvOtdMSd"]
@@ -39,7 +39,7 @@
     "title": "Crawfish Étouffée",
     "image": "https://www.africanbites.com/wp-content/uploads/2018/03/IMG_5362-2.jpg",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$10.29",
+    "price": "10.29",
     "available": "True",
     "firebaseKey": "-MVvj2UFvvjAR3Raku4f",
     "ingredients": ["-MVxK3R1gXiyIeeuWI4B", "-MVxJsN5OwfgAJQgr88V","-MVxIvqqqbS2AzG25Ls2", "-MVxJc6QjwwolEZhQlzZ", "-MVxJxDtSwnMljDlY3zt", "-MVxK6ox_oGpmr7GnUel"]
@@ -48,7 +48,7 @@
     "title": "Charbroiled Oysters",
     "image": "https://littleferrarokitchen.com/wp-content/uploads/2019/06/Charred-Oysters-3-copy.jpg",
     "description": "You're really going to love this dish I made you. If you don't, please lie to my face because I have low self-confidence.",
-    "price": "$14.99",
+    "price": "14.99",
     "available": "True",
     "firebaseKey": "-MVvkE6dWOzGvEOjuxfq",
     "ingredients": ["-MVxK93udD2YkIRiepnA", "-MVxKAWfdGGTpvtkCUia", "-MVxKBw0GksBUsl90Elz", "-MVxKD7w1yBci7ATP0ag"]
