@@ -2,7 +2,7 @@ import { getIngredients } from '../helpers/data/ingredientsData';
 import { showLoginIngredients } from '../components/ingredients/showIngredients';
 import { getMenuItems } from '../helpers/data/menuData';
 import { showLoginMenuItems } from '../components/menu/menu';
-import getSeating from '../helpers/data/seatingData';
+import { getSeating } from '../helpers/data/seatingData';
 import showSeating from '../components/seating/seating';
 import showStaff from '../components/staff/showStaff';
 import { getStaff } from '../helpers/data/staffData';
