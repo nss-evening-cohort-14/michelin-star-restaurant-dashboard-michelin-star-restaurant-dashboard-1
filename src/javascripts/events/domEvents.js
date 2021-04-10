@@ -29,7 +29,7 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
-import { createMenuReservation } from '../helpers/data/menuReservationData';
+import { createMenuReservation, deleteMenuReservationRelationship, getSingleMenuReservationInfo } from '../helpers/data/menuReservationData';
 import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
@@ -126,19 +126,19 @@ const domEventListeners = (e) => {
         createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
       }
     });
-    // let deleteArray;
-    // const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
-    // unmarkedCheckbox.forEach((checkbox) => {
-    //   if (checkbox.checked === false) {
-    //     getSingleMenuReservationInfo(firebaseKey).then((x) => {
-    //       deleteArray = Object.values(x).map((element) => element.firebaseKey);
-    //       return deleteArray;
-    //     }).then(() => {
-    //       const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
-    //       Promise.all(deleteRelationships);
-    //     });
-    //   }
-    // });
+    let deleteArray;
+    const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
+    unmarkedCheckbox.forEach((checkbox) => {
+      if (checkbox.checked === false) {
+        getSingleMenuReservationInfo(firebaseKey).then((x) => {
+          deleteArray = Object.values(x).map((element) => element.firebaseKey);
+          return deleteArray;
+        }).then(() => {
+          const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
+          Promise.all(deleteRelationships);
+        });
+      }
+    });
 
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
     $('#formModal').modal('toggle');

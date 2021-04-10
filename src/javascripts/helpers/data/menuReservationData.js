@@ -15,8 +15,8 @@ const createMenuReservation = (menuReservationObject) => new Promise((resolve, r
     });
 });
 
-const getSingleMenuReservationInfo = (menuId) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/menu_item_reservation.json?orderBy="menu_item_id"&equalTo="${menuId}`)
+const getSingleMenuReservationInfo = (reservationId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/menu_item_reservation.json?orderBy="reservation_id"&equalTo="${reservationId}"`)
     .then((response) => resolve((response.data)))
     .catch((error) => reject(error));
 });

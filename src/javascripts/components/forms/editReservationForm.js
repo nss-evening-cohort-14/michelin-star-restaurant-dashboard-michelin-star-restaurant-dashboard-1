@@ -1,4 +1,4 @@
-import { getSingleReservation } from '../../helpers/data/reservationData';
+import { getSingleMenuReservationInfo } from '../../helpers/data/menuReservationData';
 import selectMenuItem from '../menu/selectMenuItem';
 
 const editReservationForm = (resObject) => {
@@ -28,8 +28,8 @@ const editReservationForm = (resObject) => {
       </div>
       <button type="submit" id="update-res--${resObject.firebaseKey}" class="btn btn-success">Update Reservation</button>
     </form>`;
-  getSingleReservation(resObject.firebaseKey).then((response) => {
-    const reservationArray = Object.values(response).map((element) => element.reservation_id);
+  getSingleMenuReservationInfo(resObject.firebaseKey).then((response) => {
+    const reservationArray = Object.values(response).map((element) => element.menu_item_id);
     selectMenuItem(reservationArray);
   });
 };
