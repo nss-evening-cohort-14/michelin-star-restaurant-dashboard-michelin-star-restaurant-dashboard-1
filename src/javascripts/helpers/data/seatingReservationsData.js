@@ -1,24 +1,22 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
+import { getSingleReservation } from './reservationData';
+import { getSingleTable } from './seatingData';
 
 const dbUrl = firebaseConfig.databaseURL;
 
-// const getSeatingReservations = () => new Promise((resolve, reject) => {
-//   axios.get(`${dbUrl}/seating_reservations.json`)
-//     .then((response) => resolve(Object.values(response.data).map((response => {
-//     const tableId = response.data.table_id;
-//       const reservationId = response.data.reservation_id;
-//       Promise.all([tableId, reservationId])
-//       .then(([tableInfo, reservationInfo]) => {
-//       console.warn({ ...response, tableInfo, reservationInfo} )
-//     })
-//   }))))
-//   .catch((error) => reject(error));
-// });
-
 const getSeatingReservations = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/seating_reservations.json`)
-    .then((response) => console.warn(Object.values(response.data)))
+    .then((response) => Object.values(response.data).map((entry) => {
+      const tableIdPromise = getSingleTable(entry.table_id);
+      const reservationIdPromise = getSingleReservation(entry.reservation_id);
+
+      Promise.all([tableIdPromise, reservationIdPromise])
+        .then(([tableInfo, reservationInfo]) => {
+          console.warn({ ...entry, tableInfo, reservationInfo });
+        });
+      return response;
+    }))
     .catch((error) => reject(error));
 });
 
