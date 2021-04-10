@@ -7,7 +7,7 @@ const createMenuReservation = (menuReservationObject) => new Promise((resolve, r
   axios.post(`${dbUrl}/menu_item_reservation.json`, menuReservationObject)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
-      axios.patch(`${dbUrl}/menu_item_reservation.json`, body)
+      axios.patch(`${dbUrl}/menu_item_reservation/${response.data.name}.json`, body)
         .then(() => {
           getReservations().then((menuArray) => resolve(menuArray))
             .catch((error) => reject(error));

@@ -29,6 +29,7 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
+import { createMenuReservation } from '../helpers/data/menuReservationData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -111,14 +112,27 @@ const domEventListeners = (e) => {
       time: document.querySelector('#res-time').value,
       notes: document.querySelector('#res-notes').value,
     };
-    // const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    // markedCheckbox.forEach((checkbox) => {
-    //   if (checkbox.value !== '') {
-    //     const menuReservationObject = {
-    //       menu_id: checkbox.value,
-    //       reservation_id: firebaseKey
-    //     };
-    //     createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        const menuReservationObject = {
+          menu_item_id: checkbox.value,
+          reservation_id: firebaseKey
+        };
+        createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
+      }
+    });
+    // let deleteArray;
+    // const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
+    // unmarkedCheckbox.forEach((checkbox) => {
+    //   if (checkbox.checked === false) {
+    //     getSingleMenuReservationInfo(firebaseKey).then((x) => {
+    //       deleteArray = Object.values(x).map((element) => element.firebaseKey);
+    //       return deleteArray;
+    //     }).then(() => {
+    //       const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
+    //       Promise.all(deleteRelationships);
+    //     });
     //   }
     // });
 
