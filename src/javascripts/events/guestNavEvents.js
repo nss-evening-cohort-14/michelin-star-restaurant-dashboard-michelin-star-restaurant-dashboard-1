@@ -6,7 +6,7 @@ import showStaff from '../components/staff/showStaff';
 import { getStaff } from '../helpers/data/staffData';
 import { getIngredients } from '../helpers/data/ingredientsData';
 import { showIngredients } from '../components/ingredients/showIngredients';
-import getSeating from '../helpers/data/seatingData';
+import { getSeating } from '../helpers/data/seatingData';
 import showSeating from '../components/seating/seating';
 
 const guestNavEvents = () => {
