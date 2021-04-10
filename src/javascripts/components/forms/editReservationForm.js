@@ -1,3 +1,6 @@
+import { getMenuIngredients } from '../../helpers/data/menuIngredientsData';
+import selectIngredients from '../menu/selectIngredient';
+
 const editReservationForm = (resObject) => {
   document.querySelector('#modal-body').innerHTML = `
     <form id="edit-pin-form" class="mb-4">
@@ -21,8 +24,11 @@ const editReservationForm = (resObject) => {
         <label for="Reservation Date">Notes: </label>
         <input type="notes" class="form-control" id="res-notes" placeholder="Enter Notes" value="${resObject.notes}">
       </div>
+      <div class="form-group" id="update-menuItem">
+      </div>
       <button type="submit" id="update-res--${resObject.firebaseKey}" class="btn btn-success">Update Reservation</button>
     </form>`;
+  getMenuIngredients(resObject.firebaseKey).then((response) => selectIngredients(response.map((ingredientObject) => ingredientObject.firebaseKey)));
 };
 
 export default editReservationForm;

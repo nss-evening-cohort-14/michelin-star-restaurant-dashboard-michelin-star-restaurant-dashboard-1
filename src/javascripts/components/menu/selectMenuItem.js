@@ -1,8 +1,19 @@
-import 'firebase/auth';
+// import { getMenuItems } from '../../helpers/data/menuData';
+// import menuFilter from './menuFilter';
+
 import { getIngredients } from '../../helpers/data/ingredientsData';
 
-const selectIngredients = (array = []) => {
-  document.querySelector('#filter-container').innerHTML = '';
+// const selectMenuItem = () => {
+//   document.querySelector('#view').innerHTML = '';
+//   document.querySelector('#filter-container').innerHTML = '';
+//   document.querySelector('#form-container').innerHTML = '';
+//   getMenuItems().then((menuArray) => menuFilter(menuArray));
+// };
+
+// export default selectMenuItem;
+
+const selectMenuItem = (array = []) => {
+  document.querySelector('#update-menuItem').innerHTML = '';
   let domString = `<ul>
     <li class="dropdown">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
@@ -37,4 +48,4 @@ const selectIngredients = (array = []) => {
   });
 };
 
-export default selectIngredients;
+export default selectMenuItem;

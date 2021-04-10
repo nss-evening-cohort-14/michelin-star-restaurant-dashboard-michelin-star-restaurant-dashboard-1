@@ -28,6 +28,7 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
+import selectMenuItem from '../components/menu/selectMenuItem';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -277,6 +278,15 @@ const domEventListeners = (e) => {
     } else {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
+  }
+
+  if (e.target.id.includes('add-menuItem')) {
+    selectMenuItem();
+  }
+
+  if (e.target.id.includes('update-menuItem')) {
+    const firebaseKey = e.target.id;
+    console.warn(firebaseKey);
   }
 };
 
