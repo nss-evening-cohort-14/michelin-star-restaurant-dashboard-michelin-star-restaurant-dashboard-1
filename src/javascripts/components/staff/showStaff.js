@@ -20,7 +20,7 @@ const showStaff = (staffArray, user) => {
     staffArray.forEach((item) => {
       document.querySelector('#staff-container').innerHTML += `
       <div class="card m-3" style="width: 18rem;">
-        <img src="${item.image}" class="card-img-top" alt="${item.image}">
+        <img src="${item.image}" class="card-img-top" alt="${item.image}" id="staff-btn--${item.firebaseKey}">
         <div class="card-body">
           <h3 class="card-title">${item.first_name} ${item.last_name}</h3>
           <h5 class="card-title">${item.job_title}</h5>
