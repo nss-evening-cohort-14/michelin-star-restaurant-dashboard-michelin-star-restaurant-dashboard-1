@@ -28,6 +28,7 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
+import singleReservation from '../components/reservations/singleReservation';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -111,6 +112,15 @@ const domEventListeners = (e) => {
       notes: document.querySelector('#res-notes').value,
     };
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
+    $('#formModal').modal('toggle');
+  }
+
+  // CLICK EVENT FOR SHOWING SINGLE RESERVATION MODAL
+
+  if (e.target.id.includes('res-title')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    formModal('Reservation Details');
+    getSingleReservation(firebaseKey).then((resArray) => singleReservation(resArray));
     $('#formModal').modal('toggle');
   }
 

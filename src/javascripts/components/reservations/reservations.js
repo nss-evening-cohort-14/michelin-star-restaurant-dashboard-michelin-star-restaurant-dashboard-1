@@ -6,8 +6,8 @@ const showReservations = (array) => {
 
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
-    <ul class="list-group-res">
-      <li class="list-group-item"><strong>Last Name:</strong> ${item.name}</li>
+    <ul class="list-group-res" style="list-style-type:none;">
+      <li class="list-group-item"><<strong>Last Name:</strong> ${item.name}</li>
       <li class="list-group-item"><strong>Party Size:</strong> ${item.party_size}</li>
       <li class="list-group-item"><strong>Reservation Date:</strong> ${item.date}</li>
       <li class="list-group-item"><strong>Reservation Time:</strong> ${item.time}</li>
@@ -25,7 +25,8 @@ const showLoginReservations = (array) => {
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
     <ul class="list-group-res">
-      <li class="list-group-item"><strong>Last Name:</strong> ${item.name}</li>
+      <li><a href="#" id="title-link"></li>
+      <li class="list-group-item"><a href="#" id="res-link"><h5 id="res-title--${item.firebaseKey}" class="card-title mt-5 text-center">${item.name}</h5></a></li>
       <li class="list-group-item"><strong>Party Size:</strong> ${item.party_size}</li>
       <li class="list-group-item"><strong>Reservation Date:</strong> ${item.date}</li>
       <li class="list-group-item"><strong>Reservation Time:</strong> ${item.time}</li>
