@@ -29,7 +29,7 @@ const updateStaffForm = (staffObject) => {
     </form>
   `;
   getSingleStaffReservationInfo(staffObject.firebaseKey).then((response) => {
-    const reservationArray = response.map((element) => element.reservation_id);
+    const reservationArray = Object.values(response).map((element) => element.reservation_id);
     selectReservation(reservationArray);
   });
 };

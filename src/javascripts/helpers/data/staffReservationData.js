@@ -16,7 +16,7 @@ const createStaffReservation = (staffReservationObject) => new Promise((resolve,
 });
 const getSingleStaffReservationInfo = (staffId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/staff_reservation.json?orderBy="staff_id"&equalTo="${staffId}"`)
-    .then((response) => resolve(Object.values(response.data)))
+    .then((response) => resolve((response.data)))
     .catch((error) => reject(error));
 });
 const deleteStaffReservationRelationship = (firebaseKey) => new Promise((resolve, reject) => {
