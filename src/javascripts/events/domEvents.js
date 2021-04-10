@@ -28,6 +28,7 @@ import updateStaffForm from '../components/forms/updateStaffForm';
 import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
+import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -262,7 +263,30 @@ const domEventListeners = (e) => {
       image: document.querySelector('#update-image-url').value,
       bio: document.querySelector('#update-bio').value,
     };
-
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        const staffReservationObject = {
+          staff_id: firebaseKey,
+          reservation_id: checkbox.value
+        };
+        createStaffReservation(staffReservationObject).then((response) => showStaff(response, user));
+      }
+    });
+    let deleteArray; // Needed to create a variable outside of the function scope below
+    const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]'); // Create an array of all the checkboxes
+    unmarkedCheckbox.forEach((checkbox) => {
+      // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
+      if (checkbox.checked === false) {
+        getSingleStaffReservationInfo(firebaseKey).then((x) => {
+          deleteArray = Object.values(x).map((element) => element.firebaseKey);
+          return deleteArray;
+        }).then(() => {
+          const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
+          Promise.all(deleteRelationships);
+        });
+      }
+    });
     updateStaff(firebaseKey, staffObject).then(() => getStaff()
       .then((staffArray) => showStaff(staffArray, user)));
 
@@ -278,8 +302,12 @@ const domEventListeners = (e) => {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
   }
+  // Get single staff members reservations that they are assigned to
+  if (e.target.id.includes('staff-btn')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    getSingleStaff(firebaseKey).then((response) => console.warn(response));
+  }
 };
-
 const domEvents = () => {
   document.querySelector('body').addEventListener('click', domEventListeners);
 };
