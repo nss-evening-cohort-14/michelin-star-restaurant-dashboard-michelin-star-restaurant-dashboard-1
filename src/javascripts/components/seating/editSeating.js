@@ -1,22 +1,16 @@
 import { getReservations } from '../../helpers/data/reservationData';
 
-const selectReservationTable = (seatingObject = []) => {
+const editReservationTable = (seatingObject = []) => {
   let domString = `<label for="table">Select a Reservation</label>
   <select class="form-control" id="reservation-option" required>
   <option value="">Select a Reservation</option>`;
 
-  // const filterResBySize = (item) => {
-  //   const singleTable = seatingObject.forEach((table) => table.table_capacity);
-  //   if (item.party_size <= singleTable) {
-  //     return true;
-  //   }
-  // };
-  const singleTable = seatingObject.forEach((table) => table.table_capacity);
-  console.warn(singleTable);
   getReservations().then((reservationsArray) => {
     reservationsArray.forEach((reservation) => {
-      if (reservation.party_size <= singleTable) {
+      if (reservation.firebaseKey === seatingObject.firebaseKey) {
         domString += `<option selected value="${reservation.firebaseKey}">${reservation.name}</option>`;
+      } else {
+        domString += `<option value="${reservation.firebaseKey}">${reservation.name}</option>`;
       }
     });
     domString += '</select>';
@@ -24,4 +18,4 @@ const selectReservationTable = (seatingObject = []) => {
   });
 };
 
-export default selectReservationTable;
+export default editReservationTable;
