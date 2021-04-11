@@ -7,8 +7,7 @@ const landingPage = () => {
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
-            <h1 class="mb-3"></h1>
-            <p class="lead"></p>
+            <img id="landing-logo" src="src/images/baguette-logo.png">
           </div>
         </div>
       </div>

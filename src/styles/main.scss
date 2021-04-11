@@ -28,14 +28,18 @@ body {
 }
 
 .masthead {
-  height: 100vh;
+  height: 100%;
   min-height: 500px;
   background-image: url('https://www.myneworleans.com/content/uploads/2019/08/Artist2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
-  object-fit: cover;
-  opacity: 0.75;
+  object-fit: fill;
+  opacity: 0.65;
+}
+
+#landing-logo {
+  height: 40%;
 }
 
 a {
@@ -44,6 +48,7 @@ a {
 
 .dropdown, li, ul {
   list-style-type: none;
+  color: $secondaryfontcolor;
 }
 
 .card {
@@ -53,6 +58,7 @@ a {
   border-radius: 10%;
   color: $mainfontcolor;
   font-size: 18px;
+  box-shadow: 1px 1px 1px 1px $box-shadow;
 }
 
 .ingredients {
@@ -63,7 +69,6 @@ img {
   height: 45%;
   width: 100%;
   object-fit: fill;
-  box-shadow: 20px $box-shadow;
 }
 
 #seating-list {

@@ -34,6 +34,7 @@ import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
 import showSeating from '../components/seating/seating';
+// import { createReservationStaff, getSingleReservationStaffInfo } from '../helpers/data/singleReservationData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -121,11 +122,16 @@ const domEventListeners = (e) => {
   }
 
   // CLICK EVENT FOR SHOWING SINGLE RESERVATION MODAL
-
   if (e.target.id.includes('res-title')) {
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Reservation Details');
     getSingleReservation(firebaseKey).then((resArray) => singleReservation(resArray));
+    // const resStaffObject = {
+    //   firstname,
+    //   lastname,
+    //   resStaffRel: firebaseKey
+    // };
+    // createReservationStaff(resStaffObject).then((resStaffArray) => getSingleReservationStaffInfo(resStaffArray));
     $('#formModal').modal('toggle');
   }
 
@@ -325,7 +331,7 @@ const domEventListeners = (e) => {
   // event for showing edit seating modal
   if (e.target.id.includes('edit-table')) {
     const firebaseKey = e.target.id.split('--')[1];
-    formModal('Assign Table to Rservation');
+    formModal('Assign Table to Reservation');
     getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
   }
   // send data to seatingReservation node
