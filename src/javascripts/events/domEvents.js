@@ -78,7 +78,8 @@ const domEventListeners = (e) => {
     const firebaseKey = e.target.id.split('--')[1];
     const ingredientObject = {
       firebaseKey,
-      name: document.querySelector('#newIngredientName').value
+      name: document.querySelector('#newIngredientName').value,
+      quantity: document.querySelector('#ingredientCount').value
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');

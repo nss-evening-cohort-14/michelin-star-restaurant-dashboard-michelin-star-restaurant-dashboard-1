@@ -27,4 +27,8 @@ const deleteMenuReservationRelationship = (firebaseKey) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
-export { createMenuReservation, getSingleMenuReservationInfo, deleteMenuReservationRelationship };
+export {
+  createMenuReservation,
+  getSingleMenuReservationInfo,
+  deleteMenuReservationRelationship,
+};

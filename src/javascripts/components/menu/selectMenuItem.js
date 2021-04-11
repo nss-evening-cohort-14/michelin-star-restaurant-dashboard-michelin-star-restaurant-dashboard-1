@@ -16,6 +16,14 @@ const selectMenuItem = (array = []) => {
                         </label>
                       </div>
                     </li>`;
+      } else if (menu.available === false) {
+        domString += `<li>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="${menu.title}" class="menuItem-check" id="menuItemCheckBox${menu.title}" value="${menu.firebaseKey}" disabled> ${menu.title} is not available
+                        </label>
+                      </div>
+                    </li>`;
       } else {
         domString += `<li>
                         <div class="checkbox">
