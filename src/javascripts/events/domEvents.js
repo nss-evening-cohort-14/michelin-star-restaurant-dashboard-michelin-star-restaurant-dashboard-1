@@ -34,7 +34,7 @@ import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
 import showSeating from '../components/seating/seating';
-// import { createReservationStaff, getSingleReservationStaffInfo } from '../helpers/data/singleReservationData';
+import { getSingleReservationStaffInfo } from '../helpers/data/singleReservationData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -124,14 +124,21 @@ const domEventListeners = (e) => {
   // CLICK EVENT FOR SHOWING SINGLE RESERVATION MODAL
   if (e.target.id.includes('res-title')) {
     const firebaseKey = e.target.id.split('--')[1];
+    console.warn(e.target.id.split('--'));
+    let res;
+    const staffForRes = [];
+    getSingleReservation(firebaseKey).then((resp) => {
+      res = resp;
+      getSingleReservationStaffInfo(resp.reservation_id).then((nextResp) => {
+        nextResp.forEach((obj) => {
+          getSingleStaff(obj.staff_id).then((staff) => {
+            staffForRes.push(`${staff.first_name} ${staff.last_name}`);
+          });
+        });
+      });
+    });
+    singleReservation(res, staffForRes);
     formModal('Reservation Details');
-    getSingleReservation(firebaseKey).then((resArray) => singleReservation(resArray));
-    // const resStaffObject = {
-    //   firstname,
-    //   lastname,
-    //   resStaffRel: firebaseKey
-    // };
-    // createReservationStaff(resStaffObject).then((resStaffArray) => getSingleReservationStaffInfo(resStaffArray));
     $('#formModal').modal('toggle');
   }
 

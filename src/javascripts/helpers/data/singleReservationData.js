@@ -1,6 +1,6 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
-import { getReservations, getSingleReservation } from './reservationData';
+import { getSingleReservation } from './reservationData';
 import { getSingleStaff } from './staffData';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -23,11 +23,7 @@ const getSingleReservationStaffInfo = () => new Promise((resolve, reject) => {
 const createReservationStaff = (resStaffObject) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/staff_reservations.json`, resStaffObject)
     .then((response) => {
-      const body = { firebaseKey: response.data.name };
-      axios.patch(`${dbUrl}/staff_reservations/${response.data.name}.json`, body)
-        .then(() => {
-          getReservations().then((staffResArray) => resolve(staffResArray));
-        });
+      console.warn(response);
     }).catch((error) => reject(error));
 });
 
