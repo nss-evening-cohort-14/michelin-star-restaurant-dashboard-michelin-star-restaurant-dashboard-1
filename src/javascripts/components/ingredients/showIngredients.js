@@ -25,7 +25,8 @@ const showLoginIngredients = (array) => {
 </div>`;
   array.forEach((item) => {
     document.querySelector('#ingredients-list').innerHTML += `
-    <li class="list-group-item text-capitalize">${item.name} </br>
+    <li class="list-group-item text-capitalize">${item.name} / <span class="showIngredientsQty">Qty: ${item.quantity}</span>
+    </br>
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="editIngredient--${item.firebaseKey}">Edit</button>
     <button type="button" class="btn btn-danger" id="deleteIngredient--${item.firebaseKey}">Delete</button></li>`;
   });
