@@ -29,7 +29,9 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
-import { createMenuReservation, deleteMenuReservationRelationship, getSingleMenuReservationInfo } from '../helpers/data/menuReservationData';
+import {
+  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
+} from '../helpers/data/menuReservationData';
 import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
@@ -124,7 +126,9 @@ const domEventListeners = (e) => {
           menu_item_id: checkbox.value,
           reservation_id: firebaseKey
         };
-        createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
+        createMenuReservation(menuReservationObject).then(() => {
+          getIngredientsFromMenu(menuReservationObject).then((response) => showLoginReservations(response, user));
+        });
       }
     });
     let deleteArray;

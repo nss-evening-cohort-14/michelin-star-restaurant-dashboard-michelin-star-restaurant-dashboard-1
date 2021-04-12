@@ -17,7 +17,7 @@ const selectIngredients = (array = []) => {
               <input type="checkbox" name="${ingredient.name}" class="ingredient-check" id="ingredientCheckbox${ingredient.name}" value="${ingredient.firebaseKey}" checked> ${ingredient.name}
           </label>
       </div>
-  </li>`; console.warn(ingredient.name);
+  </li>`;
       } else {
         domString += `<li>
         <div class="checkbox">
