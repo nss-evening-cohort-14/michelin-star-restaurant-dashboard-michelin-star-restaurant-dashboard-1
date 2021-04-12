@@ -1,50 +1,74 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Playball&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import './vars.scss';
 
-p, ul, li, button {
-  font-family: 'Raleway', sans-serif;
-}
-
-#navigation {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.2em;
-}
-
-.dropdown {
-  list-style-type: none;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #d9c7b0;
-  color: #333333;
+  background-color: $maincolor;
   text-align: center;
-  margin-top: 1px;
   font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
-.list-group-res {
-  padding: 40px;
-  text-align: left;
+.navbar {
+  height: 75px;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-color: $secondarylightcolor;
+  overflow: auto;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.masthead {
+  height: 100%;
+  min-height: 500px;
+  background-image: url('https://www.myneworleans.com/content/uploads/2019/08/Artist2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  object-fit: fill;
+  opacity: 0.65;
+}
+
+#landing-logo {
+  height: 40%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.dropdown, li, ul {
+  list-style-type: none;
+  color: $secondaryfontcolor;
+}
+
+.card {
+  // height: 40rem;
+  // width: 20rem;
+  margin: 10px;
+  border-radius: 10%;
+  color: $mainfontcolor;
+  font-size: 18px;
+  box-shadow: 1px 1px 1px 1px $box-shadow;
 }
 
 .ingredients {
-  margin: auto;
-}
-// MENU
-#menuItemImage {
-  height: 150px;
-  width: 250px;
+  margin: 20px;
 }
 
-#menuItemImage2 {
-  height: 150px;
-  width: 250px;
-}
-
-.media {
-  margin: 10px;
-  border: 1px solid darkgray;
+img {
+  height: 45%;
+  width: 100%;
+  object-fit: fill;
 }
 
 #seating-list {
@@ -56,6 +80,7 @@ body {
 #seating-card {
   margin: 40px;
 }
+
 .dropdown-menu {
   padding: 10px;
 }
