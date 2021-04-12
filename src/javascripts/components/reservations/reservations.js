@@ -8,10 +8,6 @@ const showReservations = (array) => {
     document.querySelector('#view').innerHTML += `
     <ul class="list-group-res" style="list-style-type:none;">
       <li class="list-group-item"><strong>Last Name:</strong> ${item.name}</li>
-      <li class="list-group-item"><strong>Party Size:</strong> ${item.party_size}</li>
-      <li class="list-group-item"><strong>Reservation Date:</strong> ${item.date}</li>
-      <li class="list-group-item"><strong>Reservation Time:</strong> ${item.time}</li>
-      <li class="list-group-item"><strong>Notes:</strong> ${item.notes}</li>
     </ul>`;
   });
 };

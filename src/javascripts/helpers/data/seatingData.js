@@ -10,4 +10,14 @@ const getSeating = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getSeating;
+// GET SINGLE TABLE
+const getSingleTable = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/seating/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+export {
+  getSeating,
+  getSingleTable,
+};

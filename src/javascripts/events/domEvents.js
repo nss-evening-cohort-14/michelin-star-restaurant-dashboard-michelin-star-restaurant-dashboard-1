@@ -29,6 +29,11 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import singleReservation from '../components/reservations/singleReservation';
+import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
+import { getSingleTable } from '../helpers/data/seatingData';
+import editSeatingForm from '../components/forms/editSeatingForm';
+import { postSeatingResData } from '../helpers/data/seatingReservationsData';
+import showSeating from '../components/seating/seating';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -116,7 +121,6 @@ const domEventListeners = (e) => {
   }
 
   // CLICK EVENT FOR SHOWING SINGLE RESERVATION MODAL
-
   if (e.target.id.includes('res-title')) {
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Reservation Details');
@@ -272,7 +276,30 @@ const domEventListeners = (e) => {
       image: document.querySelector('#update-image-url').value,
       bio: document.querySelector('#update-bio').value,
     };
-
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        const staffReservationObject = {
+          staff_id: firebaseKey,
+          reservation_id: checkbox.value
+        };
+        createStaffReservation(staffReservationObject).then((response) => showStaff(response, user));
+      }
+    });
+    let deleteArray; // Needed to create a variable outside of the function scope below
+    const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]'); // Create an array of all the checkboxes
+    unmarkedCheckbox.forEach((checkbox) => {
+      // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
+      if (checkbox.checked === false) {
+        getSingleStaffReservationInfo(firebaseKey).then((x) => {
+          deleteArray = Object.values(x).map((element) => element.firebaseKey);
+          return deleteArray;
+        }).then(() => {
+          const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
+          Promise.all(deleteRelationships);
+        });
+      }
+    });
     updateStaff(firebaseKey, staffObject).then(() => getStaff()
       .then((staffArray) => showStaff(staffArray, user)));
 
@@ -288,8 +315,30 @@ const domEventListeners = (e) => {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
   }
-};
+  // Get single staff members reservations that they are assigned to
+  if (e.target.id.includes('staff-btn')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    getSingleStaff(firebaseKey).then((response) => console.warn(response));
+  }
 
+  // event for showing edit seating modal
+  if (e.target.id.includes('edit-table')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    formModal('Assign Table to Reservation');
+    getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
+  }
+  // send data to seatingReservation node
+  if (e.target.id.includes('update-table')) {
+    const firebaseKey = e.target.id.split('--')[1];
+    e.preventDefault();
+    const seatingResObject = {
+      reservation_id: document.querySelector('#reservation-option').value,
+      table_id: firebaseKey
+    };
+    postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
+    $('#formModal').modal('toggle');
+  }
+};
 const domEvents = () => {
   document.querySelector('body').addEventListener('click', domEventListeners);
 };

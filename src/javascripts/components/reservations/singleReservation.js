@@ -1,5 +1,5 @@
 const singleReservation = (item) => {
-  document.querySelector('#modal-body').innerHTML = `<div id="view-${item.firebaseKey}">
+  document.querySelector('#modal-body').innerHTML = `<div id="single-reservations">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
