@@ -29,7 +29,7 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import {
-  createStaffReservation, deleteStaffReservationRelationship, fullyStaffed, getSingleStaffReservationInfo
+  createStaffReservation, deleteStaffReservationRelationship, fullyStaffed, getSingleStaffReservation
 } from '../helpers/data/staffReservationData';
 import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
@@ -272,12 +272,19 @@ const domEventListeners = (e) => {
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
       if (checkbox.value !== '') {
-        const staffReservationObject = {
-          staff_id: firebaseKey,
-          reservation_id: checkbox.value
-        };
-        createStaffReservation(staffReservationObject).then((response) => showStaff(response, user)).then(() => {
-          fullyStaffed(checkbox.value);
+        getSingleReservation(checkbox.value).then((response) => {
+          if (response.fullyStaffed === false) {
+            const staffReservationObject = {
+              staff_id: firebaseKey,
+              reservation_id: checkbox.value
+            };
+            createStaffReservation(staffReservationObject).then(() => {
+              fullyStaffed(checkbox.value);
+            });
+          } else {
+            fullyStaffed(checkbox.value);
+            console.warn(`${checkbox.name} is staffed`);
+          }
         });
       }
     });
@@ -286,7 +293,7 @@ const domEventListeners = (e) => {
     unmarkedCheckbox.forEach((checkbox) => {
       // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
       if (checkbox.checked === false) {
-        getSingleStaffReservationInfo(firebaseKey).then((x) => {
+        getSingleStaffReservation(firebaseKey).then((x) => {
           deleteArray = Object.values(x).map((element) => element.firebaseKey);
           return deleteArray;
         }).then(() => {

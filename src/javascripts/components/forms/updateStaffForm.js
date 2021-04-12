@@ -1,4 +1,4 @@
-import { getSingleStaffReservationInfo } from '../../helpers/data/staffReservationData';
+import { getSingleStaffReservation } from '../../helpers/data/staffReservationData';
 import selectReservation from '../staff/selectReservations';
 
 const updateStaffForm = (staffObject) => {
@@ -28,7 +28,7 @@ const updateStaffForm = (staffObject) => {
       <button type="submit" id="edit-this-staff--${staffObject.firebaseKey}" class="btn btn-primary">Update Staff</button>
     </form>
   `;
-  getSingleStaffReservationInfo(staffObject.firebaseKey).then((response) => {
+  getSingleStaffReservation(staffObject.firebaseKey).then((response) => {
     const reservationArray = Object.values(response).map((element) => element.reservation_id);
     selectReservation(reservationArray);
   });

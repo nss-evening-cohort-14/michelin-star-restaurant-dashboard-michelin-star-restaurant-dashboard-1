@@ -14,7 +14,7 @@ const createStaffReservation = (staffReservationObject) => new Promise((resolve,
         });
     });
 });
-const getSingleStaffReservationInfo = (staffId) => new Promise((resolve, reject) => {
+const getSingleStaffReservation = (staffId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/staff_reservation.json?orderBy="staff_id"&equalTo="${staffId}"`)
     .then((response) => resolve((response.data)))
     .catch((error) => reject(error));
@@ -48,7 +48,7 @@ const fullyStaffed = (reservationId) => {
   });
 };
 export {
-  getSingleStaffReservationInfo,
+  getSingleStaffReservation,
   createStaffReservation,
   deleteStaffReservationRelationship,
   getSingleReservationStaffInfo,
