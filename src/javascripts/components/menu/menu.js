@@ -36,7 +36,7 @@ const showLoginMenuItems = (array) => {
       <h5 class="mt-0">${item.title}</h5>
       <p>${item.description}</p>
       <button type="button" class="btn btn-link" data-toggle="modal" data-target="#formModal" id="view-menu-ingredients--${item.firebaseKey}">Show Full Ingredient List</button>
-      <p>$${item.price}</p>
+      <p>${item.price}</p>
       <div class="pb-2">
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="edit-menu-item--${item.firebaseKey}">Edit</button>
         <button type="button" class="btn btn-danger" id="delete-menu-item--${item.firebaseKey}">Delete</button>
