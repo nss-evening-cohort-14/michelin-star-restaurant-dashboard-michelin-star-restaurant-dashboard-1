@@ -5,6 +5,10 @@ const editReservationTable = (seatingObject = []) => {
   <select class="form-control" id="reservation-option" required>
   <option value="">Select a Reservation</option>`;
 
+  // getReservations().then((reservationsArray) => {
+  //   let filtered
+  // })
+
   getReservations().then((reservationsArray) => {
     reservationsArray.forEach((reservation) => {
       if (reservation.firebaseKey === seatingObject.firebaseKey) {

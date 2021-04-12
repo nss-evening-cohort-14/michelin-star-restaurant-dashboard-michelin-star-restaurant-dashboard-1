@@ -315,8 +315,8 @@ const domEventListeners = (e) => {
   // event for showing edit seating modal
   if (e.target.id.includes('edit-table')) {
     const firebaseKey = e.target.id.split('--')[1];
-    formModal('Assign Table to Rservation');
-    getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
+    formModal('Assign Table to Reservation');
+    getSingleTable(firebaseKey).then((tableObject) => editSeatingForm(tableObject));
   }
   // send data to seatingReservation node
   if (e.target.id.includes('update-table')) {
