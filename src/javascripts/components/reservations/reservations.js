@@ -30,9 +30,12 @@ const showLoginReservations = (array) => {
       <li class="list-group-item"><strong>Reservation Date:</strong> ${item.date}</li>
       <li class="list-group-item"><strong>Reservation Time:</strong> ${item.time}</li>
       <li class="list-group-item"><strong>Notes:</strong> ${item.notes}</li>
-      <li class="list-group-item"><button class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="edit-res-btn--${item.firebaseKey}">Edit Reservation</button>
-      <button class="btn btn-danger" id="delete-res--${item.firebaseKey}">Delete Reservation</button></li>
-    </ul>`;
+      <li class="list-group-item">
+      <button class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="edit-res-btn--${item.firebaseKey}">Edit Reservation</button>
+      <button class="btn btn-danger" id="delete-res--${item.firebaseKey}">Delete Reservation</button>
+      </li>
+    </ul>
+    `;
   });
 };
 

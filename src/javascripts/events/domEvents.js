@@ -29,6 +29,9 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import { createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservationInfo } from '../helpers/data/staffReservationData';
+import {
+  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
+} from '../helpers/data/menuReservationData';
 import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
@@ -77,7 +80,8 @@ const domEventListeners = (e) => {
     const firebaseKey = e.target.id.split('--')[1];
     const ingredientObject = {
       firebaseKey,
-      name: document.querySelector('#newIngredientName').value
+      name: document.querySelector('#newIngredientName').value,
+      quantity: document.querySelector('#ingredientCount').value
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');
@@ -115,6 +119,32 @@ const domEventListeners = (e) => {
       time: document.querySelector('#res-time').value,
       notes: document.querySelector('#res-notes').value,
     };
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        const menuReservationObject = {
+          menu_item_id: checkbox.value,
+          reservation_id: firebaseKey
+        };
+        createMenuReservation(menuReservationObject).then(() => {
+          getIngredientsFromMenu(menuReservationObject).then((response) => showLoginReservations(response, user));
+        });
+      }
+    });
+    let deleteArray;
+    const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
+    unmarkedCheckbox.forEach((checkbox) => {
+      if (checkbox.checked === false) {
+        getSingleMenuReservationInfo(firebaseKey).then((x) => {
+          deleteArray = Object.values(x).map((element) => element.firebaseKey);
+          return deleteArray;
+        }).then(() => {
+          const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
+          Promise.all(deleteRelationships);
+        });
+      }
+    });
+
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
     $('#formModal').modal('toggle');
   }
@@ -330,6 +360,7 @@ const domEventListeners = (e) => {
     $('#formModal').modal('toggle');
   }
 };
+
 const domEvents = () => {
   document.querySelector('body').addEventListener('click', domEventListeners);
 };
