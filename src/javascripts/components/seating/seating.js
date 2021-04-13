@@ -2,6 +2,7 @@ const showSeating = (array) => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#filter-container').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
+  document.querySelector('#masthead').innerHTML = '';
   document.querySelector('#view').innerHTML = `<div id="seating-list">
   </div>`;
   array.forEach((item) => {
