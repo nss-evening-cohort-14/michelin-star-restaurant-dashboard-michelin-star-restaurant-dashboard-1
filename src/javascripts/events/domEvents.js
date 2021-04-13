@@ -32,10 +32,7 @@ import { createStaffReservation, deleteStaffReservationRelationship, getSingleSt
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
-import { getSingleTable } from '../helpers/data/seatingData';
-import editSeatingForm from '../components/forms/editSeatingForm';
 import { postSeatingResData } from '../helpers/data/seatingReservationsData';
-import showSeating from '../components/seating/seating';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -119,6 +116,12 @@ const domEventListeners = (e) => {
       time: document.querySelector('#res-time').value,
       notes: document.querySelector('#res-notes').value,
     };
+    const seatingResObject = {
+      reservation_id: firebaseKey,
+      table_id: document.querySelector('#seating-option').value
+    };
+    postSeatingResData(seatingResObject).then((seatingArray) => console.warn(seatingArray));
+
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
       if (checkbox.value !== '') {
@@ -146,6 +149,7 @@ const domEventListeners = (e) => {
     });
 
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
+
     $('#formModal').modal('toggle');
   }
 
@@ -340,24 +344,6 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('staff-btn')) {
     const firebaseKey = e.target.id.split('--')[1];
     getSingleStaff(firebaseKey).then((response) => console.warn(response));
-  }
-
-  // event for showing edit seating modal
-  if (e.target.id.includes('edit-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    formModal('Assign Table to Reservation');
-    getSingleTable(firebaseKey).then((tableObject) => editSeatingForm(tableObject));
-  }
-  // send data to seatingReservation node
-  if (e.target.id.includes('update-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    e.preventDefault();
-    const seatingResObject = {
-      reservation_id: document.querySelector('#reservation-option').value,
-      table_id: firebaseKey
-    };
-    postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
-    $('#formModal').modal('toggle');
   }
 };
 
