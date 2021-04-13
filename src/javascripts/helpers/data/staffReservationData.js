@@ -29,28 +29,33 @@ const getSingleReservationStaffInfo = (reservationId) => new Promise((resolve, r
     .then((response) => resolve((response.data)))
     .catch((error) => reject(error));
 });
-const fullyStaffed = (reservationId) => {
+const checkFullStaffing = (reservationId) => new Promise((resolve, reject) => {
+  const jobArray = [];
   getSingleReservationStaffInfo(reservationId).then((response) => {
     const staffArray = Object.values(response).map((x) => getSingleStaff(x.staff_id));
-    const jobArray = [];
     Promise.all(staffArray).then((array) => array.map((element) => {
-      const newArray = jobArray;
-      newArray.push(element.job_title);
-      if (newArray.includes('Bartender') && newArray.includes('Waiter') && newArray.includes('General Manager') && newArray.includes('Line Cook')) {
-        const body = { fullyStaffed: true };
-        axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
-      } else {
-        const body = { fullyStaffed: false };
-        axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
-      }
-      return newArray;
-    }));
-  });
-};
+      jobArray.push(element.job_title);
+      return jobArray;
+    })).then((x) => resolve(x));
+  }).catch((error) => reject(error));
+});
+const toggleFullStaff = (array, reservationId) => new Promise((resolve, reject) => {
+  let body = {};
+  if (array.includes('Bartender') && array.includes('Waiter') && array.includes('General Manager') && array.includes('Line Cook')) {
+    body = { fullyStaffed: true };
+    axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body);
+  } else {
+    body = { fullyStaffed: false };
+  }
+  axios.patch(`${dbUrl}/reservations/${reservationId}.json`, body)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 export {
+  toggleFullStaff,
   getSingleStaffReservation,
   createStaffReservation,
   deleteStaffReservationRelationship,
   getSingleReservationStaffInfo,
-  fullyStaffed,
+  checkFullStaffing,
 };

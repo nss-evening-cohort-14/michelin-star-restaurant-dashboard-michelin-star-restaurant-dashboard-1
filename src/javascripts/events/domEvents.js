@@ -29,7 +29,8 @@ import editReservationForm from '../components/forms/editReservationForm';
 import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import {
-  createStaffReservation, deleteStaffReservationRelationship, fullyStaffed, getSingleStaffReservation
+  checkFullStaffing,
+  createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservation, toggleFullStaff
 } from '../helpers/data/staffReservationData';
 import { getSingleTable } from '../helpers/data/seatingData';
 import editSeatingForm from '../components/forms/editSeatingForm';
@@ -48,7 +49,6 @@ const domEventListeners = (e) => {
       deleteIngredients(firebaseKey).then((ingredients) => showLoginIngredients(ingredients));
     }
   }
-
   // Create Ingredient
   if (e.target.id.includes('addIngredient')) {
     e.preventDefault();
@@ -272,19 +272,14 @@ const domEventListeners = (e) => {
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
       if (checkbox.value !== '') {
-        getSingleReservation(checkbox.value).then((response) => {
-          if (response.fullyStaffed === false) {
-            const staffReservationObject = {
-              staff_id: firebaseKey,
-              reservation_id: checkbox.value
-            };
-            createStaffReservation(staffReservationObject).then(() => {
-              fullyStaffed(checkbox.value);
-            });
-          } else {
-            fullyStaffed(checkbox.value);
-            console.warn(`${checkbox.name} is staffed`);
-          }
+        getSingleReservation(checkbox.value).then(() => {
+          const staffReservationObject = {
+            staff_id: firebaseKey,
+            reservation_id: checkbox.value
+          };
+          createStaffReservation(staffReservationObject).then(() => {
+            checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+          });
         });
       }
     });
@@ -299,7 +294,9 @@ const domEventListeners = (e) => {
         }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
           Promise.all(deleteRelationships);
-        });
+        }).then(() => checkFullStaffing(checkbox.value).then((response) => {
+          toggleFullStaff(response, checkbox.value);
+        }));
       }
     });
 
@@ -341,7 +338,14 @@ const domEventListeners = (e) => {
     postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
     $('#formModal').modal('toggle');
   }
+  console.warn($(e.target));
+  if ($(e.target).hasClass('toggle-disable')) {
+    $('input').on('keyup', () => {
+      $('.edit-staff-btn').removeAttr('disabled');
+    });
+  }
 };
+
 const domEvents = () => {
   document.querySelector('body').addEventListener('click', domEventListeners);
 };
