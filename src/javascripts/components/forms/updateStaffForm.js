@@ -26,6 +26,7 @@ const updateStaffForm = (staffObject) => {
       </div>
       <div class="mb-3" id="reservation-dropdown-container"></div>
       <button disabled id="edit-this-staff--${staffObject.firebaseKey}" class="btn btn-primary edit-staff-btn">Update Staff</button>
+      <button disabled id="edit-reservation-btn--${staffObject.firebaseKey}" class="btn btn-primary edit-reservation-btn">Update Reservation</button>
     </form>
   `;
   getSingleStaffReservation(staffObject.firebaseKey).then((response) => {

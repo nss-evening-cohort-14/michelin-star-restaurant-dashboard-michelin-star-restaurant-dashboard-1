@@ -269,6 +269,14 @@ const domEventListeners = (e) => {
       image: document.querySelector('#update-image-url').value,
       bio: document.querySelector('#update-bio').value,
     };
+    updateStaff(firebaseKey, staffObject).then(() => getStaff()
+      .then((staffArray) => showStaff(staffArray, user)));
+
+    $('#formModal').modal('toggle');
+  }
+  if (e.target.id.includes('edit-reservation-btn')) {
+    e.preventDefault();
+    const firebaseKey = e.target.id.split('--')[1];
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
       if (checkbox.value !== '') {
@@ -299,13 +307,7 @@ const domEventListeners = (e) => {
         }));
       }
     });
-
-    updateStaff(firebaseKey, staffObject).then(() => getStaff()
-      .then((staffArray) => showStaff(staffArray, user)));
-
-    $('#formModal').modal('toggle');
   }
-
   if (e.target.id.includes('filter-staff-submit')) {
     const value = document.getElementById('filter-all-staff');
     const filteredStaffOption = value.options[value.selectedIndex].value;
@@ -315,12 +317,6 @@ const domEventListeners = (e) => {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
   }
-  // Get single staff members reservations that they are assigned to
-  if (e.target.id.includes('staff-btn')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    getSingleStaff(firebaseKey).then((response) => console.warn(response));
-  }
-
   // event for showing edit seating modal
   if (e.target.id.includes('edit-table')) {
     const firebaseKey = e.target.id.split('--')[1];
@@ -338,12 +334,15 @@ const domEventListeners = (e) => {
     postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
     $('#formModal').modal('toggle');
   }
-  console.warn($(e.target));
   if ($(e.target).hasClass('toggle-disable')) {
     $('input').on('keyup', () => {
       $('.edit-staff-btn').removeAttr('disabled');
     });
   }
+
+  $('.reservation-check').on('click', () => {
+    $('.edit-reservation-btn').removeAttr('disabled');
+  });
 };
 
 const domEvents = () => {
