@@ -69,9 +69,11 @@ const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, 
         const ingredientSelectionRelationshipsArray = ingredients.find((ingredientSelection) => ingredientSelection.firebaseKey === selection.selectedIngredient);
         return ingredientSelectionRelationshipsArray;
       });
+      // eslint-disable-next-line no-return-assign
+      ingredientSelectionArray.forEach((e) => e.quantity -= 1);
       ingredientSelectionArray.forEach((item) => {
         const countObj = {
-          quantity: `${item.quantity}`
+          quantity: item.quantity
         };
         reduceIngredientCount(`${item.firebaseKey}`, countObj);
       });
