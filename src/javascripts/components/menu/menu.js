@@ -30,7 +30,7 @@ const showLoginMenuItems = (array) => {
   document.querySelector('#form-container').innerHTML = '';
   document.querySelector('#masthead').innerHTML = '';
   array.forEach((item) => {
-    document.querySelector('#view').innerHTML +=  `<div class="card m-3" style="width: 20rem; height: 40rem;">
+    document.querySelector('#view').innerHTML += `<div class="card m-3" style="width: 20rem; height: 40rem;">
     <img src="${item.image}" class="card-img-top" alt="${item.image}" id="staff-btn--${item.firebaseKey}">
     <div class="card-body">
       <h3 class="card-title">${item.title}</h3>

@@ -22,6 +22,7 @@ body {
   bottom: 0;
   background-color: $secondarylightcolor;
   overflow: auto;
+  color: $mainfontcolor;
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
   font-size: 20px;
@@ -40,15 +41,17 @@ body {
 
 #landing-logo {
   height: 40%;
+  background:rgba(57, 255, 116, 0.45);
 }
 
 a {
   text-decoration: none;
+  color: $mainfontcolor;
 }
 
 .dropdown, li, ul {
   list-style-type: none;
-  color: $secondaryfontcolor;
+  color: $mainfontcolor;
 }
 
 .card {
