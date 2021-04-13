@@ -18,8 +18,8 @@ const getSeatingReservations = () => new Promise((resolve, reject) => {
       const reservationIdPromise = getSingleReservation(entry.reservation_id);
 
       Promise.all([tableIdPromise, reservationIdPromise])
-        .then(([tableInfo, reservationInfo]) => {
-          console.warn({ ...entry, tableInfo, reservationInfo });
+        .then(() => {
+          // console.warn({ ...entry, tableInfo, reservationInfo });
         });
       return response;
     }))
