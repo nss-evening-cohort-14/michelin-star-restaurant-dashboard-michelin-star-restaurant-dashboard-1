@@ -20,7 +20,7 @@ const selectReservation = (array = []) => {
         domString += `<li>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" name="${reservation.name}" class="reservation-check" id="reservationCheckBox${reservation.name}" value="${reservation.firebaseKey}"> ${reservation.name}
+                            <input ${reservation.fullyStaffed ? 'disabled' : ''} type="checkbox" name="${reservation.name}" class="reservation-check" id="reservationCheckBox${reservation.name}" value="${reservation.firebaseKey}"> ${reservation.name} ${reservation.fullyStaffed ? '(fully staffed)' : ''}
                           </label>
                         </div>
                       </li>`;
