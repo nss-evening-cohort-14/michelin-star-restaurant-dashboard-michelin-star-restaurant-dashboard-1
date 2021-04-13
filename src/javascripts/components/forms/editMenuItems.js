@@ -20,8 +20,7 @@ const editMenuItemForm = (menuObject) => {
     <label for="itemPrice">Menu Item Price</label>
     <input type="text" class="form-control" id="itemPrice" aria-describedby="itemPrice" placeholder="Update Price" value="${menuObject.price}" required>
   </div>
-  <div class="form-group" id="select-ingredients">
-  </div>
+  <div class="mb-3" id="menun-dropdown-container"></div>
   <button type="submit" data-toggle="modal" data-target="#formModal" id="update-menu-item--${menuObject.firebaseKey}" class="btn btn-primary">Update Menu Item</button>
 </form>`;
 
