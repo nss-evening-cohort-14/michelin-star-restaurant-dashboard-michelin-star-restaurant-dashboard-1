@@ -1,11 +1,12 @@
-import { getSeating } from '../../helpers/data/seatingData';
+// import { getSeating } from '../../helpers/data/seatingData';
+import { getFilteredTables } from '../../helpers/data/seatingReservationsData';
 
-const selectTable = (array = []) => {
+const selectTable = (array = [], value) => {
   let domString = `<label for="table">Select a seating</label>
   <select class="form-control" id="seating-option" required>
   <option value="">Select a Table</option>`;
 
-  getSeating().then((seatingArray) => {
+  getFilteredTables(value).then((seatingArray) => {
     seatingArray.map((seating) => {
       if (array.includes(seating.firebaseKey)) {
         domString += `<option selected value="${seating.firebaseKey}">${seating.table_number} (Table Capacity: ${seating.table_capacity})</option>`;

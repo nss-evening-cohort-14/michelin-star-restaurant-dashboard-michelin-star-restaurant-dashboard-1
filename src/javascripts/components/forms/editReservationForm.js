@@ -36,9 +36,10 @@ const editReservationForm = (resObject) => {
     const reservationArray = Object.values(response).map((element) => element.menu_item_id);
     selectMenuItem(reservationArray);
   });
+  const partySize = resObject.party_size;
   getSingleSeatingReservationInfo(resObject.firebaseKey).then((response) => {
     const reservationArray = Object.values(response).map((element) => element.table_id);
-    selectTable(reservationArray);
+    selectTable(reservationArray, partySize);
   });
 };
 

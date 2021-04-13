@@ -62,9 +62,16 @@ const deleteSeatingReservationRelationship = (firebaseKey) => new Promise((resol
 //     }).catch((error) => reject(error));
 // });
 
+const getFilteredTables = (value) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/seating.json?orderBy="table_capacity"&startAt=${value}`)
+    .then((response) => resolve(Object.values(response.data)))
+    .then((error) => reject(error));
+});
+
 export {
   getSeatingReservations,
   postSeatingResData,
   getSingleSeatingReservationInfo,
   deleteSeatingReservationRelationship,
+  getFilteredTables
 };

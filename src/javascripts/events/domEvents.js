@@ -121,6 +121,7 @@ const domEventListeners = (e) => {
       reservation_id: firebaseKey,
       table_id: document.querySelector('#seating-option').value
     };
+
     postSeatingResData(seatingResObject).then((seatingArray) => console.warn(seatingArray));
 
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
