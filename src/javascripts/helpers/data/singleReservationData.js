@@ -15,7 +15,7 @@ const mergeReservationStaff = () => ((resolve, reject) => {
     .then(([reservations, staffReservations]) => {
       const allReservationInfoArray = reservations.map((reservation) => {
         const reservationRelationshipsArray = staffReservations.filter((rs) => rs.reservation_id === reservation.id);
-        return { ...reservations, count: reservationRelationshipsArray.length };
+        return { ...reservation, count: reservationRelationshipsArray.length };
       });
       resolve(allReservationInfoArray);
     }).catch((error) => reject(error));

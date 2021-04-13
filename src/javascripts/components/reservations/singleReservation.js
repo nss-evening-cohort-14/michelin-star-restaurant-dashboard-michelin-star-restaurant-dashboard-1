@@ -1,4 +1,5 @@
 const singleReservation = (reservations) => {
+  console.warn(reservations);
   document.querySelector('#modal-body').innerHTML = `<div id="single-reservations">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -8,7 +9,7 @@ const singleReservation = (reservations) => {
         <p class="modal-header">${reservations.day_of_week}, ${reservations.date} at ${reservations.time}</p>
       </div>
       <div id="assigned-staff">
-      <p>${reservations.staff_id}</p>
+      <p>${reservations.count}</p>
       </div>
       <div class="modal-footer">
         <p>${reservations.notes}</p>
