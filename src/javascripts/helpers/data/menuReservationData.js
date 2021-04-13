@@ -48,6 +48,12 @@ const menuWithReservation = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const reduceIngredientCount = (firebaseKey, countObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/ingredients/${firebaseKey}.json`, countObj)
+    .then(() => getReservations()).then((resArray) => resolve(resArray))
+    .catch((error) => reject(error));
+});
+
 // Getting menu and ingredients relationships
 const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, reject) => {
   Promise.all([getSingleMenuItem(menuReservationObject.menu_item_id), getIngredients()])
@@ -60,17 +66,17 @@ const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, 
         });
       }
       const ingredientSelectionArray = selections.map((selection) => {
-        const ingredientSelectionRelationshipsArray = ingredients.filter((ingredientSelection) => ingredientSelection.firebaseKey === selection.selectedIngredient);
-        return { ...selection, matchedIngredient: ingredientSelectionRelationshipsArray };
+        const ingredientSelectionRelationshipsArray = ingredients.find((ingredientSelection) => ingredientSelection.firebaseKey === selection.selectedIngredient);
+        return ingredientSelectionRelationshipsArray;
+      });
+      ingredientSelectionArray.forEach((item) => {
+        const countObj = {
+          quantity: `${item.quantity}`
+        };
+        reduceIngredientCount(`${item.firebaseKey}`, countObj);
       });
       console.warn(ingredientSelectionArray);
     }).catch((error) => reject(error));
-});
-
-const updateIngredientCount = (firebaseKey, countObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/ingredients/${firebaseKey}.json`, countObj)
-    .then(() => getReservations()).then((resArray) => resolve(resArray))
-    .catch((error) => reject(error));
 });
 
 export {
@@ -80,5 +86,17 @@ export {
   getMenuReservation,
   menuWithReservation,
   getIngredientsFromMenu,
-  updateIngredientCount
+  reduceIngredientCount
 };
+
+// const menuWithReservation = () => new Promise((resolve, reject) => {
+//   Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
+//     .then(([menus, reservations, menuReservationsJoin]) => {
+//       const allReservationInfoArray = reservations.map((reservation) => {
+//         const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
+//         const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
+//         return { ...reservation, menus: menuInfoArray };
+//       });
+//       console.warn(allReservationInfoArray);
+//     }).catch((error) => reject(error));
+// });
