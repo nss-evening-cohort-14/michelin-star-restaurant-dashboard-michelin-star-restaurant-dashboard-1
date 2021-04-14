@@ -62,6 +62,7 @@ const mergeReservationStaff = (reservationId) => new Promise((resolve, reject) =
       resolve(allReservationInfoArray);
     }).catch((error) => reject(error));
 });
+
 export {
   toggleFullStaff,
   getSingleStaffReservation,

@@ -32,7 +32,7 @@ import {
   checkFullStaffing,
   createStaffReservation, deleteStaffReservationRelationship, getSingleReservationStaffInfo, getSingleStaffReservation, toggleFullStaff
 } from '../helpers/data/staffReservationData';
-import singleReservation, { printAssignedStaff } from '../components/reservations/singleReservation';
+import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
