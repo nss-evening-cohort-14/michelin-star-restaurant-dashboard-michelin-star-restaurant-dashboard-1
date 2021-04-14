@@ -1,7 +1,7 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
 import { getIngredients } from './ingredientsData';
-import { getMenuItems, getSingleMenuItem } from './menuData';
+import { getSingleMenuItem } from './menuData';
 import { getReservations } from './reservationData';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -36,18 +36,6 @@ const deleteMenuReservationRelationship = (firebaseKey) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
-const menuWithReservation = () => new Promise((resolve, reject) => {
-  Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
-    .then(([menus, reservations, menuReservationsJoin]) => {
-      const allReservationInfoArray = reservations.map((reservation) => {
-        const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
-        const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
-        return { ...reservation, menus: menuInfoArray };
-      });
-      console.warn(allReservationInfoArray);
-    }).catch((error) => reject(error));
-});
-
 // Getting menu and ingredients relationships
 const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, reject) => {
   Promise.all([getSingleMenuItem(menuReservationObject.menu_item_id), getIngredients()])
@@ -78,7 +66,6 @@ export {
   getSingleMenuReservationInfo,
   deleteMenuReservationRelationship,
   getMenuReservation,
-  menuWithReservation,
   getIngredientsFromMenu,
   updateIngredientCount
 };
