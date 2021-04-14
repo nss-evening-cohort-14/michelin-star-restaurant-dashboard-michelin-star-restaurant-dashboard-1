@@ -36,7 +36,12 @@ import { printAssignedStaff, singleReservation } from '../components/reservation
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
-import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
+import {
+  deleteSeatingReservationRelationship,
+  getSingleSeatingReservationInfo,
+  postSeatingResData,
+  updateSeatingStatus
+} from '../helpers/data/seatingReservationsData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -129,6 +134,8 @@ const domEventListeners = (e) => {
       const deletedArray = returnedArray.map((obj) => deleteSeatingReservationRelationship(obj.firebaseKey));
       Promise.all(deletedArray).then((response) => console.warn(response));
     }).then(() => postSeatingResData(seatingResObject).then());
+
+    updateSeatingStatus(seatingResObject.table_id).then((response) => console.warn(response));
 
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {

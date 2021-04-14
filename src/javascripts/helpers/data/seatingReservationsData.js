@@ -43,9 +43,9 @@ const getSingleSeatingReservationInfo = (reservationId) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
-// const getSingleSeatingRes = (firebaseKey) => new Promise((resolve, reject) => {
-//   axios.get(`${dbUrl}/seating_reservations/${firebaseKey}.json`)
-//     .then((response) => resolve(response.data))
+// const getSingleSeatingReservationTableInfo = (tableId) => new Promise((resolve, reject) => {
+//   axios.get(`${dbUrl}/seating_reservations.json?orderBy="table_id"&equalTo="${tableId}"`)
+//     .then((response) => resolve(Object.values(response.data)))
 //     .catch((error) => reject(error));
 // });
 
@@ -67,11 +67,19 @@ const updateTableRes = (firebaseKey, tableResObj) => new Promise((resolve, rejec
     .catch((error) => reject(error));
 });
 
+const updateSeatingStatus = (tableId) => new Promise((resolve, reject) => {
+  const body = { available: false };
+  axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   postSeatingResData,
   getSingleSeatingReservationInfo,
   deleteSeatingReservationRelationship,
   getFilteredTables,
   updateTableRes,
-  getSeatingReservationJoin
+  getSeatingReservationJoin,
+  updateSeatingStatus
 };
