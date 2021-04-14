@@ -126,6 +126,7 @@ const domEventListeners = (e) => {
           menu_item_id: checkbox.value,
           reservation_id: firebaseKey
         };
+        console.warn(menuReservationObject);
         getIngredientsFromMenu(menuReservationObject);
         createMenuReservation(menuReservationObject);
       }
