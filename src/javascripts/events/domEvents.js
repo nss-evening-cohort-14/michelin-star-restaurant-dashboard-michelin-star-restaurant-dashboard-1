@@ -321,20 +321,6 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('edit-reservation-btn')) {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        getSingleReservation(checkbox.value).then(() => {
-          const staffReservationObject = {
-            staff_id: firebaseKey,
-            reservation_id: checkbox.value
-          };
-          createStaffReservation(staffReservationObject).then(() => {
-            checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
-          });
-        });
-      }
-    });
     let deleteArray; // Needed to create a variable outside of the function scope below
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]'); // Create an array of all the checkboxes
     unmarkedCheckbox.forEach((checkbox) => {
@@ -349,6 +335,20 @@ const domEventListeners = (e) => {
         }).then(() => checkFullStaffing(checkbox.value).then((response) => {
           toggleFullStaff(response, checkbox.value);
         }));
+      }
+    });
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        getSingleReservation(checkbox.value).then(() => {
+          const staffReservationObject = {
+            staff_id: firebaseKey,
+            reservation_id: checkbox.value
+          };
+          createStaffReservation(staffReservationObject).then(() => {
+            checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+          });
+        });
       }
     });
   }
