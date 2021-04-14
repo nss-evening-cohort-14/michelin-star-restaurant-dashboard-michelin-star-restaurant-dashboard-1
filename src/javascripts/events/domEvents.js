@@ -9,7 +9,7 @@ import {
   createReservation, deleteReservation, getSingleReservation, updateReservation
 } from '../helpers/data/reservationData';
 import {
-  createMenuItems, deleteMenuItems, getSingleMenuItem, getSingleMenuItemIngredients, updateMenuItems
+  createMenuItems, deleteMenuItems, getSingleMenuItem, updateMenuItems
 } from '../helpers/data/menuData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import showStaff from '../components/staff/showStaff';
@@ -127,7 +127,7 @@ const domEventListeners = (e) => {
           reservation_id: firebaseKey
         };
         getIngredientsFromMenu(menuReservationObject);
-        createMenuReservation(menuReservationObject).then((response) => showLoginReservations(response, user));
+        createMenuReservation(menuReservationObject);
       }
     });
     let deleteArray;
@@ -304,7 +304,6 @@ const domEventListeners = (e) => {
           reservation_id: checkbox.value
         };
         createStaffReservation(staffReservationObject).then((response) => showStaff(response, user));
-        getSingleMenuItemIngredients(staffReservationObject);
       }
     });
     let deleteArray; // Needed to create a variable outside of the function scope below

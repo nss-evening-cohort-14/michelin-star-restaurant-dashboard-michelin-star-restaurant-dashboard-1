@@ -1,7 +1,8 @@
 import axios from 'axios';
+import decreaseIngredientCount from '../../components/menu/ingredientsFilter';
 import firebaseConfig from '../apiKeys';
 import { getIngredients } from './ingredientsData';
-import { getMenuItems, getSingleMenuItem } from './menuData';
+import { getSingleMenuItem } from './menuData';
 import { getReservations } from './reservationData';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -36,17 +37,17 @@ const deleteMenuReservationRelationship = (firebaseKey) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
-const menuWithReservation = () => new Promise((resolve, reject) => {
-  Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
-    .then(([menus, reservations, menuReservationsJoin]) => {
-      const allReservationInfoArray = reservations.map((reservation) => {
-        const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
-        const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
-        return { ...reservation, menus: menuInfoArray };
-      });
-      console.warn(allReservationInfoArray);
-    }).catch((error) => reject(error));
-});
+// const menuWithReservation = () => new Promise((resolve, reject) => {
+//   Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
+//     .then(([menus, reservations, menuReservationsJoin]) => {
+//       const allReservationInfoArray = reservations.map((reservation) => {
+//         const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
+//         const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
+//         return { ...reservation, menus: menuInfoArray };
+//       });
+//       console.warn(allReservationInfoArray);
+//     }).catch((error) => reject(error));
+// });
 
 const reduceIngredientCount = (firebaseKey, countObj) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/ingredients/${firebaseKey}.json`, countObj)
@@ -70,10 +71,11 @@ const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, 
         return ingredientSelectionRelationshipsArray;
       });
       // eslint-disable-next-line no-return-assign
-      ingredientSelectionArray.forEach((e) => e.quantity -= 1);
+      decreaseIngredientCount(ingredientSelectionArray);
       ingredientSelectionArray.forEach((item) => {
         const countObj = {
-          quantity: item.quantity
+          quantity: item.quantity,
+          available: item.available
         };
         reduceIngredientCount(`${item.firebaseKey}`, countObj);
       });
@@ -86,19 +88,6 @@ export {
   getSingleMenuReservationInfo,
   deleteMenuReservationRelationship,
   getMenuReservation,
-  menuWithReservation,
   getIngredientsFromMenu,
-  reduceIngredientCount
+  reduceIngredientCount,
 };
-
-// const menuWithReservation = () => new Promise((resolve, reject) => {
-//   Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
-//     .then(([menus, reservations, menuReservationsJoin]) => {
-//       const allReservationInfoArray = reservations.map((reservation) => {
-//         const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
-//         const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
-//         return { ...reservation, menus: menuInfoArray };
-//       });
-//       console.warn(allReservationInfoArray);
-//     }).catch((error) => reject(error));
-// });
