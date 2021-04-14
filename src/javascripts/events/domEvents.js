@@ -36,7 +36,7 @@ import singleReservation from '../components/reservations/singleReservation';
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
-import { postSeatingResData } from '../helpers/data/seatingReservationsData';
+import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -124,7 +124,11 @@ const domEventListeners = (e) => {
       table_id: document.querySelector('#seating-option').value
     };
 
-    postSeatingResData(seatingResObject).then((seatingArray) => console.warn(seatingArray));
+    getSingleSeatingReservationInfo(firebaseKey).then((array) => {
+      const returnedArray = Object.values(array);
+      const deletedArray = returnedArray.map((obj) => deleteSeatingReservationRelationship(obj.firebaseKey));
+      Promise.all(deletedArray).then((response) => console.warn(response));
+    }).then(() => postSeatingResData(seatingResObject).then());
 
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
@@ -361,23 +365,7 @@ const domEventListeners = (e) => {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
   }
-  // event for showing edit seating modal
-  if (e.target.id.includes('edit-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    formModal('Assign Table to Reservation');
-    getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
-  }
-  // send data to seatingReservation node
-  if (e.target.id.includes('update-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    e.preventDefault();
-    const seatingResObject = {
-      reservation_id: document.querySelector('#reservation-option').value,
-      table_id: firebaseKey
-    };
-    postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
-    $('#formModal').modal('toggle');
-  }
+
   if ($(e.target).hasClass('toggle-disable')) {
     $('input').on('keyup', () => {
       $('.edit-staff-btn').removeAttr('disabled');
