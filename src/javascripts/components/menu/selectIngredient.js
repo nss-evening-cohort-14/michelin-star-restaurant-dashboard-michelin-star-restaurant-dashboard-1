@@ -6,7 +6,9 @@ const selectIngredients = (array = []) => {
   let domString = `<ul>
     <li class="dropdown">
       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Select Ingredients<b class="caret"></b></a>
-        <ul class="dropdown-menu" id="ingredients-list">`;
+        <ul class="dropdown-menu" id="ingredients-list">
+            <li>
+            </li>`;
 
   getIngredients().then((ingredientsArray) => {
     ingredientsArray.forEach((ingredient) => {
