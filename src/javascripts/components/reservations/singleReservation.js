@@ -1,5 +1,4 @@
 const singleReservation = (reservations) => {
-  console.warn(reservations);
   document.querySelector('#modal-body').innerHTML = `<div id="single-reservations">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -18,4 +17,14 @@ const singleReservation = (reservations) => {
   </div>`;
 };
 
-export default singleReservation;
+const printAssignedStaff = (array) => {
+  document.querySelector('#assigned-staff').innerHTML = '';
+  array.forEach((item) => {
+    console.warn(item);
+    document.querySelector('#assigned-staff').innerHTML += `
+  <ul class="list-group-res" style="list-style-type:none;">
+    <li class="list-group-item"><strong>Last Name:</strong> ${item.first_name} ${item.last_name}</li>
+  </ul>`;
+  });
+};
+export { printAssignedStaff, singleReservation };
