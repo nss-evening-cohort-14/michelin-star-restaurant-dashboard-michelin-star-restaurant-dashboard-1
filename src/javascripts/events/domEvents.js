@@ -323,34 +323,68 @@ const domEventListeners = (e) => {
     const firebaseKey = e.target.id.split('--')[1];
     let deleteArray; // Needed to create a variable outside of the function scope below
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]'); // Create an array of all the checkboxes
-    unmarkedCheckbox.forEach((checkbox) => {
-      // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
-      if (checkbox.checked === false) {
-        getSingleStaffReservation(firebaseKey).then((x) => {
+    getSingleStaffReservation(firebaseKey).then((x) => {
+      unmarkedCheckbox.forEach((checkbox) => {
+        // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
+        if (checkbox.checked === false) {
+          const attr = $('.check').html();
+          console.warn(attr);
           deleteArray = Object.values(x).map((element) => element.firebaseKey);
-          return deleteArray;
-        }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
-          Promise.all(deleteRelationships);
-        }).then(() => checkFullStaffing(checkbox.value).then((response) => {
-          toggleFullStaff(response, checkbox.value);
-        }));
-      }
-    });
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        getSingleReservation(checkbox.value).then(() => {
-          const staffReservationObject = {
-            staff_id: firebaseKey,
-            reservation_id: checkbox.value
-          };
-          createStaffReservation(staffReservationObject).then(() => {
-            checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+          Promise.all(deleteRelationships).then(() => {
+            checkFullStaffing(checkbox.value).then((response) => {
+              if (attr.includes('(fully staffed)')) {
+                console.warn('fully staffed');
+              } else {
+                toggleFullStaff(response, checkbox.value);
+              }
+            });
           });
-        });
-      }
+        }
+        return true;
+      });
+    }).then(() => {
+      const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+      markedCheckbox.forEach((checkbox) => {
+        if (checkbox.value !== '') {
+          getSingleReservation(checkbox.value).then(() => {
+            const staffReservationObject = {
+              staff_id: firebaseKey,
+              reservation_id: checkbox.value
+            };
+            createStaffReservation(staffReservationObject).then(() => {
+              checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+            });
+          });
+        }
+      });
     });
+    //   if (checkbox.checked === false) {
+    //     getSingleStaffReservation(firebaseKey).then((x) => {
+    //       deleteArray = Object.values(x).map((element) => element.firebaseKey);
+    //       return deleteArray;
+    //     }).then(() => {
+    //       const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
+    //       Promise.all(deleteRelationships);
+    //     }).then(() => checkFullStaffing(checkbox.value).then((response) => {
+    //       toggleFullStaff(response, checkbox.value);
+    //     }));
+    //   }
+    // });
+    // const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    // markedCheckbox.forEach((checkbox) => {
+    //   if (checkbox.value !== '') {
+    //     getSingleReservation(checkbox.value).then(() => {
+    //       const staffReservationObject = {
+    //         staff_id: firebaseKey,
+    //         reservation_id: checkbox.value
+    //       };
+    //       createStaffReservation(staffReservationObject).then(() => {
+    //         checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+    //       });
+    //     });
+    //   }
+    // });
   }
   if (e.target.id.includes('filter-staff-submit')) {
     const value = document.getElementById('filter-all-staff');
