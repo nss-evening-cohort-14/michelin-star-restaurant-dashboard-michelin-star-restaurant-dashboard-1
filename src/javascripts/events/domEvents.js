@@ -30,9 +30,9 @@ import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import {
   checkFullStaffing,
-  createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservation, toggleFullStaff
+  createStaffReservation, deleteStaffReservationRelationship, getSingleReservationStaffInfo, getSingleStaffReservation, toggleFullStaff
 } from '../helpers/data/staffReservationData';
-import singleReservation from '../components/reservations/singleReservation';
+import singleReservation, { printAssignedStaff } from '../components/reservations/singleReservation';
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
@@ -156,7 +156,12 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('res-title')) {
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Reservation Details');
-    getSingleReservation(firebaseKey).then((resArray) => singleReservation(resArray));
+    Promise.all([getSingleReservation(firebaseKey), getSingleReservationStaffInfo(firebaseKey)])
+      .then(([reservationObject, staffArray]) => {
+        singleReservation(reservationObject);
+        const array = staffArray.map((object) => getSingleStaff(object.staff_id));
+        Promise.all(array).then((response) => printAssignedStaff(response));
+      });
     $('#formModal').modal('toggle');
   }
 
