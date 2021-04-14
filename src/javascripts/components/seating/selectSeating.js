@@ -1,21 +1,23 @@
-import { getReservations } from '../../helpers/data/reservationData';
+// import { getSeating } from '../../helpers/data/seatingData';
+import { getFilteredTables } from '../../helpers/data/seatingReservationsData';
 
-const selectReservationTable = (seatingObject = []) => {
-  let domString = `<label for="table">Select a Reservation</label>
-  <select class="form-control" id="reservation-option" required>
-  <option value="">Select a Reservation</option>`;
+const selectTable = (array = [], value) => {
+  let domString = `<label for="table">Select a seating</label>
+  <select class="form-control" id="seating-option" required>
+  <option value="">Select a Table</option>`;
 
-  getReservations().then((reservationsArray) => {
-    reservationsArray.forEach((reservation) => {
-      if (reservation.firebaseKey === seatingObject.firebaseKey) {
-        domString += `<option selected value="${reservation.firebaseKey}">${reservation.name}</option>`;
+  getFilteredTables(value).then((seatingArray) => {
+    seatingArray.map((seating) => {
+      if (array.includes(seating.firebaseKey)) {
+        domString += `<option selected value="${seating.firebaseKey}">${seating.table_number} (Table Capacity: ${seating.table_capacity})</option>`;
       } else {
-        domString += `<option value="${reservation.firebaseKey}">${reservation.name}</option>`;
+        domString += `<option value="${seating.firebaseKey}">${seating.table_number} (Table Capacity: ${seating.table_capacity})</option>`;
       }
+      return domString;
     });
     domString += '</select>';
-    document.querySelector('#select-reservation').innerHTML = domString;
+    document.querySelector('#select-seating').innerHTML = domString;
   });
 };
 
-export default selectReservationTable;
+export default selectTable;

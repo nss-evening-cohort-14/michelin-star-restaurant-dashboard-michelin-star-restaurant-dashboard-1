@@ -30,16 +30,13 @@ import editMenuItemForm from '../components/forms/editMenuItems';
 import filterSubmit from '../components/menu/filterSubmit';
 import {
   checkFullStaffing,
-  createStaffReservation, deleteStaffReservationRelationship, getSingleStaffReservation, toggleFullStaff
+  createStaffReservation, deleteStaffReservationRelationship, getSingleReservationStaffInfo, getSingleStaffReservation, toggleFullStaff
 } from '../helpers/data/staffReservationData';
-import singleReservation from '../components/reservations/singleReservation';
+import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
-import { getSingleTable } from '../helpers/data/seatingData';
-import editSeatingForm from '../components/forms/editSeatingForm';
-import { postSeatingResData } from '../helpers/data/seatingReservationsData';
-import showSeating from '../components/seating/seating';
+import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -122,6 +119,17 @@ const domEventListeners = (e) => {
       time: document.querySelector('#res-time').value,
       notes: document.querySelector('#res-notes').value,
     };
+    const seatingResObject = {
+      reservation_id: firebaseKey,
+      table_id: document.querySelector('#seating-option').value
+    };
+
+    getSingleSeatingReservationInfo(firebaseKey).then((array) => {
+      const returnedArray = Object.values(array);
+      const deletedArray = returnedArray.map((obj) => deleteSeatingReservationRelationship(obj.firebaseKey));
+      Promise.all(deletedArray).then((response) => console.warn(response));
+    }).then(() => postSeatingResData(seatingResObject).then());
+
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
       if (checkbox.value !== '') {
@@ -149,6 +157,7 @@ const domEventListeners = (e) => {
     });
 
     updateReservation(firebaseKey, resObject).then((resArray) => showLoginReservations(resArray));
+
     $('#formModal').modal('toggle');
   }
 
@@ -156,7 +165,12 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('res-title')) {
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Reservation Details');
-    getSingleReservation(firebaseKey).then((resArray) => singleReservation(resArray));
+    Promise.all([getSingleReservation(firebaseKey), getSingleReservationStaffInfo(firebaseKey)])
+      .then(([reservationObject, staffArray]) => {
+        singleReservation(reservationObject);
+        const array = staffArray.map((object) => getSingleStaff(object.staff_id));
+        Promise.all(array).then((response) => printAssignedStaff(response));
+      });
     $('#formModal').modal('toggle');
   }
 
@@ -356,23 +370,7 @@ const domEventListeners = (e) => {
       filterPosition(filteredStaffOption).then((response) => showStaff(response, user));
     }
   }
-  // event for showing edit seating modal
-  if (e.target.id.includes('edit-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    formModal('Assign Table to Reservation');
-    getSingleTable(firebaseKey).then((pinObject) => editSeatingForm(pinObject));
-  }
-  // send data to seatingReservation node
-  if (e.target.id.includes('update-table')) {
-    const firebaseKey = e.target.id.split('--')[1];
-    e.preventDefault();
-    const seatingResObject = {
-      reservation_id: document.querySelector('#reservation-option').value,
-      table_id: firebaseKey
-    };
-    postSeatingResData(seatingResObject).then((seatingArray) => showSeating(seatingArray));
-    $('#formModal').modal('toggle');
-  }
+
   if ($(e.target).hasClass('toggle-disable')) {
     $('input').on('keyup', () => {
       $('.edit-staff-btn').removeAttr('disabled');
