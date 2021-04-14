@@ -1,64 +1,52 @@
-# Michelin Star Restaurant Dashboard
-
-### Product Owner
-Your PO is assigned as an approver and feedback for your application. They are not there to guide you through code. If you have code related needs, submit a completed issue ticket.
-
-PO: **Trinity**
-
+# Michelin Star Restaurant Dashboard [![Netlify Status](https://api.netlify.com/api/v1/badges/7bf1cb09-6f1a-4d46-860b-9a513af5611a/deploy-status)](https://app.netlify.com/sites/michelin-star-restaurant/deploys)
 ### Description
-Welcome to Laissez les bons Temps Roulere.  The only restaurant in the world to have to have 27 Michelin stars. Laissez les bons Temps Roulere is a creole, soul food fusion restaurant using only the freshest ingredients from local farms.
+Welcome to the Laissez les bons Temps Roulere restaurant dashboard. This app allows the user to manage restaurant's menu, ingredients, staff, seating, and reservations.
 
-Now that Laissez les bons Temps Rouler has received its 27th star its owners would like to bring the restaurant into the modern age and build it a nice application.  You will be helping them keep track of staff, ingredients, reservations, and Menu Items.
-
-### Requirements
-* Complete Planning
-    * Make sure to break down tickets into milestones, include an ERD and a Workflow Diagram of how you will tackle each part of the application
-    * NOTE: This includes setting up a development branch that branches off of the main branch to test your team's code and for review by the PO
-* Set up deployment EARLY and deploy with every milestone so that the PO can see the web interface
-* Add Webpack to the Project
-* Authenticate to perform any actions (CUD)
-* Staff module
-* Ingredients module
-* Reservations module
-* Seating module
-* Menu Items module
-* Filter Menu Items on ingredients
+### Relevant Links
+- Deployed App: https://labaguette.netlify.app/
+- ERD: https://dbdiagram.io/d/606d0baaecb54e10c33f0247
+- Canva Wireframes: https://www.canva.com/design/DAEYsXpgJ_k/wPSiFM3CGEfQydp5HuCDTQ/view?utm_content=DAEYsXpgJ_k&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
+- Color Palette:
+![color palette](https://user-images.githubusercontent.com/67122062/113798964-c7faa180-9719-11eb-8286-2f9713da34fa.png)
+### Technologies Utilized
+- HTML, SCSS, Javascript
+- Google Firebase
+- Webpack
+- Figma 
 
 ### User Stories
 
-#### Authentication
-- As a user, I should be able to log in to add, edit, or delete from any of the modules.
-- As a user, if I'm not authenticated, I can only read the information.
-- As a user, I should be able to login using Google
-- As a user, I should be able to logout
+All of the following user stories assume the user is authenticated unless otherwise stated.
 
-#### Staff
-- As a user, I should be able to add new staff members
-- As a user, I should be able to delete staff members
-- As a user, I should be able to edit the staff members
-- As a user, I should be able to view all the staff members
-- As a user, I should be able to filter the staff member list my staff member type (ie show only waiters or busboys)
+Reservations
 
-#### Ingredients
-- As a user, I should be able to add new ingredients to my restaurant inventory
-- As a user, I should be able to delete ingredients
-- As a user, I should be able to edit the ingredients
-- As a user, I should be able to view all the ingredients
+As a user can assign staff members to reservations.
+As a user I can tell if a reservation has all the staff they need (waiter, bar tender, bussboy, etc.)
+As a user can assign a table to a reservation.
+As a user I can only assign a table with the appropriate number of seats for that party (ie a reservation for 4 should not be assigned to a table with 2 seats).
+As a user can view a single reservation page that displays all the information about that reservation.
 
-#### Reservations
-- As a user, I should be able to add new reservations to my restaurant
-- As a user, I should be able to delete reservations
-- As a user, I should be able to edit the reservations
-- As a user, I should be able to view all the reservations
+Orders
 
-#### Seating
-- As a user, I should be able to view all seating options
+As a user can assign menu items to reservations
+As a user I should not be able to assign a menu item to a reservation if any of the ingredients from that menu item are sold out.
+As a user can create a final bill for each reservation. This bill should show up on the single reservation pages.
 
-#### Menu Items
-- As a user, I should be able to add new menu items to my restaurant
-- As a user, I should be able to delete menu items
-- As a user, I should be able to edit the menu items
-- As a user, I should be able to view all the menu items
-- As a user, I should be able to view all the menu items based on the ingredients they contain (ie only show menu items that have tomatoes)
-- As a user, I should be able to add ingredients to my menu items
-- As a user, I should be able to remove ingredients to my menu items
+Reporting
+
+As a user I can see what the total revenue is for my restaurant since I opened.
+As a user I can see what the revenue is for my restaurant over a 7 day period.
+As a user I can see what the revenue is for my restaurant over a particular day.
+As a user can track the amount of ingredients used on a single day.
+As a user can track the amount of ingredients used over a 7 day period.
+As a user can track the amount of ingredients used since my restaurant opened.
+As a user can see a list of the top 10 most popular menu items.
+As a user can see a list of the 10 least popular menu items.
+
+### Loom
+### Contributors
+
+- Jesse Robinson: @jrobinson0529
+- Katy Fry: @katherinevfry
+- Chie Stroud: @chiestroud
+- Holly Parsons: @hmparsons-sde

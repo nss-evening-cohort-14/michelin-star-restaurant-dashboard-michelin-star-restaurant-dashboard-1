@@ -1,0 +1,122 @@
+{
+  "-MVxIo-pDIAbUH6jYtSv" : {
+    "firebaseKey" : "-MVxIo-pDIAbUH6jYtSv",
+    "name" : "shrimp",
+    "available": true,
+    "quantity": 9
+  },
+  "-MVxIvqqqbS2AzG25Ls2" : {
+    "firebaseKey" : "-MVxIvqqqbS2AzG25Ls2",
+    "name" : "cajun seasoning",
+    "available": true,
+    "quantity": 100
+  },
+  "-MVxJUBooq8-N6V1P0DI" : {
+    "firebaseKey" : "-MVxJUBooq8-N6V1P0DI",
+    "name" : "lettuce",
+    "available": true,
+    "quantity": 10
+  },
+  "-MVxJY4fFWYg5BZDzWbe" : {
+    "firebaseKey" : "-MVxJY4fFWYg5BZDzWbe",
+    "name" : "tomato",
+    "available": true,
+    "quantity": 7
+  },
+  "-MVxJaCfcjF54RvJqZYH" : {
+    "firebaseKey" : "-MVxJaCfcjF54RvJqZYH",
+    "name" : "bread",
+    "available": true,
+    "quantity": 15
+  },
+  "-MVxJc6QjwwolEZhQlzZ" : {
+    "firebaseKey" : "-MVxJc6QjwwolEZhQlzZ",
+    "name" : "hot sauce",
+    "available": true,
+    "quantity": 3
+  },
+  "-MVxJgGJNCYH8tqhHoxp" : {
+    "firebaseKey" : "-MVxJgGJNCYH8tqhHoxp",
+    "name" : "chicken",
+    "available": true,
+    "quantity": 14
+  },
+  "-MVxJoQdnYjceeDBA7O1" : {
+    "firebaseKey" : "-MVxJoQdnYjceeDBA7O1",
+    "name" : "tomato sauce",
+    "available": true,
+    "quantity": 7
+  },
+  "-MVxJptNSWhQfrCcG9lw" : {
+    "firebaseKey" : "-MVxJptNSWhQfrCcG9lw",
+    "name" : "tomato paste",
+    "available": true,
+    "quantity": 6
+  },
+  "-MVxJsN5OwfgAJQgr88V" : {
+    "firebaseKey" : "-MVxJsN5OwfgAJQgr88V",
+    "name" : "rice",
+    "available": true,
+    "quantity": 50
+  },
+  "-MVxJugoKnuS-CmIPI4-" : {
+    "firebaseKey" : "-MVxJugoKnuS-CmIPI4-",
+    "name" : "sausage",
+    "available": true,
+    "quantity": 6
+  },
+  "-MVxJxDtSwnMljDlY3zt" : {
+    "firebaseKey" : "-MVxJxDtSwnMljDlY3zt",
+    "name" : "peppers",
+    "available": true,
+    "quantity": 12
+  },
+  "-MVxJzJFH0RtS3ApJePJ" : {
+    "firebaseKey" : "-MVxJzJFH0RtS3ApJePJ",
+    "name" : "bouillon",
+    "available": true,
+    "quantity": 9
+  },
+  "-MVxK0suYalyIvOtdMSd" : {
+    "firebaseKey" : "-MVxK0suYalyIvOtdMSd",
+    "name" : "kidney beans",
+    "available": true,
+    "quantity": 5
+  },
+  "-MVxK3R1gXiyIeeuWI4B" : {
+    "firebaseKey" : "-MVxK3R1gXiyIeeuWI4B",
+    "name" : "crawfish",
+    "available": true,
+    "quantity": 15
+  },
+  "-MVxK6ox_oGpmr7GnUel" : {
+    "firebaseKey" : "-MVxK6ox_oGpmr7GnUel",
+    "name" : "chicken broth",
+    "available": true,
+    "quantity": 20
+  },
+  "-MVxK93udD2YkIRiepnA" : {
+    "firebaseKey" : "-MVxK93udD2YkIRiepnA",
+    "name" : "oysters",
+    "available": true,
+    "quantity": 13
+  },
+  "-MVxKAWfdGGTpvtkCUia" : {
+    "firebaseKey" : "-MVxKAWfdGGTpvtkCUia",
+    "name" : "butter",
+    "available": true,
+    "quantity": 40
+  },
+  "-MVxKBw0GksBUsl90Elz" : {
+    "firebaseKey" : "-MVxKBw0GksBUsl90Elz",
+    "name" : "garlic",
+    "available": true,
+    "quantity": 19
+  },
+  "-MVxKD7w1yBci7ATP0ag" : {
+    "firebaseKey" : "-MVxKD7w1yBci7ATP0ag",
+    "name" : "cheese",
+    "available": true,
+    "quantity": 75
+  }
+}
