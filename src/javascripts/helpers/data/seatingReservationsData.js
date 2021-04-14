@@ -74,6 +74,13 @@ const updateSeatingStatus = (tableId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const updateSeatingStatusDelete = (tableId) => new Promise((resolve, reject) => {
+  const body = { available: true };
+  axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   postSeatingResData,
   getSingleSeatingReservationInfo,
@@ -81,5 +88,6 @@ export {
   getFilteredTables,
   updateTableRes,
   getSeatingReservationJoin,
-  updateSeatingStatus
+  updateSeatingStatus,
+  updateSeatingStatusDelete
 };
