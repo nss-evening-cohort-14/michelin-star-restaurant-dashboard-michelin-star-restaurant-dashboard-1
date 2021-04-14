@@ -32,12 +32,12 @@ import {
   checkFullStaffing,
   createStaffReservation, deleteStaffReservationRelationship, getSingleReservationStaffInfo, getSingleStaffReservation, toggleFullStaff
 } from '../helpers/data/staffReservationData';
-import { printAssignedStaff, printAssignedTable, singleReservation } from '../components/reservations/singleReservation';
+import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
   createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
 import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
-import { getSingleTable } from '../helpers/data/seatingData';
+// import { getSingleTable } from '../helpers/data/seatingData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
@@ -172,12 +172,12 @@ const domEventListeners = (e) => {
         const array = staffArray.map((object) => getSingleStaff(object.staff_id));
         Promise.all(array).then((response) => printAssignedStaff(response));
       });
-    Promise.all([getSingleReservation(firebaseKey), getSingleSeatingReservationInfo(firebaseKey)])
-      .then(([reservationObject, tableArray]) => {
-        singleReservation(reservationObject);
-        const tables = tableArray.map((object) => getSingleTable(object.table_id));
-        Promise.all(tables).then((response) => printAssignedTable(response));
-      });
+    // Promise.all([getSingleReservation(firebaseKey), getSingleSeatingReservationInfo(firebaseKey)])
+    //   .then(([reservationObject, tableArray]) => {
+    //     singleReservation(reservationObject);
+    //     const tables = tableArray.map((object) => getSingleTable(object.table_id));
+    //     Promise.all(tables).then((response) => printAssignedTable(response));
+    //   });
     $('#formModal').modal('toggle');
   }
 

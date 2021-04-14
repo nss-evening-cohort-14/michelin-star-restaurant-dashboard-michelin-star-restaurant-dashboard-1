@@ -8,6 +8,7 @@ import { getIngredients } from '../helpers/data/ingredientsData';
 import { showIngredients } from '../components/ingredients/showIngredients';
 import { getSeating } from '../helpers/data/seatingData';
 import showSeating from '../components/seating/seating';
+import landingPage from '../views/landingPage';
 
 const guestNavEvents = () => {
   // Events for Navbar, READ only
@@ -34,6 +35,10 @@ const guestNavEvents = () => {
   document.querySelector('#nav-seating').addEventListener('click', (e) => {
     e.preventDefault();
     getSeating().then((seats) => showSeating(seats));
+  });
+  // Return to landing page
+  document.querySelector('#nav-home').addEventListener('click', () => {
+    landingPage();
   });
 };
 
