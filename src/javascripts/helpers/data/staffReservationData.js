@@ -1,5 +1,6 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
+import { getReservations } from './reservationData';
 import { getSingleStaff, getStaff } from './staffData';
 
 const dbUrl = firebaseConfig.databaseURL;
@@ -26,7 +27,7 @@ const deleteStaffReservationRelationship = (firebaseKey) => new Promise((resolve
 });
 const getSingleReservationStaffInfo = (reservationId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/staff_reservation.json?orderBy="reservation_id"&equalTo="${reservationId}"`)
-    .then((response) => resolve((response.data)))
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 const checkFullStaffing = (reservationId) => new Promise((resolve, reject) => {
@@ -51,6 +52,17 @@ const toggleFullStaff = (array, reservationId) => new Promise((resolve, reject) 
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
+const mergeReservationStaff = (reservationId) => new Promise((resolve, reject) => {
+  Promise.all([getReservations(), getSingleReservationStaffInfo(reservationId)])
+    .then(([reservations, staffReservations]) => {
+      const allReservationInfoArray = reservations.map((reservation) => {
+        const reservationRelationshipsArray = staffReservations.filter((rs) => rs.reservation_id === reservation.id);
+        return { ...reservation, count: reservationRelationshipsArray.length };
+      });
+      resolve(allReservationInfoArray);
+    }).catch((error) => reject(error));
+});
+
 export {
   toggleFullStaff,
   getSingleStaffReservation,
@@ -58,4 +70,5 @@ export {
   deleteStaffReservationRelationship,
   getSingleReservationStaffInfo,
   checkFullStaffing,
+  mergeReservationStaff
 };
