@@ -5,6 +5,7 @@ const showStaff = (staffArray, user) => {
     document.querySelector('#view').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
     document.querySelector('#filter-container').innerHTML = '';
+    document.querySelector('#masthead').innerHTML = '';
     document.querySelector('#form-container').innerHTML = `
       <div class="d-flex flex-wrap justify-content-center align-content-around flex-column" id="staff-filter-container"></div> 
     `;
@@ -19,8 +20,8 @@ const showStaff = (staffArray, user) => {
 
     staffArray.forEach((item) => {
       document.querySelector('#staff-container').innerHTML += `
-      <div class="card m-3" style="width: 18rem;">
-        <img src="${item.image}" class="card-img-top" alt="${item.image}">
+      <div class="card m-3" style="height: 30rem; width: 18rem;">
+        <img src="${item.image}" class="card-img-top" alt="${item.image}" id="staff-btn--${item.firebaseKey}">
         <div class="card-body">
           <h3 class="card-title">${item.first_name} ${item.last_name}</h3>
           <h5 class="card-title">${item.job_title}</h5>
@@ -38,6 +39,7 @@ const showStaff = (staffArray, user) => {
     document.querySelector('#stage').innerHTML = '';
     document.querySelector('#filter-container').innerHTML = '';
     document.querySelector('#stage').innerHTML = '';
+    document.querySelector('#masthead').innerHTML = '';
     document.querySelector('#form-container').innerHTML = `
       <div class="d-flex flex-wrap justify-content-center align-content-around flex-column" id="staff-filter-container"></div> 
     `;
@@ -47,7 +49,7 @@ const showStaff = (staffArray, user) => {
     filterStaff();
     staffArray.forEach((item) => {
       document.querySelector('#staff-container ').innerHTML += `
-      <div class="card m-3" style="width: 18rem;">
+      <div class="card m-3" id="staff" style="height: 30rem; width: 18rem;">
         <img src="${item.image}" class="card-img-top" alt="${item.image}">
         <div class="card-body">
           <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
