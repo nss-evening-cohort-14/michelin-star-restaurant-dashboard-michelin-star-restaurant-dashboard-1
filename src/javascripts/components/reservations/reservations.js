@@ -3,12 +3,14 @@ const showReservations = (array) => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
   document.querySelector('#filter-container').innerHTML = '';
-
+  document.querySelector('#masthead').innerHTML = '';
   array.forEach((item) => {
     document.querySelector('#view').innerHTML += `
-    <ul class="list-group-res" style="list-style-type:none;">
-      <li class="list-group-item"><strong>Last Name:</strong> ${item.name}</li>
-    </ul>`;
+    <div class="card m-3">
+    <div class="card-header">
+      <h5 class="card-title mt-5">${item.name}</h5>
+    </div>
+    </div>`;
   });
 };
 

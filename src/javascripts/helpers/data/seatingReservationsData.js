@@ -1,5 +1,6 @@
 import axios from 'axios';
 import firebaseConfig from '../apiKeys';
+import { getReservations } from './reservationData';
 // import { getSingleReservation } from './reservationData';
 // import { getSingleTable } from './seatingData';
 
@@ -43,6 +44,17 @@ const getSingleSeatingReservationInfo = (reservationId) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
+const mergeReservationSeating = (reservationId) => new Promise((resolve, reject) => {
+  Promise.all([getReservations(), getSingleSeatingReservationInfo(reservationId)])
+    .then(([reservations, seatingReservations]) => {
+      const allReservationInfoArray = reservations.map((reservation) => {
+        const reservationRelationshipsArray = seatingReservations.filter((rs) => rs.reservation_id === reservation.id);
+        return { ...reservation, count: reservationRelationshipsArray.length };
+      });
+      resolve(allReservationInfoArray);
+    }).catch((error) => reject(error));
+});
+
 // const getSingleSeatingRes = (firebaseKey) => new Promise((resolve, reject) => {
 //   axios.get(`${dbUrl}/seating_reservations/${firebaseKey}.json`)
 //     .then((response) => resolve(response.data))
@@ -73,5 +85,6 @@ export {
   deleteSeatingReservationRelationship,
   getFilteredTables,
   updateTableRes,
-  getSeatingReservationJoin
+  getSeatingReservationJoin,
+  mergeReservationSeating
 };
