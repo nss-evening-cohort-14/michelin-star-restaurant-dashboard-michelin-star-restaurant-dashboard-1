@@ -3,7 +3,7 @@ const singleReservation = (reservations) => {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h2 class="modal-header"> ${reservations.name} — Table #</h2>
+        <h2 class="modal-header"> ${reservations.name}</h2>
         <p class="modal-header">Party of ${reservations.party_size}</p>
         <p class="modal-header">${reservations.day_of_week}, ${reservations.date} at ${reservations.time}</p>
       </div>
@@ -25,4 +25,12 @@ const printAssignedStaff = (array) => {
   });
 };
 
-export { singleReservation, printAssignedStaff };
+const printAssignedTable = (array) => {
+  document.querySelector('#assigned-table').innerHTML = '';
+  array.forEach((item) => {
+    document.querySelector('#assigned-table').innerHTML += `
+    <h2>${item.table_number}</h2>`;
+  });
+};
+
+export { singleReservation, printAssignedStaff, printAssignedTable };

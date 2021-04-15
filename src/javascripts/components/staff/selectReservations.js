@@ -11,7 +11,7 @@ const selectReservation = (array = []) => {
       if (array.includes(reservation.firebaseKey)) {
         domString += `<li>
                       <div class="checkbox">
-                        <label>
+                        <label class="check">
                           <input type="checkbox" name="${reservation.name}" class="reservation-check" id="reservationCheckBox${reservation.name}" value="${reservation.firebaseKey}" checked> ${reservation.name}
                         </label>
                       </div>
@@ -19,7 +19,7 @@ const selectReservation = (array = []) => {
       } else {
         domString += `<li>
                         <div class="checkbox">
-                          <label>
+                          <label class="check">
                             <input ${reservation.fullyStaffed ? 'disabled' : ''} type="checkbox" name="${reservation.name}" class="reservation-check" id="reservationCheckBox${reservation.name}" value="${reservation.firebaseKey}"> ${reservation.name} ${reservation.fullyStaffed ? '(fully staffed)' : ''}
                           </label>
                         </div>
