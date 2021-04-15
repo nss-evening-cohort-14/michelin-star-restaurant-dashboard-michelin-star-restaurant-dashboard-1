@@ -28,8 +28,8 @@ const showLoginReservations = (array) => {
     <h3 class="card-title text-capitalize" id="res-title--${item.firebaseKey}">${item.name}</h3>
     </br>
     <div class="card-body">
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="editIngredient--${item.firebaseKey}">Edit</button>
-      <button type="button" class="btn btn-danger" id="deleteIngredient--${item.firebaseKey}">Delete</button></li>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#formModal" id="update-res--${item.firebaseKey}">Edit</button>
+      <button type="button" class="btn btn-danger" id="delete-res--${item.firebaseKey}">Delete</button></li>
     </div>
   </div>`;
   });
