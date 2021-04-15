@@ -34,12 +34,13 @@ import {
 } from '../helpers/data/staffReservationData';
 import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
-  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
+  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getMenuIngredientsTogether, getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
 import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
+  getMenuIngredientsTogether().then();
   // Click Events for Ingredients
   // Delete Ingredient
   if (e.target.id.includes('deleteIngredient')) {
@@ -71,7 +72,7 @@ const domEventListeners = (e) => {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Edit Ingredient');
-    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient));
+    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient)).then();
   }
 
   // Submit on Edit Ingredient Form
@@ -81,7 +82,7 @@ const domEventListeners = (e) => {
     const ingredientObject = {
       firebaseKey,
       name: document.querySelector('#newIngredientName').value,
-      quantity: document.querySelector('#ingredientCount').value
+      quantity: document.querySelector('#ingredientCount').value,
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');
