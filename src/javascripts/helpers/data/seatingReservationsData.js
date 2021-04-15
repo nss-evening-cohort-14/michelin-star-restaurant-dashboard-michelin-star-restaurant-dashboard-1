@@ -68,18 +68,10 @@ const updateTableRes = (firebaseKey, tableResObj) => new Promise((resolve, rejec
 });
 
 const updateSeatingStatus = (tableId) => new Promise((resolve, reject) => {
-  let body = {};
-  if (tableId) {
-    body = { available: false };
-    axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
-      .then((response) => resolve(response))
-      .catch((error) => reject(error));
-  } else {
-    body = { available: true };
-    axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
-      .then((response) => resolve(response))
-      .catch((error) => reject(error));
-  }
+  const body = { available: false };
+  axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
 });
 
 const updateSeatingStatusDelete = (tableId) => new Promise((resolve, reject) => {
