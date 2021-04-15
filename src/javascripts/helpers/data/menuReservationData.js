@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { decreaseIngredientCount } from '../../components/menu/ingredientsFilter';
+import decreaseIngredientCount from '../../components/menu/ingredientsFilter';
 import firebaseConfig from '../apiKeys';
 import { getIngredients } from './ingredientsData';
 import { getMenuItems, getSingleMenuItem } from './menuData';

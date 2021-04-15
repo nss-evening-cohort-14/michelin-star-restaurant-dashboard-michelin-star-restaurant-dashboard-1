@@ -34,7 +34,10 @@ import {
 } from '../helpers/data/staffReservationData';
 import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
-  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getMenuIngredientsTogether, getSingleMenuReservationInfo
+  createMenuReservation, deleteMenuReservationRelationship,
+  getIngredientsFromMenu,
+  getMenuIngredientsTogether,
+  getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
 import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
 
@@ -82,7 +85,8 @@ const domEventListeners = (e) => {
     const ingredientObject = {
       firebaseKey,
       name: document.querySelector('#newIngredientName').value,
-      quantity: document.querySelector('#ingredientCount').value,
+      quantity: Number(document.querySelector('#ingredientCount').value),
+      available: true
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');
