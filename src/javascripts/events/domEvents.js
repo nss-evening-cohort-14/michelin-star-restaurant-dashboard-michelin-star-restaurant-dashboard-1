@@ -133,8 +133,8 @@ const domEventListeners = (e) => {
     getSingleSeatingReservationInfo(firebaseKey).then((array) => {
       const returnedArray = Object.values(array);
       const deletedArray = returnedArray.map((obj) => updateSeatingStatusDelete(obj.table_id).then(() => deleteSeatingReservationRelationship(obj.firebaseKey)));
-      Promise.all(deletedArray).then((response) => console.warn(response));
-    }).then(() => updateSeatingStatus(seatingResObject.table_id).then((response) => console.warn(response)).then(() => postSeatingResData(seatingResObject).then()));
+      Promise.all(deletedArray).then(() => updateSeatingStatus(seatingResObject.table_id).then(() => postSeatingResData(seatingResObject).then()));
+    });
 
     const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
     markedCheckbox.forEach((checkbox) => {
