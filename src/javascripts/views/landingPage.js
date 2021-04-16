@@ -1,3 +1,5 @@
+import baguetteLogo from '../../images/baguette-logo.png';
+
 const landingPage = () => {
   document.querySelector('#stage').innerHTML = '';
   document.querySelector('#modal-container').innerHTML = '';
@@ -7,7 +9,7 @@ const landingPage = () => {
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
-            <img id="landing-logo" src="src/images/baguette-logo.png">
+            <img id="landing-logo" src=${baguetteLogo} alt="page logo">
           </div>
         </div>
       </div>
