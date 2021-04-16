@@ -1,4 +1,3 @@
-// import { getSeating } from '../../helpers/data/seatingData';
 import { getFilteredTables } from '../../helpers/data/seatingReservationsData';
 
 const selectTable = (array = [], value) => {
