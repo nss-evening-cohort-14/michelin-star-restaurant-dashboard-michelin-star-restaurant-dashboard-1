@@ -85,7 +85,6 @@ const getIngredientsFromMenu = (menuReservationObject) => new Promise((resolve, 
         };
         reduceIngredientCount(`${item.firebaseKey}`, countObj);
       });
-      console.warn(ingredientSelectionArray);
     }).catch((error) => reject(error));
 });
 

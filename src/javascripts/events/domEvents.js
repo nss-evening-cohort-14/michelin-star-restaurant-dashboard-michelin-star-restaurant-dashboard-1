@@ -136,18 +136,6 @@ const domEventListeners = (e) => {
       Promise.all(deletedArray).then((response) => console.warn(response));
     }).then(() => postSeatingResData(seatingResObject).then());
 
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        const menuReservationObject = {
-          menu_item_id: checkbox.value,
-          reservation_id: firebaseKey
-        };
-        createMenuReservation(menuReservationObject).then(() => {
-          getIngredientsFromMenu(menuReservationObject).then((response) => showLoginReservations(response, user));
-        });
-      }
-    });
     let deleteArray;
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
     unmarkedCheckbox.forEach((checkbox) => {
@@ -158,6 +146,19 @@ const domEventListeners = (e) => {
         }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
           Promise.all(deleteRelationships);
+        });
+      }
+    });
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        getSingleMenuReservationInfo(checkbox.value).then(() => {
+          const menuReservationObject = {
+            menu_item_id: checkbox.value,
+            reservation_id: firebaseKey
+          };
+          Promise.all([createMenuReservation(menuReservationObject), getIngredientsFromMenu(menuReservationObject)])
+            .then((response) => showLoginReservations(response, user));
         });
       }
     });
