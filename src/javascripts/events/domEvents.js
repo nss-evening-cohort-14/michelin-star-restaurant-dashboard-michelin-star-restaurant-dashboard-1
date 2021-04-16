@@ -34,13 +34,17 @@ import {
 } from '../helpers/data/staffReservationData';
 import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
-  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
+  createMenuReservation, deleteMenuReservationRelationship,
+  getIngredientsFromMenu,
+  getMenuIngredientsTogether,
+  getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
 import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
 // import { getSingleTable } from '../helpers/data/seatingData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
+  getMenuIngredientsTogether().then();
   // Click Events for Ingredients
   // Delete Ingredient
   if (e.target.id.includes('deleteIngredient')) {
@@ -72,7 +76,7 @@ const domEventListeners = (e) => {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Edit Ingredient');
-    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient));
+    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient)).then();
   }
 
   // Submit on Edit Ingredient Form
@@ -82,7 +86,8 @@ const domEventListeners = (e) => {
     const ingredientObject = {
       firebaseKey,
       name: document.querySelector('#newIngredientName').value,
-      quantity: document.querySelector('#ingredientCount').value
+      quantity: Number(document.querySelector('#ingredientCount').value),
+      available: true
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');
@@ -131,18 +136,6 @@ const domEventListeners = (e) => {
       Promise.all(deletedArray).then((response) => console.warn(response));
     }).then(() => postSeatingResData(seatingResObject).then());
 
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        const menuReservationObject = {
-          menu_item_id: checkbox.value,
-          reservation_id: firebaseKey
-        };
-        createMenuReservation(menuReservationObject).then(() => {
-          getIngredientsFromMenu(menuReservationObject).then((response) => showLoginReservations(response, user));
-        });
-      }
-    });
     let deleteArray;
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
     unmarkedCheckbox.forEach((checkbox) => {
@@ -153,6 +146,19 @@ const domEventListeners = (e) => {
         }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
           Promise.all(deleteRelationships);
+        });
+      }
+    });
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        getSingleMenuReservationInfo(checkbox.value).then(() => {
+          const menuReservationObject = {
+            menu_item_id: checkbox.value,
+            reservation_id: firebaseKey
+          };
+          Promise.all([createMenuReservation(menuReservationObject), getIngredientsFromMenu(menuReservationObject)])
+            .then((response) => showLoginReservations(response, user));
         });
       }
     });
