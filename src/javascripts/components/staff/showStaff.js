@@ -49,11 +49,11 @@ const showStaff = (staffArray, user) => {
     filterStaff();
     staffArray.forEach((item) => {
       document.querySelector('#staff-container ').innerHTML += `
-      <div class="card m-3" id="staff" style="height: 30rem; width: 18rem;">
+      <div class="card m-3" style="height: 30rem; width: 18rem;">
         <img src="${item.image}" class="card-img-top" alt="${item.image}">
         <div class="card-body">
-          <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
-          <h4 class="card-title">${item.job_title}</h4>
+          <h3 class="card-title">${item.first_name} ${item.last_name}</h3>
+          <h5 class="card-title">${item.job_title}</h5>
           <p class="card-text">${item.bio}</p>
         </div>
       </div>

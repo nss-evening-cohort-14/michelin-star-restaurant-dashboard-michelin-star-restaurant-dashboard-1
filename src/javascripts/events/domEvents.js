@@ -34,12 +34,18 @@ import {
 } from '../helpers/data/staffReservationData';
 import { printAssignedStaff, singleReservation } from '../components/reservations/singleReservation';
 import {
-  createMenuReservation, deleteMenuReservationRelationship, getIngredientsFromMenu, getSingleMenuReservationInfo
+  createMenuReservation, deleteMenuReservationRelationship,
+  getIngredientsFromMenu,
+  getMenuIngredientsTogether,
+  getSingleMenuReservationInfo
 } from '../helpers/data/menuReservationData';
-import { deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData } from '../helpers/data/seatingReservationsData';
+import {
+  deleteSeatingReservationRelationship, getSingleSeatingReservationInfo, postSeatingResData, updateSeatingStatus, updateSeatingStatusDelete
+} from '../helpers/data/seatingReservationsData';
 
 const domEventListeners = (e) => {
   const user = firebase.auth().currentUser;
+  getMenuIngredientsTogether().then();
   // Click Events for Ingredients
   // Delete Ingredient
   if (e.target.id.includes('deleteIngredient')) {
@@ -71,7 +77,7 @@ const domEventListeners = (e) => {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
     formModal('Edit Ingredient');
-    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient));
+    getSingleIngredient(firebaseKey).then((ingredient) => editIngredientForm(ingredient)).then();
   }
 
   // Submit on Edit Ingredient Form
@@ -81,7 +87,8 @@ const domEventListeners = (e) => {
     const ingredientObject = {
       firebaseKey,
       name: document.querySelector('#newIngredientName').value,
-      quantity: document.querySelector('#ingredientCount').value
+      quantity: Number(document.querySelector('#ingredientCount').value),
+      available: true
     };
     updateIngredient(firebaseKey, ingredientObject).then((ingredients) => showLoginIngredients(ingredients));
     $('#formModal').modal('toggle');
@@ -126,22 +133,10 @@ const domEventListeners = (e) => {
 
     getSingleSeatingReservationInfo(firebaseKey).then((array) => {
       const returnedArray = Object.values(array);
-      const deletedArray = returnedArray.map((obj) => deleteSeatingReservationRelationship(obj.firebaseKey));
-      Promise.all(deletedArray).then((response) => console.warn(response));
-    }).then(() => postSeatingResData(seatingResObject).then());
-
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        const menuReservationObject = {
-          menu_item_id: checkbox.value,
-          reservation_id: firebaseKey
-        };
-        createMenuReservation(menuReservationObject).then(() => {
-          getIngredientsFromMenu(menuReservationObject).then((response) => showLoginReservations(response, user));
-        });
-      }
+      const deletedArray = returnedArray.map((obj) => updateSeatingStatusDelete(obj.table_id).then(() => deleteSeatingReservationRelationship(obj.firebaseKey)));
+      Promise.all(deletedArray).then(() => updateSeatingStatus(seatingResObject.table_id).then(() => postSeatingResData(seatingResObject).then()));
     });
+
     let deleteArray;
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]');
     unmarkedCheckbox.forEach((checkbox) => {
@@ -152,6 +147,19 @@ const domEventListeners = (e) => {
         }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteMenuReservationRelationship(key).then());
           Promise.all(deleteRelationships);
+        });
+      }
+    });
+    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+    markedCheckbox.forEach((checkbox) => {
+      if (checkbox.value !== '') {
+        getSingleMenuReservationInfo(checkbox.value).then(() => {
+          const menuReservationObject = {
+            menu_item_id: checkbox.value,
+            reservation_id: firebaseKey
+          };
+          Promise.all([createMenuReservation(menuReservationObject), getIngredientsFromMenu(menuReservationObject)])
+            .then((response) => showLoginReservations(response, user));
         });
       }
     });
@@ -330,35 +338,40 @@ const domEventListeners = (e) => {
   if (e.target.id.includes('edit-reservation-btn')) {
     e.preventDefault();
     const firebaseKey = e.target.id.split('--')[1];
-    const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    markedCheckbox.forEach((checkbox) => {
-      if (checkbox.value !== '') {
-        getSingleReservation(checkbox.value).then(() => {
-          const staffReservationObject = {
-            staff_id: firebaseKey,
-            reservation_id: checkbox.value
-          };
-          createStaffReservation(staffReservationObject).then(() => {
-            checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
-          });
-        });
-      }
-    });
     let deleteArray; // Needed to create a variable outside of the function scope below
     const unmarkedCheckbox = document.querySelectorAll('input[type="checkbox"]'); // Create an array of all the checkboxes
-    unmarkedCheckbox.forEach((checkbox) => {
-      // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
-      if (checkbox.checked === false) {
-        getSingleStaffReservation(firebaseKey).then((x) => {
+    getSingleStaffReservation(firebaseKey).then((x) => {
+      unmarkedCheckbox.forEach((checkbox) => {
+        // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
+        if (checkbox.checked === false) {
+          const attr = $('.check').html();
           deleteArray = Object.values(x).map((element) => element.firebaseKey);
-          return deleteArray;
-        }).then(() => {
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
-          Promise.all(deleteRelationships);
-        }).then(() => checkFullStaffing(checkbox.value).then((response) => {
-          toggleFullStaff(response, checkbox.value);
-        }));
-      }
+          Promise.all(deleteRelationships).then(() => {
+            checkFullStaffing(checkbox.value).then((response) => {
+              if (!(attr.includes('(fully staffed)'))) {
+                toggleFullStaff(response, checkbox.value);
+              }
+            });
+          });
+        }
+        return true;
+      });
+    }).then(() => {
+      const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+      markedCheckbox.forEach((checkbox) => {
+        if (checkbox.value !== '') {
+          getSingleReservation(checkbox.value).then(() => {
+            const staffReservationObject = {
+              staff_id: firebaseKey,
+              reservation_id: checkbox.value
+            };
+            createStaffReservation(staffReservationObject).then(() => {
+              checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
+            });
+          });
+        }
+      });
     });
   }
   if (e.target.id.includes('filter-staff-submit')) {

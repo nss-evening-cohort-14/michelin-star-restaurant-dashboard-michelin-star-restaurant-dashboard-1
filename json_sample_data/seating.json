@@ -3,60 +3,60 @@
     "table_number":1,
     "table_capacity":4,
     "firebaseKey":"-MXnzgAreqosmDOgByr1",
-    "status":true
+    "available":true
   },
   "-MXnzgAt5zG6Ewt5GIuN":{
     "table_number":2,
-    "table_capacity":3,
+    "table_capacity":4,
     "firebaseKey": "-MXnzgAt5zG6Ewt5GIuN",
-    "status":false
+    "available":true
   },
   "-MXnzgAvEi9W5qjWywCA":
   {"table_number":3,
     "table_capacity":4,
     "firebaseKey":"-MXnzgAvEi9W5qjWywCA",
-    "status":true
+    "available":true
   },
   "-MXnzgAyrgxJMb0xHGSk":{
     "table_number":4,
     "table_capacity":5,
     "firebaseKey":"-MXnzgAyrgxJMb0xHGSk",
-    "status":false
+    "available":true
   },
   "-MXnzgB1QvLFjBZHwU7G":
   {"table_number":5,
     "table_capacity":1,
     "firebaseKey":"-MXnzgB1QvLFjBZHwU7G",
-    "status":true
+    "available":true
   },
   "-MXnzgB310fKMDlShOfM":{
     "table_number":6,
-    "table_capacity":5,
+    "table_capacity":6,
     "firebaseKey":"-MXnzgB310fKMDlShOfM",
-    "status":true
+    "available":true
   },
   "-MXnzgB6TbkJ41wlCOSv":{
     "table_number":7,
-    "table_capacity":3,
+    "table_capacity":8,
     "firebaseKey":"-MXnzgB6TbkJ41wlCOSv",
-    "status":true
+    "available":true
   },
   "-MXo06IfumvDcmdoH743":{
     "table_number":8,
-    "table_capacity":3,
+    "table_capacity":10,
     "firebaseKey":"-MXo06IfumvDcmdoH743",
-    "status":false
+    "available":true
   },
   "-MXo06Ihm17zGBKSQZCj":{
     "table_number":9,
     "table_capacity":6,
     "firebaseKey": "-MXo06Ihm17zGBKSQZCj",
-    "status":false
+    "available":true
   },
   "-MXo06Ijp9m2nYc3srne":{
     "table_number":10,
     "table_capacity":4,
     "firebaseKey": "-MXo06Ijp9m2nYc3srne",
-    "status":false
+    "available":true
   }
 }
