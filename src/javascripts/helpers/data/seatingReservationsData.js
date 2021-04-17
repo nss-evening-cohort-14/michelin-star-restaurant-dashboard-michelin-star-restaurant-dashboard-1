@@ -44,6 +44,20 @@ const updateTableRes = (firebaseKey, tableResObj) => new Promise((resolve, rejec
     .catch((error) => reject(error));
 });
 
+const updateSeatingStatus = (tableId) => new Promise((resolve, reject) => {
+  const body = { available: false };
+  axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+const updateSeatingStatusDelete = (tableId) => new Promise((resolve, reject) => {
+  const body = { available: true };
+  axios.patch(`${dbUrl}/seating/${tableId}.json`, body)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   postSeatingResData,
   getSingleSeatingReservationInfo,
@@ -51,4 +65,6 @@ export {
   getFilteredTables,
   updateTableRes,
   getSeatingReservationJoin,
+  updateSeatingStatus,
+  updateSeatingStatusDelete
 };

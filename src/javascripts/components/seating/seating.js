@@ -6,13 +6,13 @@ const showSeating = (array) => {
   document.querySelector('#view').innerHTML = `<div id="seating-list">
   </div>`;
   array.forEach((item) => {
-    let status = 'Reserved';
-    if (item.status) {
-      status = 'Open';
+    let available = 'Available';
+    if (item.available === false) {
+      available = 'Reserved';
     }
     document.querySelector('#seating-list').innerHTML += `<div class="card" id="seating-card" style="width: 15rem;">
       <div class="card-body">
-        <p>Table ${item.table_number} is ${status}.</p>
+        <p>Table ${item.table_number} is ${available}.</p>
         <p>Total Seats: ${item.table_capacity}</p>
       </div>
     </div>`;

@@ -9,8 +9,6 @@ import { getStaff } from '../helpers/data/staffData';
 import { getReservations } from '../helpers/data/reservationData';
 import { showLoginReservations } from '../components/reservations/reservations';
 import landingPage from '../views/landingPage';
-import { getFilteredTables } from '../helpers/data/seatingReservationsData';
-import { printAssignedTable } from '../components/reservations/singleReservation';
 
 // Events for Navbar, READ only
 const navEvents = (user) => {
@@ -37,7 +35,6 @@ const navEvents = (user) => {
   document.querySelector('#nav-seating').addEventListener('click', (e) => {
     e.preventDefault();
     getSeating().then((seats) => showSeating(seats));
-    getFilteredTables(4).then((seats) => printAssignedTable(seats));
   });
   // Return to landing page
   document.querySelector('#nav-home').addEventListener('click', () => {
