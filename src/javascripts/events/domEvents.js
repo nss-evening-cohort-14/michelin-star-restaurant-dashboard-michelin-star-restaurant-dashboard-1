@@ -349,9 +349,7 @@ const domEventListeners = (e) => {
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
           Promise.all(deleteRelationships).then(() => {
             checkFullStaffing(checkbox.value).then((response) => {
-              if (attr.includes('(fully staffed)')) {
-                console.warn('fully staffed');
-              } else {
+              if (!(attr.includes('(fully staffed)'))) {
                 toggleFullStaff(response, checkbox.value);
               }
             });

@@ -120,11 +120,3 @@ export {
   getMenuIngredientsTogether,
   changeMenuAvailability
 };
-
-// allMenuIngredientsArray.forEach((item) => {
-//   const menuObj = {
-//     availability: displayAvailability(allMenuIngredientsArray)
-//   };
-//   changeMenuAvailability(`${item.firebaseKey}`, menuObj);
-// }).resolve(allMenuIngredientsArray);
-// }).catch((error) => reject(error));
