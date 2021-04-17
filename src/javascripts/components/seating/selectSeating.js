@@ -1,4 +1,3 @@
-// import { getSeating } from '../../helpers/data/seatingData';
 import { getFilteredTables } from '../../helpers/data/seatingReservationsData';
 
 const selectTable = (array = [], value) => {
@@ -10,7 +9,7 @@ const selectTable = (array = [], value) => {
     seatingArray.map((seating) => {
       if (array.includes(seating.firebaseKey)) {
         domString += `<option selected value="${seating.firebaseKey}">${seating.table_number} (Table Capacity: ${seating.table_capacity})</option>`;
-      } else {
+      } else if (seating.available) {
         domString += `<option value="${seating.firebaseKey}">${seating.table_number} (Table Capacity: ${seating.table_capacity})</option>`;
       }
       return domString;
