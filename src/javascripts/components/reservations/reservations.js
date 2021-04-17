@@ -25,7 +25,7 @@ const showLoginReservations = (array) => {
     document.querySelector('#view').innerHTML += `
     <div class="card m-3" style="width: 20rem;">
     <div class="card-body">
-      <div class="card-header">
+      <div>
         <a href="#" id="res-link"><h5 id="res-title--${item.firebaseKey}" class="card-title mt-5">${item.name}</h5></a>
       </div>
     <div class="card-body">
