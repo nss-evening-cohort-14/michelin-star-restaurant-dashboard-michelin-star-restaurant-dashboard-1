@@ -35,5 +35,5 @@ All of the following user stories assume the user is authenticated unless otherw
 
 - Jesse Robinson: @jrobinson0529 - https://www.loom.com/share/b650ef8e5ef34f17982864879612aac3
 - Katy Fry: @katherinevfry - https://www.loom.com/share/83b7e6b0f814436d955dca58b5a1ee52
-- Chie Stroud: @chiestroud - 
+- Chie Stroud: @chiestroud - https://www.loom.com/share/5ce45eb5d3214f19a6cdf9f0b1c8c48d
 - Holly Parsons: @hmparsons-sde - https://www.loom.com/share/be3f2d5db6a14e3193573df66cb7c987

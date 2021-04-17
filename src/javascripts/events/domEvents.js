@@ -343,7 +343,6 @@ const domEventListeners = (e) => {
         // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
         if (checkbox.checked === false) {
           const attr = $('.check').html();
-          console.warn(attr);
           deleteArray = Object.values(x).map((element) => element.firebaseKey);
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
           Promise.all(deleteRelationships).then(() => {
