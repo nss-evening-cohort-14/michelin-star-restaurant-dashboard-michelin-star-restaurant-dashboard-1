@@ -37,18 +37,6 @@ const deleteMenuReservationRelationship = (firebaseKey) => new Promise((resolve,
     .catch((error) => reject(error));
 });
 
-// const menuWithReservation = () => new Promise((resolve, reject) => {
-//   Promise.all([getMenuItems(), getReservations(), getMenuReservation()])
-//     .then(([menus, reservations, menuReservationsJoin]) => {
-//       const allReservationInfoArray = reservations.map((reservation) => {
-//         const reservationRelationshipsArray = menuReservationsJoin.filter((reservationGroup) => reservationGroup.reservation_id === reservation.firebaseKey);
-//         const menuInfoArray = reservationRelationshipsArray.map((reservationRelationship) => menus.find((menu) => menu.firebaseKey === reservationRelationship.menu_item_id));
-//         return { ...reservation, menus: menuInfoArray };
-//       });
-//       console.warn(allReservationInfoArray);
-//     }).catch((error) => reject(error));
-// });
-
 const reduceIngredientCount = (firebaseKey, countObj) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/ingredients/${firebaseKey}.json`, countObj)
     .then(() => getReservations()).then((resArray) => resolve(resArray))

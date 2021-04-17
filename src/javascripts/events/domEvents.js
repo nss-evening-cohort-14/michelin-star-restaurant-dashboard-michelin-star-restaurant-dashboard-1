@@ -179,12 +179,6 @@ const domEventListeners = (e) => {
         const array = staffArray.map((object) => getSingleStaff(object.staff_id));
         Promise.all(array).then((response) => printAssignedStaff(response));
       });
-    // Promise.all([getSingleReservation(firebaseKey), getSingleSeatingReservationInfo(firebaseKey)])
-    //   .then(([reservationObject, tableArray]) => {
-    //     singleReservation(reservationObject);
-    //     const tables = tableArray.map((object) => getSingleTable(object.table_id));
-    //     Promise.all(tables).then((response) => printAssignedTable(response));
-    //   });
     $('#formModal').modal('toggle');
   }
 
@@ -351,7 +345,6 @@ const domEventListeners = (e) => {
         // If a box is unchecked we need to run the code block to find unchecked relationships and delete them from firebase
         if (checkbox.checked === false) {
           const attr = $('.check').html();
-          console.warn(attr);
           deleteArray = Object.values(x).map((element) => element.firebaseKey);
           const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
           Promise.all(deleteRelationships).then(() => {
@@ -382,32 +375,6 @@ const domEventListeners = (e) => {
         }
       });
     });
-    //   if (checkbox.checked === false) {
-    //     getSingleStaffReservation(firebaseKey).then((x) => {
-    //       deleteArray = Object.values(x).map((element) => element.firebaseKey);
-    //       return deleteArray;
-    //     }).then(() => {
-    //       const deleteRelationships = deleteArray.map((key) => deleteStaffReservationRelationship(key).then());
-    //       Promise.all(deleteRelationships);
-    //     }).then(() => checkFullStaffing(checkbox.value).then((response) => {
-    //       toggleFullStaff(response, checkbox.value);
-    //     }));
-    //   }
-    // });
-    // const markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
-    // markedCheckbox.forEach((checkbox) => {
-    //   if (checkbox.value !== '') {
-    //     getSingleReservation(checkbox.value).then(() => {
-    //       const staffReservationObject = {
-    //         staff_id: firebaseKey,
-    //         reservation_id: checkbox.value
-    //       };
-    //       createStaffReservation(staffReservationObject).then(() => {
-    //         checkFullStaffing(checkbox.value).then((x) => toggleFullStaff(x[0], checkbox.value));
-    //       });
-    //     });
-    //   }
-    // });
   }
   if (e.target.id.includes('filter-staff-submit')) {
     const value = document.getElementById('filter-all-staff');

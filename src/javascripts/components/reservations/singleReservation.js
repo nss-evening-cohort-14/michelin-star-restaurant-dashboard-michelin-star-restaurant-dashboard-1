@@ -4,6 +4,7 @@ const singleReservation = (reservations) => {
     <div class="modal-content">
       <div class="modal-body">
         <h2 class="modal-header"> ${reservations.name}</h2>
+        <div id="assigned-table"></div>
         <p class="modal-header">Party of ${reservations.party_size}</p>
         <p class="modal-header">${reservations.day_of_week}, ${reservations.date} at ${reservations.time}</p>
       </div>
@@ -29,7 +30,7 @@ const printAssignedTable = (array) => {
   document.querySelector('#assigned-table').innerHTML = '';
   array.forEach((item) => {
     document.querySelector('#assigned-table').innerHTML += `
-    <h2>${item.table_number}</h2>`;
+    <h4>${item.table_number}</h4>`;
   });
 };
 
